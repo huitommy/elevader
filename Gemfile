@@ -39,10 +39,16 @@ gem 'dotenv-rails'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 gem 'pry-rails'
+gem 'devise'
+gem 'carrierwave'
 
 group :test do
   gem 'rspec-rails'
   gem 'capybara-rails'
   gem 'coveralls', require: false
+  gem 'launchy'
+  gem 'factory_girl'
+  gem 'valid_attribute'
+  gem 'shoulda-matchers', require: false
 end
 
