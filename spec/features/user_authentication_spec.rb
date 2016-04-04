@@ -12,7 +12,7 @@ feature 'User accounts:' do
     expect(page).to have_content('Welcome! You have signed up successfully.')
   end
 
-  scenario 'user does not submit an email'  do
+  scenario 'user does not submit an email' do
     visit '/'
     click_link 'Sign Up!'
     fill_in 'Password', with: 'password'
