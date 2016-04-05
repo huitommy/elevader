@@ -1,9 +1,8 @@
 require 'rails_helper'
 
 feature "User creates new elevator" do
-
   scenario "User visits page with new elevator form and fills it out correctly" do
-    visit '/elevators/new'
+    visit new_elevator_path
     fill_in 'Building name', with: 'test'
     fill_in 'Address', with: 'test street'
     fill_in 'City', with: 'teston'
@@ -16,9 +15,9 @@ feature "User creates new elevator" do
     expect(page).to have_content("test")
   end
 
-    scenario "User visits page with new elevader form and fills out incorrectly" do
+  scenario "User visits page with new elevader form and fills out incorrectly" do
 
-    visit '/elevators/new'
+    visit new_elevator_path
     fill_in 'Address', with: 'test street'
     fill_in 'City', with: 'teston'
     fill_in 'Zipcode', with: '02142'

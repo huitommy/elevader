@@ -1,5 +1,4 @@
 class ElevatorsController < ApplicationController
-  # before_action :authenticate_user!
   def index
     @elevators = Elevator.all.order(created_at: :desc)
   end

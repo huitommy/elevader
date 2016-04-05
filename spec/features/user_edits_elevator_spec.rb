@@ -2,19 +2,27 @@ require 'rails_helper'
 
 feature "User edits an existing elevator" do
 
+  let!(:elevader) do
+    Elevator.create(
+    building_name: "test",
+    address: "testing",
+    city: "tester",
+    zipcode: "01234",
+    state: "ma"
+    )
+  end
+
   scenario "User visits page with existing elevator and clicks edit link, fields should be populated with existing data" do
 
-    elevader = Elevator.create(building_name: "test", address: "testing", city: "tester", zipcode: "01234", state: "ma")
+    elevader
 
-    visit '/elevators'
+    visit elevators_path
     click_link "test"
 
     click_link "Edit Elevator"
 
     expect(page).to have_content("Edit")
     expect(page).to have_content("test")
-
-    expect(page).to  have_content("test")
     expect(page).to have_selector("input[value='tester']")
     expect(page).to have_selector("input[value='ma']")
     expect(page).to have_selector("input[value ='01234']")
@@ -22,9 +30,9 @@ feature "User edits an existing elevator" do
 
   scenario "User sucessfully edits an existing elevator profile" do
 
-    elevader = Elevator.create(building_name: "test", address: "testing", city: "tester", zipcode: "01234", state: "ma")
+    elevader
 
-    visit '/elevators'
+    visit elevators_path
     click_link "test"
 
     click_link "Edit Elevator"
