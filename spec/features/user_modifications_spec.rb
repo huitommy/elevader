@@ -65,5 +65,5 @@ feature 'User can edit and delete account' do
 
     expect(page).to have_content('Invalid email or password.')
   end
-  
+
 end
