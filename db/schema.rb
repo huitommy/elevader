@@ -11,17 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160404200928) do
+ActiveRecord::Schema.define(version: 20160405152229) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "elevators", force: true do |t|
-    t.string "building_name", null: false
-    t.string "address",       null: false
-    t.string "city",          null: false
-    t.string "zipcode",       null: false
-    t.string "state",         null: false
+    t.string   "building_name", null: false
+    t.string   "address",       null: false
+    t.string   "city",          null: false
+    t.string   "zipcode",       null: false
+    t.string   "state",         null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "elevators", ["building_name"], name: "index_elevators_on_building_name", unique: true, using: :btree

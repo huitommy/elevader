@@ -1,0 +1,29 @@
+<h1> Building Name: <%= @elevator.building_name %></h1>
+<h3> Address: <%= @elevator.address %>  </h3>
+<h3> <%= @elevator.city %>, <%= @elevator.state %> <%= @elevator.zipcode %> </h3>
+
+<%= link_to "Homepage", elevators_path %>
+<%= link_to "Edit Elevator", edit_elevator_path(@elevator)%>
+<%= link_to "Delete", @elevator, method: :delete, data: { confirm: "Are you sure you want to delete this elevator?" } %>
+
+<%= form_for [@elevator, @review] do |f| %>
+  <div class = "row">
+    <%= f.label :rating %>
+    <%= f.select :rating, options_for_select(@rating) %>
+  </div>
+
+  <div class = "field">
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+  </div>
+
+  <div class = "actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<ul>
+<% @reviews.each do |review| %>
+  <li>Rating: <%= review.rating  %> Description:<%= review.body %></li>
+<% end %>
+</ul>
