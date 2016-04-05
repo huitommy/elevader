@@ -17,6 +17,41 @@ feature 'User can edit and delete account' do
     expect(page).to have_content('Current password')
   end
 
+  scenario 'user can change email from edit profile page' do
+    click_on 'Profile'
+    fill_in 'Email', with: 'new@email.com'
+    fill_in 'Current password', with: 'password'
+    click_on 'Update'
+
+    expect(page).to have_content('Your account has been updated successfully.')
+
+    click_on 'Sign Out'
+    click_on 'Sign In'
+    fill_in 'Email', with: 'new@email.com'
+    fill_in 'Password', with: 'password'
+    click_on 'Log in'
+
+    expect(page).to have_content('Signed in successfully.')
+  end
+
+  scenario 'user can change password from edit profile page' do
+    click_on 'Profile'
+    fill_in 'Password', with: 'newpassword'
+    fill_in 'Password confirmation', with: 'newpassword'
+    fill_in 'Current password', with: 'password'
+    click_on 'Update'
+
+    expect(page).to have_content('Your account has been updated successfully.')
+
+    click_on 'Sign Out'
+    click_on 'Sign In'
+    fill_in 'Email', with: 'noteeth@email.com'
+    fill_in 'Password', with: 'newpassword'
+    click_on 'Log in'
+
+    expect(page).to have_content('Signed in successfully.')
+  end
+
   scenario 'user can delete profile in edit profile page' do
     click_on 'Profile'
     click_on 'Cancel my account'
