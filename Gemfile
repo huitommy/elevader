@@ -47,7 +47,7 @@ group :test do
   gem 'capybara-rails'
   gem 'coveralls', require: false
   gem 'launchy'
-  gem 'factory_girl'
+  gem 'factory_girl_rails', '~> 4.0'
   gem 'valid_attribute'
   gem 'shoulda-matchers', require: false
 end
