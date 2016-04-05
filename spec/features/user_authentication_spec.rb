@@ -42,3 +42,6 @@ feature 'User can login and logout:' do
   end
 
 end
+
+
+
