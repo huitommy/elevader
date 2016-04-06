@@ -4,9 +4,12 @@ Rails.application.routes.draw do
   root to: 'elevators#index'
   resources :users
 
-  resources :elevators do
-    resources :reviews, only:[ :create ]
-  end
+  resources :elevators, only: [:index, :show, :new]
 
-  resources :reviews, only:[:update, :destroy]
+  authenticate :user do
+    resources :elevators, only: [:create, :update, :destroy, :edit] do
+      resources :reviews, only: [:create]
+    end
+    resources :reviews, only: [:update, :destroy, :edit]
+  end
 end

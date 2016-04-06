@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160405170040) do
+ActiveRecord::Schema.define(version: 20160406154816) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20160405170040) do
     t.string   "state",         null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id",       null: false
   end
 
   add_index "elevators", ["building_name"], name: "index_elevators_on_building_name", unique: true, using: :btree
