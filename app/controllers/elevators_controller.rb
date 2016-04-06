@@ -28,7 +28,6 @@ class ElevatorsController < ApplicationController
 
   def destroy
     @elevator = Elevator.find(params[:id])
-    # @elevator.review.destroy
     @elevator.destroy
 
     redirect_to elevators_path
@@ -41,10 +40,10 @@ class ElevatorsController < ApplicationController
   def update
     @elevator = Elevator.find(params[:id])
     if @elevator.update(elevator_params)
-      flash[:notice]= "Elevator was updated successfully"
+      flash[:notice] = "Elevator was updated successfully"
       redirect_to elevator_path(@elevator)
     else
-      flash[:alert]= @elevator.errors.full_messages.join(". ")
+      flash[:alert] = @elevator.errors.full_messages.join(". ")
       render :edit
     end
   end

@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 feature "User edits an existing elevator" do
-
   let!(:elevader) do
     Elevator.create(
       building_name: "test",
