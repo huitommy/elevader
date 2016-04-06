@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :users
 
   resources :elevators do
-    resources :reviews, only: [ :create ]
+    resources :reviews, only: [:create]
   end
 
   resources :reviews, only: [:update, :destroy]

@@ -1,8 +1,8 @@
-admin = Admin.create(
+Admin.create(
   username: 'admin',
   email: 'admin@admin.com',
   password: 'password'
-);
+)
 
 user = User.create(
   username: 'user',
@@ -19,7 +19,7 @@ elevator = Elevator.create(
   user: user
 )
 
-review = Review.create(
+Review.create(
   user: user,
   elevator: elevator,
   rating: 0,
