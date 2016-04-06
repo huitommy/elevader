@@ -1,4 +1,14 @@
 class ElevatorsController < ApplicationController
+  before_filter :require_permission, only: [:edit, :destroy]
+  def require_permission
+    @elevator = Elevator.find(params[:id])
+    @user = @elevator.user
+    if current_user != @user
+      flash[:notice] = 'You do not have permission to change post'
+      redirect_to elevator_path(@elevator)
+    end
+  end
+
   def index
     @elevators = Elevator.all.order(created_at: :desc)
   end
@@ -15,13 +25,13 @@ class ElevatorsController < ApplicationController
   end
 
   def create
-    @elevator = Elevator.new(elevator_params)
+    @elevator = current_user.elevators.build(elevator_params)
 
     if @elevator.save
-      flash[:notice] = "You have successfully added an elevader!"
+      flash[:notice] = 'You have successfully added an elevader!'
       redirect_to elevator_path(@elevator)
     else
-      flash[:notice] = @elevator.errors.full_messages.join(". ")
+      flash[:notice] = @elevator.errors.full_messages.join('. ')
       render action: 'new'
     end
   end
@@ -40,10 +50,10 @@ class ElevatorsController < ApplicationController
   def update
     @elevator = Elevator.find(params[:id])
     if @elevator.update(elevator_params)
-      flash[:notice] = "Elevator was updated successfully"
+      flash[:notice] = 'Elevator was updated successfully'
       redirect_to elevator_path(@elevator)
     else
-      flash[:alert] = @elevator.errors.full_messages.join(". ")
+      flash[:alert] = @elevator.errors.full_messages.join('. ')
       render :edit
     end
   end

@@ -1,24 +1,52 @@
 class ReviewsController < ApplicationController
+  before_filter :require_permission, only: [:edit, :destroy]
+
+  def require_permission
+    @review = Review.find(params[:id])
+    @user = @review.user
+    if current_user != @user
+      flash[:notice] = 'You do not have permission to change review'
+      redirect_to elevator_path(@review.elevator)
+    end
+  end
+
   def create
     @elevator = Elevator.find(params[:elevator_id])
-    @review = Review.new(review_params)
+    @review = current_user.reviews.build(review_params)
     @rating = Review::RATING
     @reviews = @elevator.reviews
+
     @review.elevator = @elevator
-    @review.user_id = 1
     if @review.save
-      flash[:notice] = "Review Added!"
+      flash[:notice] = 'Review Added!'
       redirect_to elevator_path(@elevator)
     else
-      flash[:notice] = @review.errors.full_messages.join(", ")
+      flash[:notice] = @review.errors.full_messages.join(', ')
       render 'elevators/show'
+    end
+  end
+
+  def edit
+    @review = Review.find(params[:id])
+    @elevator = @review.elevator
+    @rating = Review::RATING
+  end
+
+  def update
+    @review = Review.find(params[:id])
+    if @review.update(review_params)
+      flash[:notice] = 'Review was updated successfully'
+      redirect_to elevator_path(@review.elevator)
+    else
+      flash[:alert] = @review.errors.full_messages.join('. ')
+      render :edit
     end
   end
 
   def destroy
     @review = Review.find(params[:id])
     @elevator = @review.elevator
-    @review.delete
+    @review.destroy
     flash[:notice] = "Review was deleted"
     redirect_to @elevator
   end
