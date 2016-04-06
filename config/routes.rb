@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { sessions: "users/sessions" }
+  devise_for :users
 
   root to: 'elevators#index'
+  resources :users
 
   resources :elevators do
     resources :reviews, only:[ :create ]

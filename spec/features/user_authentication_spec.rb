@@ -1,25 +1,49 @@
 require 'rails_helper'
 
-feature 'User accounts:' do
+feature 'User can login and logout:' do
 
-  scenario 'user can create an account' do
+  before :each do
+    FactoryGirl.create(
+      :user,
+      username: 't00thless',
+      email: 'noteeth@email.com',
+      password: 'password'
+    )
     visit '/'
-    click_link 'Sign Up!'
-    fill_in 'Email', with: 'test@test.test'
-    fill_in 'Password', with: 'password'
-    fill_in 'Password confirmation', with: 'password'
-    click_on 'Sign up'
-    expect(page).to have_content('Welcome! You have signed up successfully.')
   end
 
-  scenario 'user does not submit an email' do
-    visit '/'
-    click_link 'Sign Up!'
-    fill_in 'Password', with: 'password'
-    click_on 'Sign up'
+  scenario 'not logged-in user sees sign-up button and sign-in button' do
+    expect(page).to have_link('Sign Up')
+    expect(page).to have_link('Sign In')
+    expect(page).to_not have_link('Sign Out')
+  end
 
-    expect(page).to have_content("Email can't be blank")
-    expect(page).to have_content("Password confirmation doesn't match Password")
+  scenario 'user can sign in' do
+    click_on 'Sign In'
+    fill_in 'Email', with: 'noteeth@email.com'
+    fill_in 'Password', with: 'password'
+    click_on 'Log in'
+
+    expect(page).to have_content('Signed in successfully.')
+  end
+
+  scenario 'user can sign out' do
+    click_on 'Sign In'
+    fill_in 'Email', with: 'noteeth@email.com'
+    fill_in 'Password', with: 'password'
+    click_on 'Log in'
+    click_on 'Sign Out'
+
+    expect(page).to have_content('Signed out successfully.')
+  end
+
+  scenario "user not yet in db tries to sign in" do
+    click_on 'Sign In'
+    fill_in 'Email', with: 'idohaveteeth@email.com'
+    fill_in 'Password', with: 'passwordzz'
+    click_on 'Log in'
+
+    expect(page).to have_content('Invalid email or password.')
   end
 
 end
