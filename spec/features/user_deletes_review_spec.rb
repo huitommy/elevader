@@ -15,7 +15,7 @@ feature 'User deletes an existing review' do
     select '3', from: 'Rating'
     click_on 'Create Review'
   end
-  
+
   scenario 'User deletes existing review' do
     expect(page).to have_content('sample body')
     click_on 'Delete Review'
