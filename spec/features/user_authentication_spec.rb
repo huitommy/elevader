@@ -3,7 +3,12 @@ require 'rails_helper'
 feature 'User can login and logout:' do
 
   before :each do
-    FactoryGirl.create(:user, username: 't00thless', email: 'noteeth@email.com', password: 'password')
+    FactoryGirl.create(
+      :user, 
+      username: 't00thless', 
+      email: 'noteeth@email.com', 
+      password: 'password'
+    )
     visit '/'
   end
 
