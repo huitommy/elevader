@@ -37,6 +37,6 @@
   <p> Rating: <%= review.rating %> </p>
   <p> Description: <%= review.body %> </p>
   <p> Posted by: <%= review.user.username %></p>
-  <%= link_to "Edit Review", edit_review_path(review)%>
-  <%= link_to "Delete Review", review_path(review), method: :delete %>
+  <%= link_to "Edit Review", edit_elevator_review_path(review.elevator, review) %>
+  <%= link_to "Delete Review", elevator_review_path(review.elevator, review), method: :delete %>
 <% end %>
