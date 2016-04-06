@@ -19,7 +19,7 @@ feature 'Admin authentication:' do
     fill_in 'Password', with: 'password'
     click_on 'Log in'
 
-    expect(page).to have_content('Welcome!')
+    expect(page).to have_content('Signed in successfully.')
     expect(page).to_not have_content('Sign In')
   end
 
@@ -29,7 +29,7 @@ feature 'Admin authentication:' do
     click_on 'Log in'
     click_on 'Sign Out'
 
-    expect(page).to have_content('Goodbye!')
+    expect(page).to have_content('Signed out successfully.')
     expect(page).to have_content('Sign In')
   end
 

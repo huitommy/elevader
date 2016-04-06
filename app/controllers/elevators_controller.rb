@@ -29,7 +29,7 @@ class ElevatorsController < ApplicationController
   def destroy
     @elevator = Elevator.find(params[:id])
     @elevator.destroy
-
+    flash[:notice] = "Elevator was deleted"
     redirect_to elevators_path
   end
 
@@ -49,6 +49,7 @@ class ElevatorsController < ApplicationController
   end
 
   private
+
   def elevator_params
     params.require(:elevator).permit(:building_name, :address, :city, :zipcode, :state)
   end

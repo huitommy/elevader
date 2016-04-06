@@ -6,9 +6,14 @@ Rails.application.routes.draw do
   resources :users
 
   resources :elevators do
-    resources :reviews, only:[ :create ]
+    resources :reviews, only: [ :create ]
   end
 
-  resources :reviews, only:[:update, :destroy]
+  resources :reviews, only: [:update, :destroy]
+
+  authenticated :admin do
+    resources :admins, only: [:index, :create, :destroy]
+    resources :users, only: [:index]
+  end
 
 end

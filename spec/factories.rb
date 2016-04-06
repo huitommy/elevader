@@ -8,11 +8,11 @@ FactoryGirl.define do
   end
 
   factory :elevator do
-    sequence(:building_name) { |n| "testname#{n}"}
-    sequence(:address) { |n| "testaddress#{n}"}
-    sequence(:city) { |n| "testcity#{n}"}
-    sequence(:zipcode) { |n| "9329#{n}"}
-    sequence(:state) { |n| "teststate#{n}"}
+    sequence(:building_name) { |n| "testname#{n}" }
+    sequence(:address) { |n| "testaddress#{n}" }
+    sequence(:city) { |n| "testcity#{n}" }
+    sequence(:state) { |n| "teststate#{n}" }
+    zipcode "93290"
     user
   end
 

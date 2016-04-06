@@ -5,7 +5,7 @@ feature 'Admin functionality:' do
   before :each do
     FactoryGirl.create(:admin, email: 'admin@admin.com')
     2.times { FactoryGirl.create(:admin) }
-    5.times { FactoryGirl.create(:elevators) }
+    5.times { FactoryGirl.create(:elevator) }
     visit '/admins/sign_in'
     fill_in 'Email', with: 'admin@admin.com'
     fill_in 'Password', with: 'password'
@@ -19,7 +19,7 @@ feature 'Admin functionality:' do
 
   scenario 'admin can erase users from list of users' do
     visit '/users'
-    click_on 'Delete', match: :third
+    click_on 'Delete', match: :first
     expect(page).to have_content('User was deleted')
     expect(page).to have_css('.user', count: 4)
 
@@ -27,15 +27,14 @@ feature 'Admin functionality:' do
     expect(page).to have_css('.user', count: 4)
   end
 
-  scenario 'admin can s
-  ee list of elevators' do
+  scenario 'admin can see list of elevators' do
     visit '/elevators'
     expect(page).to have_css('.elevator', count: 5)
   end
 
   scenario 'admin can erase elevators from list of elevators' do
     visit '/elevators'
-    click_on 'Delete', match: :fifth
+    click_on 'Delete', match: :first
     expect(page).to have_content('Elevator was deleted')
     expect(page).to have_css('.elevator', count: 4)
 
@@ -44,9 +43,10 @@ feature 'Admin functionality:' do
   end
 
   scenario 'admin can erase an elevator from the elevator show page' do
+    elevator = Elevator.third
     visit '/elevators'
-    click_on '.elevator', match: :second
-    click_on 'Delete Elevator'
+    click_on elevator.building_name
+    click_on 'Delete'
 
     expect(page).to have_content('Elevator was deleted')
     expect(page).to have_css('.elevator', count: 4)
@@ -64,7 +64,9 @@ feature 'Admin functionality:' do
     elevator = Elevator.first
     3.times { FactoryGirl.create(:review, elevator: elevator) }
     visit "/elevators/#{elevator.id}"
-    click_on '.review', match: :third
+    within(:css, '.reviews') do
+      click_on 'Delete', match: :first
+    end
 
     expect(page).to have_content('Review was deleted')
     expect(page).to have_css('.review', count: 2)
@@ -76,20 +78,21 @@ feature 'Admin functionality:' do
     expect(page).to have_css('.admin', count: 3)
   end
 
-  scenario 'admin can make an existing users admin' do
+  scenario 'admin can make an existing user admin' do
     click_on 'Admins'
     click_on 'Add New Admin'
     user = User.fourth
-    fill_in 'Email', with: user.email
-    click_on 'Add admin'
+    within(:css, "#user-#{user.id}") do
+      click_on 'Make Admin'
+    end 
 
-    expect(page).to have_content("New admin has been added")
+    expect(page).to have_content("#{user.username} is now an admin")
     expect(page).to have_css('.admin', count: 4)
   end
 
   scenario 'admin can erase other admins from list of admins' do
     click_on 'Admins'
-    click_on 'Delete', match: :fifth
+    click_on 'Delete', match: :first
 
     expect(page).to have_content('Admin was deleted')
     expect(page).to have_css('.admin', count: 2)

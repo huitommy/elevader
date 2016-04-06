@@ -15,6 +15,14 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def destroy
+    @review = Review.find(params[:id])
+    @elevator = @review.elevator
+    @review.delete
+    flash[:notice] = "Review was deleted"
+    redirect_to @elevator
+  end
+
   private
 
   def review_params
