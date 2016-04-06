@@ -17,11 +17,13 @@ ActiveRecord::Schema.define(version: 20160405170040) do
   enable_extension "plpgsql"
 
   create_table "elevators", force: true do |t|
-    t.string "building_name", null: false
-    t.string "address",       null: false
-    t.string "city",          null: false
-    t.string "zipcode",       null: false
-    t.string "state",         null: false
+    t.string   "building_name", null: false
+    t.string   "address",       null: false
+    t.string   "city",          null: false
+    t.string   "zipcode",       null: false
+    t.string   "state",         null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "elevators", ["building_name"], name: "index_elevators_on_building_name", unique: true, using: :btree
