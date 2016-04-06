@@ -4,11 +4,11 @@ feature "User edits an existing elevator" do
 
   let!(:elevader) do
     Elevator.create(
-    building_name: "test",
-    address: "testing",
-    city: "tester",
-    zipcode: "01234",
-    state: "ma"
+      building_name: "test",
+      address: "testing",
+      city: "tester",
+      zipcode: "01234",
+      state: "ma"
     )
   end
 
