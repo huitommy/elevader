@@ -1,0 +1,14 @@
+<h1>Users</h1>
+
+<ul>
+  <% @users.each do |user| %>
+    <div class="user" id="user-<%= user.id %>">
+      <%= user.username %>
+      <%= button_to "Delete", user, method: :delete %>
+      <%= form_tag('/admins', method: 'post') do %>
+        <%= hidden_field_tag(:user_id, value=user.id) %>
+        <%= submit_tag("Make Admin") %>
+      <% end %>
+    </div>
+  <% end %>
+</ul>

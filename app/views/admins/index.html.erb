@@ -1,0 +1,12 @@
+<h1>Admins</h1>
+
+<%= link_to "Add New Admin", users_path %>
+
+<div class="admins">
+  <% @admins.each do |admin| %>
+    <div class="admin" id="admin-<%= admin.id %>">
+      <%= admin.username %>
+      <%= button_to "Delete", admin, method: :delete %>
+    </div>
+  <% end %>
+</div>
