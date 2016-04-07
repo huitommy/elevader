@@ -16,7 +16,7 @@ feature 'User edits an existing elevator' do
     expect(page).to_not have_content('test')
   end
 
-  scenario 'User does not see Delete button' do
+  scenario 'Non-logged-in user does not see Delete button in show page' do
     FactoryGirl.create(:elevator, building_name: 'test')
     visit elevators_path
     click_link 'test'
@@ -24,7 +24,14 @@ feature 'User edits an existing elevator' do
     expect(page).to_not have_content('Delete')
   end
 
-  context "user is signs in" do
+  scenario 'Non-logged-in user does not see Delete button in index page' do
+    FactoryGirl.create(:elevator, building_name: 'test')
+    visit elevators_path
+
+    expect(page).to_not have_content('Delete')
+  end
+
+  context "user is signed in" do
     before(:each) do
       FactoryGirl.create(:user, username: 't00thless', email: 'noteeth@email.com', password: 'password')
       visit '/users/sign_in'
