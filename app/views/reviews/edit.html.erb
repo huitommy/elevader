@@ -1,0 +1,16 @@
+<%= form_for @review do |f| %>
+  <div class = "row">
+    <%= f.label :rating %>
+    <%= f.select :rating, options_for_select(@rating) %>
+  </div>
+
+  <div class = "field">
+    <%= f.label :body %>
+    <br />
+    <%= f.text_area :body %>
+  </div>
+
+  <div class = "actions">
+    <%= f.submit %>
+  </div>
+<% end %>
