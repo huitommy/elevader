@@ -45,7 +45,7 @@ feature 'User edits an existing review' do
     click_link 'test'
     elevator = Elevator.first
     review = elevator.reviews.first
-    within(:css, "#review-#{ review.id }") do
+    within(:css, "#review-#{review.id}") do
       expect(page).not_to have_content("Edit")
     end
     expect(page).to have_content('sample body')

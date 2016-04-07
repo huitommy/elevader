@@ -71,7 +71,7 @@ feature 'Admin functionality:' do
     3.times { FactoryGirl.create(:review, elevator: elevator) }
     review = Review.second
     visit "/elevators/#{elevator.id}"
-    within(:css, "#review-#{ review.id }") do
+    within(:css, "#review-#{review.id}") do
       click_on 'Delete'
     end
 
