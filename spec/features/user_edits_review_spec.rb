@@ -23,16 +23,15 @@ feature 'User edits an existing review' do
 
     expect(page).to_not have_content('sample body')
     expect(page).to have_content('derp')
-
   end
 
   scenario 'User is unable to edit existing review if they are not logged in' do
     expect(page).to have_content('sample body')
     click_link 'Sign Out'
     click_link 'test'
-    click_on 'Edit Review'
-
-    expect(page).to have_content('You need to sign in or sign up before continuing.')
+    within(:css, '.review_buttons') do
+      expect(page).not_to have_content("Edit")
+    end
   end
 
   scenario 'User is unable to edit review if they were not the one who created it' do
@@ -44,9 +43,10 @@ feature 'User edits an existing review' do
     fill_in 'Password', with: 'password1'
     click_on 'Log in'
     click_link 'test'
-    click_on 'Edit Review'
 
-    expect(page).to have_content('You do not have permission to change review')
+    within(:css, '.review_buttons', match: :first) do
+      expect(page).not_to have_content("Edit")
+    end
     expect(page).to have_content('sample body')
   end
 end

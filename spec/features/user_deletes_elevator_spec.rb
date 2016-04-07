@@ -16,13 +16,12 @@ feature 'User edits an existing elevator' do
     expect(page).to_not have_content('test')
   end
 
-  scenario 'User is unable to delete existing elevator if they are not logged in' do
+  scenario 'User does not see Delete button' do
     FactoryGirl.create(:elevator, building_name: 'test')
     visit elevators_path
     click_link 'test'
-    click_link 'Delete'
 
-    expect(page).to have_content('You need to sign in or sign up before continuing.')
+    expect(page).to_not have_content('Delete')
   end
 
   context "user is signs in" do
@@ -50,9 +49,8 @@ feature 'User edits an existing elevator' do
       fill_in 'Password', with: 'password1'
       click_on 'Log in'
       click_link 'test'
-      click_link 'Delete'
 
-      expect(page).to have_content('You do not have permission to change post')
+      expect(page).to_not have_content('Delete')
     end
   end
 end

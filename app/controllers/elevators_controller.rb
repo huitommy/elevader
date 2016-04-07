@@ -1,11 +1,14 @@
 class ElevatorsController < ApplicationController
+
   before_filter :require_permission, only: [:edit, :destroy]
+
   def require_permission
     @elevator = Elevator.find(params[:id])
     @user = @elevator.user
-    if current_user != @user
+    session[:current_page] ||= request.referer
+    unless current_user == @user || (current_admin)
       flash[:notice] = 'You do not have permission to change post'
-      redirect_to elevator_path(@elevator)
+      redirect_to session.delete(:current_page)
     end
   end
 
