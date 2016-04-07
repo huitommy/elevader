@@ -1,13 +1,5 @@
-class ElevatorsController < ApplicationController
+class ElevatorsController < PermissionsController
   before_filter :require_permission, only: [:edit, :destroy]
-  def require_permission
-    @elevator = Elevator.find(params[:id])
-    @user = @elevator.user
-    if current_user != @user
-      flash[:notice] = 'You do not have permission to change post'
-      redirect_to elevator_path(@elevator)
-    end
-  end
 
   def index
     @elevators = Elevator.all.order(created_at: :desc)
@@ -39,7 +31,7 @@ class ElevatorsController < ApplicationController
   def destroy
     @elevator = Elevator.find(params[:id])
     @elevator.destroy
-
+    flash[:notice] = "Elevator was deleted"
     redirect_to elevators_path
   end
 

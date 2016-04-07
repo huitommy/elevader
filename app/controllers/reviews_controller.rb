@@ -1,15 +1,5 @@
-
-class ReviewsController < ApplicationController
+class ReviewsController < PermissionsController
   before_filter :require_permission, only: [:edit, :destroy]
-
-  def require_permission
-    @review = Review.find(params[:id])
-    @user = @review.user
-    if current_user != @user
-      flash[:notice] = 'You do not have permission to change review'
-      redirect_to elevator_path(@review.elevator)
-    end
-  end
 
   def create
     @elevator = Elevator.find(params[:elevator_id])
@@ -46,9 +36,10 @@ class ReviewsController < ApplicationController
 
   def destroy
     @review = Review.find(params[:id])
+    @elevator = @review.elevator
     @review.destroy
-
-    redirect_to elevator_path(@review.elevator)
+    flash[:notice] = "Review was deleted"
+    redirect_to @elevator
   end
 
   private

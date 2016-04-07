@@ -26,9 +26,8 @@ feature 'User deletes an existing review' do
     expect(page).to have_content('sample body')
     click_link 'Sign Out'
     click_link 'test'
-    click_on 'Delete Review'
-    expect(page).to have_content('You need to sign in or sign up before continuing.')
-    expect(page).to have_content('Log in')
+
+    expect(page).not_to have_content('Delete')
   end
 
   scenario 'User is unable to delete review if they were not the one who created it' do
@@ -41,9 +40,9 @@ feature 'User deletes an existing review' do
     fill_in 'Password', with: 'password1'
     click_on 'Log in'
     click_link 'test'
-    click_on 'Delete Review'
 
-    expect(page).to have_content('You do not have permission to change review')
-    expect(page).to have_content('sample body')
+    within(:css, '.reviews') do
+      expect(page).not_to have_content('Delete')
+    end
   end
 end

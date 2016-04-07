@@ -58,9 +58,9 @@ feature "User edits an existing elevator" do
       fill_in 'Password', with: 'password1'
       click_on 'Log in'
       click_link 'test'
-      click_link 'Edit'
-
-      expect(page).to have_content("You do not have permission to change post")
+      within(:css, '.elevator_buttons') do
+        expect(page).not_to have_content("Edit")
+      end
     end
   end
 
@@ -68,8 +68,9 @@ feature "User edits an existing elevator" do
     FactoryGirl.create(:elevator, building_name: "test")
     visit elevators_path
     click_link "test"
-    click_link "Edit"
 
-    expect(page).to have_content("You need to sign in or sign up before continuing.")
+    within(:css, '.elevator_buttons') do
+      expect(page).not_to have_content("Edit")
+    end
   end
 end

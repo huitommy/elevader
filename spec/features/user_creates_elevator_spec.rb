@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 feature 'User creates new elevator' do
+
   context "user is signed in" do
     before(:each) do
       FactoryGirl.create(:user, username: 't00thless', email: 'noteeth@email.com', password: 'password')
@@ -42,7 +43,6 @@ feature 'User creates new elevator' do
   scenario 'User is not logged in and tries to submit a new elevator form' do
     visit '/'
     click_link 'Add Elevator'
-    click_on 'Create Elevator'
 
     expect(page).to have_content('You need to sign in or sign up before continuing.')
   end

@@ -27,13 +27,6 @@ feature 'User inputs review' do
     visit elevators_path
     click_link 'test'
 
-    select '3', from: 'Rating'
-    fill_in 'Body', with: 'Testing testers with test data.'
-
-    click_on 'Create Review'
-
-    expect(page).to have_content('You need to sign in or sign up before continuing.')
-    expect(page).to_not have_content('Testing testers with test data.')
-    expect(page).to_not have_content('Review Added!')
+    expect(page).not_to have_content 'Create Review'
   end
 end
