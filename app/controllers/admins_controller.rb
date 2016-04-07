@@ -1,5 +1,4 @@
 class AdminsController < ApplicationController
-
   def index
     @admins = Admin.all
   end
@@ -10,11 +9,11 @@ class AdminsController < ApplicationController
       username: @user.username,
       email: @user.email,
       password: 'placeholder',
-      encrypted_password: @user.encrypted_password 
+      encrypted_password: @user.encrypted_password
     )
     if @admin.save
       flash[:notice] = "#{@admin.username} is now an admin"
-    else 
+    else
       unless Admin.find_by(email: @admin.email).nil?
         flash[:notice] = "#{admin.username} is already admin"
       end

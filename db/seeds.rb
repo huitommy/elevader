@@ -25,7 +25,7 @@ elevators = []
   )
 end
 
-(1..100).each do |i|
+(1..100).each do
   Review.create(
     user: users.sample,
     elevator: elevators.sample,

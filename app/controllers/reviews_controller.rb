@@ -5,7 +5,7 @@ class ReviewsController < ApplicationController
     @review = Review.find(params[:id])
     @user = @review.user
     session[:current_page] ||= request.referer
-    unless current_user == @user || (current_admin)
+    unless current_user == @user || current_admin
       flash[:notice] = 'You do not have permission to change review'
       redirect_to session.delete(:current_page)
     end

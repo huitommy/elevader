@@ -84,7 +84,7 @@ feature 'Admin functionality:' do
     user = User.fourth
     within(:css, "#user-#{user.id}") do
       click_on 'Make Admin'
-    end 
+    end
 
     expect(page).to have_content("#{user.username} is now an admin")
     expect(page).to have_css('.admin', count: 4)
@@ -97,5 +97,5 @@ feature 'Admin functionality:' do
     expect(page).to have_content('Admin was deleted')
     expect(page).to have_css('.admin', count: 2)
   end
-  
+
 end

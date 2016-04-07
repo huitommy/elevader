@@ -41,5 +41,5 @@ feature 'Admin authentication:' do
     expect(page).to_not have_content('You are not admin')
     expect(page).to have_content('Sign In')
   end
-  
+
 end
