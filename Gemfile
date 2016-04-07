@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 
 
+gem 'fog'
+gem 'mini_magick'
+gem 'carrierwave'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.6'
 # Use postgresql as the database for Active Record
@@ -51,4 +54,3 @@ group :test do
   gem 'valid_attribute'
   gem 'shoulda-matchers', require: false
 end
-
