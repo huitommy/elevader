@@ -8,22 +8,33 @@
 </head>
 <body>
 
+  <div class="search-bar">
+    <%= form_tag search_elevators_path, method: :get do %>
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag "Search" %>
+
+    <% end %>
+  </div>
+
+  <div class="nav-buttons">
+    <% if current_admin %>
+      <%= link_to "Admins", admins_path %>
+    <% end %>
+    <% if current_user || current_admin %>
+      <%= link_to "Profile", edit_user_registration_path %>
+      <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+    <% else %>
+      <%= link_to "Sign In", new_user_session_path %>
+      <%= link_to "Sign Up", new_user_registration_path %>
+    <% end %>
+  </div>
+
   <header>
     <% flash.each do |type, msg| %>
       <div class="flash <%= type %>"><%= msg %></div>
     <% end %>
   </header>
 
-  <% if current_admin %>
-    <%= link_to "Admins", admins_path %>
-  <% end %>
-  <% if current_user || current_admin %>
-    <%= link_to "Profile", edit_user_registration_path %>
-    <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
-  <% else %>
-    <%= link_to "Sign In", new_user_session_path %>
-    <%= link_to "Sign Up", new_user_registration_path %>
-  <% end %>
 
   <%= yield %>
 

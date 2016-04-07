@@ -50,6 +50,14 @@ class ElevatorsController < PermissionsController
     end
   end
 
+  def search
+    @elevators = Elevator.where(
+      'building_name LIKE ?',
+      "%#{params['search']}%"
+    )
+    render :index
+  end
+
   private
 
   def elevator_params

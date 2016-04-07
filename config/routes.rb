@@ -12,7 +12,11 @@ Rails.application.routes.draw do
     resources :reviews, only: [:edit, :update]
   end
 
-  resources :elevators, only: [:index, :show, :destroy]
+  resources :elevators, only: [:index, :show, :destroy] do
+    collection do
+      get 'search'
+    end
+  end
   resources :reviews, only: [:destroy]
 
   authenticated :admin do
