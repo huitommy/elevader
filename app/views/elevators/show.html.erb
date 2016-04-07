@@ -1,8 +1,10 @@
 <h1> Building Name: <%= @elevator.building_name %></h1>
+<img src="<%= @elevator.elevator.large_elevator %>">
+
 <h3> Address: <%= @elevator.address %>  </h3>
 <h3> <%= @elevator.city %>, <%= @elevator.state %> <%= @elevator.zipcode %> </h3>
-<img src="<%= @elevator.user.avatar.large_avatar %>">
 <h4> Created by: <%= @elevator.user.username %></h4>
+<img src="<%= @elevator.user.avatar.medium_avatar %>">
 
 <div class = "row">
   <%= link_to "Edit", edit_elevator_path(@elevator)%>
