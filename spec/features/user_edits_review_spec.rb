@@ -43,8 +43,9 @@ feature 'User edits an existing review' do
     fill_in 'Password', with: 'password1'
     click_on 'Log in'
     click_link 'test'
-
-    within(:css, '.review_buttons', match: :first) do
+    elevator = Elevator.first
+    review = elevator.reviews.first
+    within(:css, "#review-#{ review.id }") do
       expect(page).not_to have_content("Edit")
     end
     expect(page).to have_content('sample body')

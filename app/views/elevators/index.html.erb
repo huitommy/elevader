@@ -1,7 +1,7 @@
 <h1>Hello!</h1>
 
 <% @elevators.each do |elevator| %>
-  <div class="elevator">
+  <div class="elevator" id="elevator-<%= elevator.id %>">
     <%= link_to "#{elevator.building_name}", elevator_path(elevator) %>
     <% if current_admin || current_user == elevator.user %>
       <%= button_to "Delete", elevator, method: :delete %>

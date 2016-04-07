@@ -19,7 +19,10 @@ feature 'Admin functionality:' do
 
   scenario 'admin can erase users from list of users' do
     visit '/users'
-    click_on 'Delete', match: :first
+    user = User.third
+    within(:css, "#user-#{user.id}") do
+      click_on 'Delete'
+    end
     expect(page).to have_content('User was deleted')
     expect(page).to have_css('.user', count: 4)
 
@@ -34,7 +37,10 @@ feature 'Admin functionality:' do
 
   scenario 'admin can erase elevators from list of elevators' do
     visit '/elevators'
-    click_on 'Delete', match: :first
+    elevator = Elevator.third
+    within(:css, "#elevator-#{elevator.id}") do
+      click_on 'Delete'
+    end
     expect(page).to have_content('Elevator was deleted')
     expect(page).to have_css('.elevator', count: 4)
 
@@ -63,9 +69,10 @@ feature 'Admin functionality:' do
   scenario 'admin can erase reviews from elevator show page' do
     elevator = Elevator.first
     3.times { FactoryGirl.create(:review, elevator: elevator) }
+    review = Review.second
     visit "/elevators/#{elevator.id}"
-    within(:css, '.reviews') do
-      click_on 'Delete', match: :first
+    within(:css, "#review-#{ review.id }") do
+      click_on 'Delete'
     end
 
     expect(page).to have_content('Review was deleted')
@@ -92,7 +99,10 @@ feature 'Admin functionality:' do
 
   scenario 'admin can erase other admins from list of admins' do
     click_on 'Admins'
-    click_on 'Delete', match: :first
+    admin = Admin.third
+    within(:css, "#admin-#{admin.id}") do
+      click_on 'Delete'
+    end
 
     expect(page).to have_content('Admin was deleted')
     expect(page).to have_css('.admin', count: 2)

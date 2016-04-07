@@ -1,15 +1,5 @@
-class ReviewsController < ApplicationController
+class ReviewsController < PermissionsController
   before_filter :require_permission, only: [:edit, :destroy]
-
-  def require_permission
-    @review = Review.find(params[:id])
-    @user = @review.user
-    session[:current_page] ||= request.referer
-    unless current_user == @user || current_admin
-      flash[:notice] = 'You do not have permission to change review'
-      redirect_to session.delete(:current_page)
-    end
-  end
 
   def create
     @elevator = Elevator.find(params[:elevator_id])
