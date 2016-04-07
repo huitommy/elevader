@@ -41,6 +41,7 @@ gem 'dotenv-rails'
 gem 'pry-rails'
 gem 'devise'
 gem 'carrierwave'
+gem 'fuzzily'
 
 group :test do
   gem 'rspec-rails'

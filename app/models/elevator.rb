@@ -8,4 +8,7 @@ class Elevator < ActiveRecord::Base
   validates :zipcode, presence: true, numericality: true, length: { is: 5 }
   validates :state, presence: true
   validates :user_id, presence: true
+
+  fuzzily_searchable :building_name
+  Elevator.bulk_update_fuzzy_building_name
 end
