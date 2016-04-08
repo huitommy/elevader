@@ -9,9 +9,7 @@
 <body>
 
   <header>
-    <% flash.each do |type, msg| %>
-      <div class="flash <%= type %>"><%= msg %></div>
-    <% end %>
+    <%= render "layouts/flash" %>
   </header>
 
   <% if current_admin %>
