@@ -17,4 +17,3 @@
 /public/uploads/tmp
 /coverage
 .env
-Gemfile.lock
