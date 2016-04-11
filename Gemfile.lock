@@ -84,11 +84,14 @@ GEM
       actionmailer (~> 4.0)
       activesupport (~> 4.0)
     execjs (2.6.0)
-    factory_girl (4.5.0)
+    factory_girl (4.7.0)
       activesupport (>= 3.0.0)
-    factory_girl_rails (4.6.0)
-      factory_girl (~> 4.5.0)
+    factory_girl_rails (4.7.0)
+      factory_girl (~> 4.7.0)
       railties (>= 3.0.0)
+    foundation-rails (5.5.0.0)
+      railties (>= 3.1.0)
+      sass (>= 3.2.0, < 3.4)
     fuzzily (0.3.3)
       activerecord (>= 2.3.17)
     hike (1.2.3)
@@ -178,7 +181,7 @@ GEM
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.0)
     slop (3.6.0)
-    spring (1.6.4)
+    spring (1.7.1)
     sprockets (2.12.4)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -217,6 +220,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   factory_girl_rails (~> 4.0)
+  foundation-rails
   fuzzily
   jbuilder (~> 2.0)
   jquery-rails

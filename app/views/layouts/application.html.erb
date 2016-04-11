@@ -1,42 +1,41 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Elevader</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <div class="search-bar">
-    <%= form_tag search_elevators_path, method: :get do %>
-      <%= text_field_tag :search, params[:search] %>
-      <%= submit_tag "Search" %>
+    <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
 
-    <% end %>
-  </div>
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= csrf_meta_tags %>
+  </head>
 
-  <div class="nav-buttons">
-    <% if current_admin %>
-      <%= link_to "Admins", admins_path %>
-    <% end %>
-    <% if current_user || current_admin %>
-      <%= link_to "Profile", edit_user_registration_path %>
-      <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
-    <% else %>
-      <%= link_to "Sign In", new_user_session_path %>
-      <%= link_to "Sign Up", new_user_registration_path %>
-    <% end %>
-  </div>
+  <body>
+    <div class="search-bar">
+      <%= form_tag search_elevators_path, method: :get do %>
+        <%= text_field_tag :search, params[:search] %>
+        <%= submit_tag "Search" %>
+      <% end %>
+    </div>
 
-  <header>
-    <% flash.each do |type, msg| %>
-      <div class="flash <%= type %>"><%= msg %></div>
-    <% end %>
-  </header>
+    <div class="nav-buttons">
+      <% if current_admin %>
+        <%= link_to "Admins", admins_path %>
+      <% end %>
+      <% if current_user || current_admin %>
+        <%= link_to "Profile", edit_user_registration_path %>
+        <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+      <% else %>
+        <%= link_to "Sign In", new_user_session_path %>
+        <%= link_to "Sign Up", new_user_registration_path %>
+      <% end %>
+    </div>
 
+    <%= render "layouts/flash" %>
 
-  <%= yield %>
+    <%= yield %>
 
-</body>
+    <%= javascript_include_tag "application" %>
+  </body>
 </html>

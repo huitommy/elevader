@@ -42,6 +42,7 @@ gem 'pry-rails'
 gem 'devise'
 gem 'carrierwave'
 gem 'fuzzily'
+gem 'foundation-rails'
 
 group :test do
   gem 'rspec-rails'
