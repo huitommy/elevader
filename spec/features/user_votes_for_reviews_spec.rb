@@ -140,6 +140,7 @@ feature 'Voting buttons for reviews:' do
       click_on 'Mission Control'
       within(:css, "#review-#{review.id}") do
         click_on 'upvote'
+        binding.pry
         expect(page).to have_content('You cannot vote on your own reviews')
         within(:css, '.vote-total') do
           expect(page).to have_content('0')
@@ -203,7 +204,6 @@ feature 'Voting buttons for reviews:' do
       fill_in 'Password', with: 'password'
       click_on 'Log in'
       click_on 'Mission Control'
-      binding.pry
       within(:css, "#review-#{review.id}") do
         click_on direction
       end
@@ -214,13 +214,12 @@ feature 'Voting buttons for reviews:' do
     user_votes(User.all[1], 'downvote', review)
     user_votes(User.all[2], 'upvote', review)
     user_votes(User.all[3], 'upvote', review)
-    user_votes(User.all[4], 'downvote', review)
-    user_votes(User.all[5], 'upvote', review)
+    user_votes(User.all[8], 'downvote', review)
+    user_votes(User.all[9], 'upvote', review)
 
     visit '/'
     click_on 'Mission Control'
     within(:css, "#review-#{review.id} .vote-total") do
-      binding.pry
       expect(page).to have_content('2')
     end
   end
