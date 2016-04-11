@@ -42,7 +42,7 @@ gem 'dotenv-rails'
 # gem 'debugger', group: [:development, :test]
 gem 'pry-rails'
 gem 'devise'
-gem 'carrierwave'
+gem 'foundation-rails'
 
 group :test do
   gem 'rspec-rails'
