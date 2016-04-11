@@ -24,33 +24,25 @@ feature 'Voting buttons for reviews:' do
     end
 
     scenario 'can see voting buttons and vote total' do
-      expect(page).to have_css('.uparrow', count: 7)
-      expect(page).to have_css('.downarrow', count: 7)
+      expect(page).to have_css('#upvote', count: 7)
+      expect(page).to have_css('#downvote', count: 7)
       expect(page).to have_css('.vote-total', count: 7)
     end
 
     scenario 'cannot upvote' do
       review = Review.third
       within(:css, "#review-#{review.id}") do
-        click_on '.uparrow'
-        expect(page).to have_content('Sorry but only users can vote for reviews')
-        within(:css, '.vote-total') do
-          expect(page).to have_content('0')
-          expect(page).to_not have_content('1')
-        end
+        click_on 'upvote'
       end
+      expect(page).to have_content('You need to sign in or sign up before continuing.')
     end
 
     scenario 'cannot downvote' do
       review = Review.fourth
       within(:css, "#review-#{review.id}") do
-        click_on '.downarrow'
-        expect(page).to have_content('Sorry but only users can vote for reviews')
-        within(:css, '.vote-total') do
-          expect(page).to have_content('0')
-          expect(page).to_not have_content('-1')
-        end
+        click_on 'downvote'
       end
+      expect(page).to have_content('You need to sign in or sign up before continuing.')
     end
   end
 
@@ -61,99 +53,100 @@ feature 'Voting buttons for reviews:' do
     end
 
     scenario 'can see voting buttons and vote total' do
-      expect(page).to have_css('.uparrow', count: 7)
-      expect(page).to have_css('.downarrow', count: 7)
+      expect(page).to have_css('#upvote', count: 7)
+      expect(page).to have_css('#downvote', count: 7)
       expect(page).to have_css('.vote-total', count: 7)
     end
 
     scenario 'is prompted to sign-in if she attempts to upvote' do
       review = Review.second
       within(:css, "#review-#{review.id}") do
-        click_on '.uparrow'
-        expect(page).to have_content('Please sign-in')
-        within(:css, '.vote-total') do
-          expect(page).to have_content('0')
-          expect(page).to_not have_content('1')
-        end
-        fill_in 'Email', with: 'user1@user.com'
-        fill_in 'Password', with: 'password'
-        click_on 'Log in'
-        expect(page).to have_css('.review', count: 7)
-        expect(page).to_not have_content('Add Elevator')
+        click_on 'upvote'
+      end
+      expect(page).to have_content('You need to sign in or sign up before continuing.')
+
+      visit '/'
+      click_on 'Mission Control'
+      within(:css, "#review-#{review.id} .vote-total") do
+        expect(page).to have_content('0')
+        expect(page).to_not have_content('1')
       end
     end
 
     scenario 'is prompted to sign-in if she attempts to downvote' do
       review = Review.second
       within(:css, "#review-#{review.id}") do
-        click_on '.downarrow'
-        expect(page).to have_content('Please sign-in')
-        within(:css, '.vote-total') do
-          expect(page).to have_content('0')
-          expect(page).to_not have_content('-1')
-        end
-        fill_in 'Email', with: 'user1@user.com'
-        fill_in 'Password', with: 'password'
-        click_on 'Log in'
-        expect(page).to have_css('.review', count: 7)
-        expect(page).to_not have_content('Add Elevator')
+        click_on 'downvote'
+      end
+      expect(page).to have_content('You need to sign in or sign up before continuing.')
+
+      visit '/'
+      click_on 'Mission Control'
+      within(:css, "#review-#{review.id} .vote-total") do
+        expect(page).to have_content('0')
+        expect(page).to_not have_content('-1')
       end
     end
   end
 
   context 'Logged-in user' do
     before :each do
+      @user = User.first
       visit '/'
       click_on 'Sign In'
-      fill_in 'Email', with: 'user1@user.com'
+      fill_in 'Email', with: @user.email
       fill_in 'Password', with: 'password'
       click_on 'Log in'
       click_on 'Mission Control'
     end
 
     scenario 'can see voting buttons and vote total' do
-      expect(page).to have_css('.uparrow', count: 7)
-      expect(page).to have_css('.downarrow', count: 7)
+      expect(page).to have_css('#upvote', count: 7)
+      expect(page).to have_css('#downvote', count: 7)
       expect(page).to have_css('.vote-total', count: 7)
     end
 
     scenario 'can vote up once' do
       review = Review.all[6]
       within(:css, "#review-#{review.id}") do
-        click_on '.uparrow'
-        within(:css, '.vote-total') do
-          expect(page).to have_content('1')
-          expect(page).to_not have_content('0')
-        end
+        click_on 'upvote'
+      end
+
+      within(:css, "#review-#{review.id} .vote-total") do
+        expect(page).to have_content('1')
+        expect(page).to_not have_content('0')
       end
     end
 
     scenario 'can vote down once' do
-      review = Review.all[5]
+      review = Review.all[6]
       within(:css, "#review-#{review.id}") do
-        click_on '.downarrow'
-        within(:css, '.vote-total') do
-          expect(page).to have_content('-1')
-          expect(page).to_not have_content('0')
-        end
+        click_on 'downvote'
+      end
+
+      within(:css, "#review-#{review.id} .vote-total") do
+        expect(page).to have_content('-1')
+        expect(page).to_not have_content('0')
       end
     end
 
     scenario 'cannot vote up or down on own reviews' do
-      review = FactoryGirl(
+      review = FactoryGirl.create(
         :review,
         elevator: @elevator,
-        user: current_user
+        user: @user
       )
+      visit '/'
+      click_on 'Mission Control'
       within(:css, "#review-#{review.id}") do
-        click_on '.uparrow'
+        click_on 'upvote'
         expect(page).to have_content('You cannot vote on your own reviews')
         within(:css, '.vote-total') do
           expect(page).to have_content('0')
           expect(page).to_not have_content('1')
         end
 
-        click_on '.downarrow'
+        click_on 'downvote'
         expect(page).to have_content('You cannot vote on your own reviews')
         within(:css, '.vote-total') do
           expect(page).to have_content('0')
@@ -165,14 +158,14 @@ feature 'Voting buttons for reviews:' do
     scenario 'can erase vote by clicking same button twice' do
       review = Review.first
       within(:css, "#review-#{review.id}") do
-        2.times { click_on '.uparrow' }
+        2.times { click_on 'upvote' }
         within(:css, '.vote-total') do
           expect(page).to have_content('0')
           expect(page).to_not have_content('1')
           expect(page).to_not have_content('2')
         end
 
-        2.times { click_on '.downarrow' }
+        2.times { click_on 'downvote' }
         within(:css, '.vote-total') do
           expect(page).to have_content('0')
           expect(page).to_not have_content('-1')
@@ -184,15 +177,15 @@ feature 'Voting buttons for reviews:' do
     scenario 'change direction of vote by clicking opposite vote button' do
       review = Review.last
       within(:css, "#review-#{review.id}") do
-        click_on '.uparrow'
-        click_on '.downarrow'
+        click_on 'upvote'
+        click_on 'downvote'
         within(:css, '.vote-total') do
           expect(page).to have_content('-1')
           expect(page).to_not have_content('0')
         end
 
-        2.times { click_on '.downarrow' }
-        click_on '.uparrow'
+        2.times { click_on 'downvote' }
+        click_on 'upvote'
         within(:css, '.vote-total') do
           expect(page).to have_content('1')
           expect(page).to_not have_content('0')
@@ -202,28 +195,32 @@ feature 'Voting buttons for reviews:' do
   end
 
   scenario 'Vote total displays the total of all votes by all users' do
+    review = Review.first
+    
     def user_votes(user, direction, review)
-      visit '/sign_in'
+      visit 'users/sign_in'
       fill_in 'Email', with: user.email
+      fill_in 'Password', with: 'password'
       click_on 'Log in'
       click_on 'Mission Control'
+      binding.pry
       within(:css, "#review-#{review.id}") do
         click_on direction
       end
       click_on 'Sign Out'
     end
 
-    review = Review.first
-    user_votes(User.all[0], '.upvote', review)
-    user_votes(User.all[1], '.downvote', review)
-    user_votes(User.all[2], '.upvote', review)
-    user_votes(User.all[3], '.upvote', review)
-    user_votes(User.all[4], '.downvote', review)
-    user_votes(User.all[5], '.upvote', review)
+    user_votes(User.all[0], 'upvote', review)
+    user_votes(User.all[1], 'downvote', review)
+    user_votes(User.all[2], 'upvote', review)
+    user_votes(User.all[3], 'upvote', review)
+    user_votes(User.all[4], 'downvote', review)
+    user_votes(User.all[5], 'upvote', review)
 
     visit '/'
     click_on 'Mission Control'
     within(:css, "#review-#{review.id} .vote-total") do
+      binding.pry
       expect(page).to have_content('2')
     end
   end

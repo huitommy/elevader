@@ -52,6 +52,26 @@
           <%= link_to "Delete Review", review, method: :delete %>
         <% end %>
       </div>
+
+      <div class="voting">
+        <div>
+          <%= form_tag review_path(review), method: :put do  %>
+            <%= hidden_field_tag :vote, "1" %>
+            <%= submit_tag 'Up', id: 'upvote' %>
+          <% end %>
+        </div>
+
+        <div class="vote-total">
+          <%= review.total_votes %>
+        </div>
+
+        <div class="downarrow">
+          <%= form_tag review_path(review), method: :put do  %>
+            <%= hidden_field_tag :vote, "-1" %>
+            <%= submit_tag 'Down', id: 'downvote' %>
+          <% end %>
+        </div>
+      </div>
     </div>
   <% end %>
 </div>

@@ -13,4 +13,5 @@ class Review < ActiveRecord::Base
   validates :user_id, presence: true
   validates :elevator_id, presence: true
   validates :rating, presence: true
+  validates :total_votes, presence: true
 end

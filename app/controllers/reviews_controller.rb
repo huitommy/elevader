@@ -25,12 +25,23 @@ class ReviewsController < PermissionsController
 
   def update
     @review = Review.find(params[:id])
-    if @review.update(review_params)
-      flash[:notice] = 'Review was updated successfully'
-      redirect_to elevator_path(@review.elevator)
+    if params[:vote].nil?
+      if @review.update(review_params)
+        flash[:notice] = 'Review was updated successfully'
+        redirect_to elevator_path(@review.elevator)
+      else
+        flash[:alert] = @review.errors.full_messages.join('. ')
+        render :edit
+      end
     else
-      flash[:alert] = @review.errors.full_messages.join('. ')
-      render :edit
+      if current_user == @review.user
+        flash[:error] = "You cannot vote on your own reviews"
+        redirect_to elevator_path(@review.elevator)
+      else
+        @review.total_votes += params[:vote].to_i
+        @review.save
+        redirect_to elevator_path(@review.elevator)
+      end
     end
   end
 
@@ -45,6 +56,6 @@ class ReviewsController < PermissionsController
   private
 
   def review_params
-    params.require(:review).permit(:rating, :body)
+    params.require(:review).permit(:rating, :body, :vote)
   end
 end
