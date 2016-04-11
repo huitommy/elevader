@@ -51,9 +51,7 @@ class ElevatorsController < PermissionsController
   end
 
   def search
-    @elevators = Elevator.find_by_fuzzy_building_name(
-      params['search'].to_s
-    )
+    @elevators = Elevator.find_by_fuzzy_building_name(params['search'])
     if @elevators.empty?
       flash[:notice] = "Sorry but we couldn't find that elevator for you"
     end
