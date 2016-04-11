@@ -61,18 +61,22 @@ feature 'Voting buttons for reviews:' do
     click_on 'Mission Control'
     within(:css, "#review-#{review.id}") do
       click_on 'upvote'
-      expect(page).to have_content('You cannot vote on your own reviews')
-      within(:css, '.vote-total') do
-        expect(page).to have_content('0')
-        expect(page).to_not have_content('1')
-      end
+    end
 
+    expect(page).to have_content('You cannot vote on your own reviews')
+    within(:css, "#review-#{review.id} .vote-total") do
+      expect(page).to have_content('0')
+      expect(page).to_not have_content('1')
+    end
+
+    within(:css, "#review-#{review.id}") do
       click_on 'downvote'
-      expect(page).to have_content('You cannot vote on your own reviews')
-      within(:css, '.vote-total') do
-        expect(page).to have_content('0')
-        expect(page).to_not have_content('-1')
-      end
+    end
+
+    expect(page).to have_content('You cannot vote on your own reviews')
+    within(:css, "#review-#{review.id} .vote-total") do
+      expect(page).to have_content('0')
+      expect(page).to_not have_content('-1')
     end
   end
 
@@ -80,18 +84,20 @@ feature 'Voting buttons for reviews:' do
     review = Review.first
     within(:css, "#review-#{review.id}") do
       2.times { click_on 'upvote' }
-      within(:css, '.vote-total') do
-        expect(page).to have_content('0')
-        expect(page).to_not have_content('1')
-        expect(page).to_not have_content('2')
-      end
+    end
+    within(:css, "#review-#{review.id} .vote-total") do
+      expect(page).to have_content('0')
+      expect(page).to_not have_content('1')
+      expect(page).to_not have_content('2')
+    end
 
+    within(:css, "#review-#{review.id}") do
       2.times { click_on 'downvote' }
-      within(:css, '.vote-total') do
-        expect(page).to have_content('0')
-        expect(page).to_not have_content('-1')
-        expect(page).to_not have_content('-2')
-      end
+    end
+    within(:css, "#review-#{review.id} .vote-total") do
+      expect(page).to have_content('0')
+      expect(page).to_not have_content('-1')
+      expect(page).to_not have_content('-2')
     end
   end
 

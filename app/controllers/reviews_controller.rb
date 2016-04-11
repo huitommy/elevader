@@ -38,7 +38,21 @@ class ReviewsController < PermissionsController
         flash[:error] = "You cannot vote on your own reviews"
         redirect_to elevator_path(@review.elevator)
       else
-        @review.total_votes += params[:vote].to_i
+        current_vote = params[:vote].to_i
+        previous_vote = Vote.find_by(user: current_user, review: @review)
+        if previous_vote.nil?
+          Vote.create(user: current_user, review: @review, vote: current_vote)
+          @review.total_votes += params[:vote].to_i
+        else
+          if previous_vote.vote == current_vote
+            previous_vote.destroy
+            @review.total_votes -= current_vote
+          else
+            previous_vote.vote = current_vote
+            previous_vote.save
+            @review.total_votes -= 2 * current_vote
+          end
+        end
         @review.save
         redirect_to elevator_path(@review.elevator)
       end

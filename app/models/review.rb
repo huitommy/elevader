@@ -1,6 +1,7 @@
 class Review < ActiveRecord::Base
   belongs_to :elevator
   belongs_to :user
+  has_many :votes, dependent: :destroy
 
   RATING = [
     [1, "1"],

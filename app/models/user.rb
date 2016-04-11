@@ -5,4 +5,5 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: true, presence: true
   has_many :reviews, dependent: :destroy
   has_many :elevators, dependent: :destroy
+  has_many :votes, dependent: :destroy
 end
