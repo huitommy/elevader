@@ -1,0 +1,32 @@
+<nav class="top-bar">
+
+  <ul class="title-area">
+    <li class="name">
+      <h1><a href="#">ELEVADER</a></h1>
+    </li>
+  </ul>
+
+  <div class="search-bar">
+    <%= form_tag search_elevators_path, method: :get do %>
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag "Search" %>
+    <% end %>
+  </div>
+
+  <section class="top-bar-section">
+    <ul class="right">
+      <% if current_admin %>
+          <li><%= link_to "Admins", admins_path %></li>
+          <li><%= link_to "Users", users_path %></li>
+      <% end %>
+      <% if current_user || current_admin %>
+        <li><%= link_to "Profile", edit_user_registration_path %></li>
+        <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+      <% else %>
+        <li><%= link_to "Sign In", new_user_session_path %></li>
+        <li><%= link_to "Sign Up", new_user_registration_path %></li>
+      <% end %>
+    </ul>
+  </section>
+
+</nav>
