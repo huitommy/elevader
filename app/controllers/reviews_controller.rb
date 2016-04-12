@@ -52,12 +52,12 @@ class ReviewsController < PermissionsController
   def review_params
     params.require(:review).permit(:rating, :body)
   end
-    def added_review
-      RestClient.post "https://api:key-177e772090fb4ca2b64749b2abe1b699"\
-      "@api.mailgun.net/v3/postmaster@sandbox02eba1aa5d6f4d76bfcf581fcc05ad6f.mailgun.org/messages",
-      :from => "Excited User postmaster@sandbox02eba1aa5d6f4d76bfcf581fcc05ad6f.mailgun.org",
-      :to => "bar@example.com, postmaster@sandbox02eba1aa5d6f4d76bfcf581fcc05ad6f.mailgun.org",
-      :subject => "Hello",
-      :text => "Testing some Mailgun awesomness!"
-    end
+  def added_review
+    RestClient.post "https://api:#{ENV['MAILGUN_KEY']}"\
+    "@api.mailgun.net/v3/#{ENV['MAILGUN_DOMAIN']}",
+    from: "Excited User #{ENV['MAILGUN_DOMAIN']}",
+    to: "bar@example.com, #{ENV['MAILGUN_USER']}",
+    subject: "Hello",
+    text: "Testing some Mailgun awesomness!"
+  end
 end
