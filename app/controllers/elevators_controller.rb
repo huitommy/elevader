@@ -2,14 +2,14 @@ class ElevatorsController < PermissionsController
   before_filter :require_permission, only: [:edit, :destroy]
 
   def index
-    @elevators = Elevator.all.order(created_at: :desc)
+    @elevators = Elevator.order(:building_name).page params[:page]
   end
 
   def show
     @elevator = Elevator.find(params[:id])
     @review = Review.new
     @rating = Review::RATING
-    @reviews = @elevator.reviews
+    @reviews = @elevator.reviews.order(rating: :desc).page params[:page]
   end
 
   def new

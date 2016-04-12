@@ -1,6 +1,7 @@
 class Elevator < ActiveRecord::Base
   mount_uploader :elevator, ElevatorUploader
 
+  paginates_per 25
   belongs_to :user
   has_many :reviews
 
