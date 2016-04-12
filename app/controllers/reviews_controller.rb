@@ -1,3 +1,5 @@
+require 'rest-client'
+
 class ReviewsController < PermissionsController
   before_filter :require_permission, only: [:edit, :destroy]
 
@@ -6,9 +8,12 @@ class ReviewsController < PermissionsController
     @review = current_user.reviews.build(review_params)
     @rating = Review::RATING
     @reviews = @elevator.reviews
+    a = @elevator.user
+    @user = a
 
     @review.elevator = @elevator
     if @review.save
+      UserMailer.added_review(@user).deliver
       flash[:notice] = 'Review Added!'
       redirect_to elevator_path(@elevator)
     else
@@ -47,4 +52,12 @@ class ReviewsController < PermissionsController
   def review_params
     params.require(:review).permit(:rating, :body)
   end
+    def added_review
+      RestClient.post "https://api:key-177e772090fb4ca2b64749b2abe1b699"\
+      "@api.mailgun.net/v3/postmaster@sandbox02eba1aa5d6f4d76bfcf581fcc05ad6f.mailgun.org/messages",
+      :from => "Excited User postmaster@sandbox02eba1aa5d6f4d76bfcf581fcc05ad6f.mailgun.org",
+      :to => "bar@example.com, postmaster@sandbox02eba1aa5d6f4d76bfcf581fcc05ad6f.mailgun.org",
+      :subject => "Hello",
+      :text => "Testing some Mailgun awesomness!"
+    end
 end

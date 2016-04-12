@@ -148,6 +148,8 @@ GEM
       json (~> 1.4)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     rspec-core (3.4.4)
       rspec-support (~> 3.4.0)
     rspec-expectations (3.4.0)
@@ -229,6 +231,7 @@ DEPENDENCIES
   pg
   pry-rails
   rails (= 4.1.6)
+  rest-client
   rspec-rails
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
