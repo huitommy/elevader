@@ -16,4 +16,3 @@
 /tmp
 /coverage
 .env
-Gemfile.lock
