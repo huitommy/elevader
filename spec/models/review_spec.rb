@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Review do
-  describe '#total_votes' do    
+  describe '#total_votes' do
     let(:review) { FactoryGirl.create(:review) }
 
     it 'returns total number of votes for specific review' do
