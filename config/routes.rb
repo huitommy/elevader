@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :reviews, only: [:edit, :update] do
       resources :votes, only: [:create]
     end
+    resources :sessions, only: [:show]
   end
 
   resources :elevators, only: [:index, :show, :destroy]
