@@ -5,7 +5,7 @@ feature 'Voting buttons for reviews:', js: true do
   before :each do
     5.times { FactoryGirl.create(:user) }
     @elevator = FactoryGirl.create(:elevator, building_name: 'Mission Control')
-    7.times do
+    5.times do
       FactoryGirl.create(
         :review,
         elevator: @elevator
@@ -22,13 +22,13 @@ feature 'Voting buttons for reviews:', js: true do
   end
 
   scenario 'Logged-in user can see voting buttons and vote total' do
-    expect(page).to have_css('#upvote', count: 7)
-    expect(page).to have_css('#downvote', count: 7)
-    expect(page).to have_css('.vote-total', count: 7)
+    expect(page).to have_css('#upvote', count: 5)
+    expect(page).to have_css('#downvote', count: 5)
+    expect(page).to have_css('.vote-total', count: 5)
   end
 
   scenario 'Logged-in user can vote up once' do
-    review = Review.all[6]
+    review = Review.all[4]
     within(:css, "#review-#{review.id}") do
       click_on 'upvote'
     end
@@ -40,7 +40,7 @@ feature 'Voting buttons for reviews:', js: true do
   end
 
   scenario 'Logged-in user can vote down once' do
-    review = Review.all[6]
+    review = Review.all[2]
     within(:css, "#review-#{review.id}") do
       click_on 'downvote'
     end
