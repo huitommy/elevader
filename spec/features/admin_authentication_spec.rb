@@ -9,6 +9,7 @@ feature 'Admin authentication:' do
   end
 
   scenario 'admin has a sign-in page' do
+    binding.pry
     expect(page).to have_css('input#admin_email')
     expect(page).to have_css('input#admin_password')
     expect(page).to have_content('Log in')
