@@ -28,6 +28,10 @@ FactoryGirl.define do
     password "password"
   end
 
+  factory :propic do
+    photo Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/fixtures/images/sampleprofile.jpg')))
+  end
+  
   factory :vote do
     review
     user
