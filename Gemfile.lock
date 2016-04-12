@@ -221,7 +221,7 @@ GEM
       fog-core
       nokogiri (~> 1.5, >= 1.5.11)
     formatador (0.2.5)
-    foundation-rails (5.4.5.0)
+    foundation-rails (5.4.3.1)
       railties (>= 3.1.0)
       sass (>= 3.2.0)
     hike (1.2.3)
@@ -363,7 +363,7 @@ DEPENDENCIES
   dotenv-rails
   factory_girl_rails (~> 4.0)
   fog
-  foundation-rails (~> 5.4.5)
+  foundation-rails (~> 5.4.3.1)
   jbuilder (~> 2.0)
   jquery-rails
   kaminari
