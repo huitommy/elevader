@@ -42,7 +42,7 @@ gem 'dotenv-rails'
 # gem 'debugger', group: [:development, :test]
 gem 'pry-rails'
 gem 'devise'
-gem 'foundation-rails'
+gem 'foundation-rails', '~> 5.4.5'
 
 group :test do
   gem 'rspec-rails'
