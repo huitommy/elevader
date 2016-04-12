@@ -10,12 +10,14 @@
       <div class="profile-info inline-list">
         <li><%= link_to "#{elevator.building_name}", elevator_path(elevator) %></li>
         <% if current_admin || current_user == elevator.user %>
-          <li><%= button_to "Delete", elevator, method: :delete %></li>
+          <li><%= button_to "Delete", elevator, method: :delete, class: 'button tiny alert' %></li>
       <% end %>
       </div>
     </div>
   </div>
 <% end %>
+
+
 <%= paginate @elevators %>
 <%= link_to "Add Elevator", new_elevator_path %>
 <div class="row"

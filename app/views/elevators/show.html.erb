@@ -1,12 +1,18 @@
 <h1> Building Name: <%= @elevator.building_name %></h1>
 <img src="<%= @elevator.elevator.large_elevator %>">
 
-<h3> Address: <%= @elevator.address %>  </h3>
-<h3> <%= @elevator.city %>, <%= @elevator.state %> <%= @elevator.zipcode %> </h3>
-<h4> Created by: <%= @elevator.user.username %></h4>
+<ul>
+  <div class = "inline-list">
+    <li> Address: <%= @elevator.address %>  </li>
+    <li> <%= @elevator.city %>, <%= @elevator.state %> <%= @elevator.zipcode %> </li>
+    <li> Created by: <%= @elevator.user.username %></li>
+  </div>
+</ul>
+
 <img src="<%= @elevator.user.avatar.medium_avatar %>">
 
-<div class = "row">
+
+<div class = "large-10 columns">
   <%= link_to "Homepage", elevators_path %>
 </div>
 
@@ -44,15 +50,14 @@
 <div class="reviews">
   <% @reviews.each do |review| %>
     <div class="review" id="review-<%= review.id %>">
-      <p> Rating: <%= review.rating %> </p>
-      <p> Description: <%= review.body %> </p>
-      <p> Posted by: <%= review.user.username %></p>
+      <p> Rating: <%= review.rating %> Posted by: <%= review.user.username %></p>
+      <p> Review: <%= review.body %> </p>
       <div class="review_buttons">
         <% if current_user == review.user %>
-          <%= link_to "Edit Review", edit_review_path(review) %>
+          <%= link_to "Edit Review", edit_review_path(review), class: "button tiny" %>
         <% end %>
         <% if current_user == review.user || current_admin %>
-          <%= link_to "Delete Review", review, method: :delete %>
+          <%= link_to "Delete Review", review, method: :delete, class: "button tiny alert" %>
         <% end %>
       </div>
     </div>
