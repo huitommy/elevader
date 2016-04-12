@@ -53,7 +53,7 @@ class ReviewsController < PermissionsController
   def review_params
     params.require(:review).permit(:rating, :body)
   end
-  
+
   def added_review
     RestClient.post "https://api:#{ENV['MAILGUN_KEY']}"\
     "@api.mailgun.net/v3/#{ENV['MAILGUN_DOMAIN']}",
