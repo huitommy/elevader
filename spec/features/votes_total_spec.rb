@@ -4,8 +4,13 @@ feature 'Voting buttons for reviews:' do
 
   scenario 'Vote total displays the total of all votes by all users' do
     5.times { FactoryGirl.create(:user) }
-    @elevator = FactoryGirl.create(:elevator, building_name: 'Mission Control')
-    review = FactoryGirl.create(:review)
+    elevator = FactoryGirl.create(:elevator, building_name: 'Mission Control')
+    user1 = User.all[0]
+    user2 = User.all[1]
+    user3 = User.all[2]
+    user4 = User.all[3]
+    user5 = User.all[4]
+    review = FactoryGirl.create(:review, elevator: elevator, user: user5)
 
     def user_votes(user, direction, review)
       visit 'users/sign_in'
@@ -19,12 +24,10 @@ feature 'Voting buttons for reviews:' do
       click_on 'Sign Out'
     end
 
-    user_votes(User.all[0], 'upvote', review)
-    user_votes(User.all[1], 'downvote', review)
-    user_votes(User.all[2], 'upvote', review)
-    user_votes(User.all[3], 'upvote', review)
-    user_votes(User.all[8], 'downvote', review)
-    user_votes(User.all[9], 'upvote', review)
+    user_votes(user1, 'upvote', review)
+    user_votes(user2, 'downvote', review)
+    user_votes(user3, 'upvote', review)
+    user_votes(user4, 'upvote', review)
 
     visit '/'
     click_on 'Mission Control'
