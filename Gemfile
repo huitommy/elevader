@@ -48,6 +48,8 @@ gem 'foundation-rails','~> 5.4.3.1'
 group :test do
   gem 'rspec-rails'
   gem 'capybara-rails'
+  gem 'database_cleaner'
+  gem 'selenium-webdriver'
   gem 'coveralls', require: false
   gem 'launchy'
   gem 'factory_girl_rails', '~> 4.0'
