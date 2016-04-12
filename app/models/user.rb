@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
 
+  paginates_per 10
   devise :registerable, :recoverable, :rememberable, :trackable, :validatable, :database_authenticatable
 
   validates :username, uniqueness: true, presence: true

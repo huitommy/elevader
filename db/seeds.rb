@@ -5,7 +5,7 @@ Admin.create(
 )
 
 users = []
-(1..5).each do |i|
+(1..20).each do |i|
   users << User.create(
     username: "User ##{i}",
     email: "user#{i}@user.com",
