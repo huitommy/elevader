@@ -1,4 +1,5 @@
 class Elevator < ActiveRecord::Base
+  paginates_per 25
   belongs_to :user
   has_many :reviews
 
