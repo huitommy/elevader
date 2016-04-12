@@ -8,11 +8,12 @@ feature "User edits an existing elevator" do
                                username: 't00thless',
                                email: 'noteeth@email.com',
                                password: 'password')
-    elevator = FactoryGirl.create(:elevator, zipcode: "92312",
+    elevator = FactoryGirl.create(:elevator,
+                                  zipcode: "92312",
                                   building_name: "testname",
                                   state: "teststate", user: tooth)
 
-    visit '/users/sign_in'
+    visit new_user_session_path
     fill_in 'Email', with: 'noteeth@email.com'
     fill_in 'Password', with: 'password'
     click_on 'Log in'

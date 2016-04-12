@@ -42,7 +42,7 @@ gem 'dotenv-rails'
 gem 'pry-rails'
 gem 'devise'
 gem 'carrierwave'
-gem 'foundation-rails'
+gem 'foundation-rails', '~> 5.4.3.1'
 gem "rest-client"
 
 group :test do

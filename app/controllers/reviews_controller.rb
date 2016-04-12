@@ -13,7 +13,8 @@ class ReviewsController < PermissionsController
 
     @review.elevator = @elevator
     if @review.save
-      UserMailer.added_review(@user).deliver
+
+      UserMailer.added_review(@user, @elevator).deliver
       flash[:notice] = 'Review Added!'
       redirect_to elevator_path(@elevator)
     else
