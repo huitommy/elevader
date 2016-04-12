@@ -4,11 +4,11 @@ feature 'Admin can view user pagination' do
 
   before :each do
     FactoryGirl.create(:admin)
-    visit '/admins/sign_in'
+    visit new_admin_session_path
     fill_in 'Email', with: 'admin@admin.com'
     fill_in 'Password', with: 'password'
     30.times { FactoryGirl.create(:user) }
-    visit '/users'
+    visit users_path
   end
 
   scenario 'User sees multiple pages of elevators' do
