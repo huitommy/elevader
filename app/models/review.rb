@@ -1,4 +1,5 @@
 class Review < ActiveRecord::Base
+  paginates_per 7
   belongs_to :elevator
   belongs_to :user
   has_many :votes, dependent: :destroy
