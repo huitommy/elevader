@@ -5,10 +5,12 @@ feature "User edits an existing elevator" do
     ActionMailer::Base.deliveries.clear
 
     tooth = FactoryGirl.create(:user,
-            username: 't00thless', email: 'noteeth@email.com',
-            password: 'password')
+                               username: 't00thless',
+                               email: 'noteeth@email.com',
+                               password: 'password')
     elevator = FactoryGirl.create(:elevator, zipcode: "92312",
-               building_name: "testname", state: "teststate", user: tooth)
+                                  building_name: "testname",
+                                  state: "teststate", user: tooth)
 
     visit '/users/sign_in'
     fill_in 'Email', with: 'noteeth@email.com'
