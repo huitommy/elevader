@@ -57,7 +57,7 @@
         <div>
           <%= form_tag review_votes_path(review), method: :post do  %>
             <%= hidden_field_tag :vote, "1" %>
-            <%= submit_tag 'Up', id: 'upvote' %>
+            <%= submit_tag 'Up', class: 'vote', id: 'upvote' %>
           <% end %>
         </div>
 
@@ -68,7 +68,7 @@
         <div class="downarrow">
           <%= form_tag review_votes_path(review), method: :post do  %>
             <%= hidden_field_tag :vote, "-1" %>
-            <%= submit_tag 'Down', id: 'downvote' %>
+            <%= submit_tag 'Down', class: 'vote', id: 'downvote' %>
           <% end %>
         </div>
       </div>
