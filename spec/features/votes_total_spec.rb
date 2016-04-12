@@ -13,7 +13,7 @@ feature 'Voting buttons for reviews:' do
     review = FactoryGirl.create(:review, elevator: elevator, user: user5)
 
     def user_votes(user, direction, review)
-      visit 'users/sign_in'
+      visit new_user_session_path
       fill_in 'Email', with: user.email
       fill_in 'Password', with: 'password'
       click_on 'Log in'
@@ -29,7 +29,7 @@ feature 'Voting buttons for reviews:' do
     user_votes(user3, 'upvote', review)
     user_votes(user4, 'upvote', review)
 
-    visit '/'
+    visit root_path
     click_on 'Mission Control'
     within(:css, "#review-#{review.id} .vote-total") do
       expect(page).to have_content('2')

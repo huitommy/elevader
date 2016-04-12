@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Voting buttons for reviews:' do
+feature 'Voting buttons for reviews:', js: true do
 
   before :each do
     5.times { FactoryGirl.create(:user) }
@@ -13,7 +13,7 @@ feature 'Voting buttons for reviews:' do
     end
 
     @user = User.first
-    visit '/'
+    visit root_path
     click_on 'Sign In'
     fill_in 'Email', with: @user.email
     fill_in 'Password', with: 'password'
@@ -57,8 +57,8 @@ feature 'Voting buttons for reviews:' do
       elevator: @elevator,
       user: @user
     )
-    visit '/'
-    click_on 'Mission Control'
+    visit root_path
+    click_link 'Mission Control'
     within(:css, "#review-#{review.id}") do
       click_on 'upvote'
     end
