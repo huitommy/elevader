@@ -34,25 +34,25 @@
       <%= f.label :rating %>
       <%= f.select :rating, options_for_select(@rating) %>
     </div>
-
-    <div class = "field">
+    <div class = "small-10 columns">
       <%= f.label :body %>
-      <br />
       <%= f.text_area :body %>
     </div>
-
-    <div class = "actions">
-      <%= f.submit %>
+    <div class = "small-12 columns">
+      <%= f.submit "Create Review", class: "button tiny success" %>
     </div>
   <% end %>
 <% end %>
 
-<div class="reviews">
+<div class="row">
   <% @reviews.each do |review| %>
-    <div class="review" id="review-<%= review.id %>">
-      <p> Rating: <%= review.rating %> Posted by: <%= review.user.username %></p>
-      <p> Review: <%= review.body %> </p>
-      <div class="review_buttons">
+    <div class="medium-6 columns" id="review-<%= review.id %>">
+      <div class="card">
+        <div class="content">
+          <span class ="title"> Rating: <%= review.rating %></span>
+          <p> Review: <%= review.body %> </p>
+        </div>
+        <div class="action">
         <% if current_user == review.user %>
           <%= link_to "Edit Review", edit_review_path(review), class: "button tiny" %>
         <% end %>
@@ -61,6 +61,8 @@
         <% end %>
       </div>
     </div>
+  </div>
   <% end %>
+
   <%= paginate @reviews %>
 </div>
