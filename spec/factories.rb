@@ -27,4 +27,10 @@ FactoryGirl.define do
     sequence(:email) { |n| "admin#{n}@admins.com" }
     password "password"
   end
+
+  factory :vote do
+    review
+    user
+    vote [-1, 1].sample
+  end
 end
