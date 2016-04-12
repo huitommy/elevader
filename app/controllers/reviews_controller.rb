@@ -25,37 +25,12 @@ class ReviewsController < PermissionsController
 
   def update
     @review = Review.find(params[:id])
-    if params[:vote].nil?
-      if @review.update(review_params)
-        flash[:notice] = 'Review was updated successfully'
-        redirect_to elevator_path(@review.elevator)
-      else
-        flash[:alert] = @review.errors.full_messages.join('. ')
-        render :edit
-      end
+    if @review.update(review_params)
+      flash[:notice] = 'Review was updated successfully'
+      redirect_to elevator_path(@review.elevator)
     else
-      if current_user == @review.user
-        flash[:error] = "You cannot vote on your own reviews"
-        redirect_to elevator_path(@review.elevator)
-      else
-        current_vote = params[:vote].to_i
-        previous_vote = Vote.find_by(user: current_user, review: @review)
-        if previous_vote.nil?
-          Vote.create(user: current_user, review: @review, vote: current_vote)
-          @review.total_votes += params[:vote].to_i
-        else
-          if previous_vote.vote == current_vote
-            previous_vote.destroy
-            @review.total_votes -= current_vote
-          else
-            previous_vote.vote = current_vote
-            previous_vote.save
-            @review.total_votes -= 2 * current_vote
-          end
-        end
-        @review.save
-        redirect_to elevator_path(@review.elevator)
-      end
+      flash[:alert] = @review.errors.full_messages.join('. ')
+      render :edit
     end
   end
 

@@ -106,17 +106,16 @@ feature 'Voting buttons for reviews:' do
     within(:css, "#review-#{review.id}") do
       click_on 'upvote'
       click_on 'downvote'
-      within(:css, '.vote-total') do
-        expect(page).to have_content('-1')
-        expect(page).to_not have_content('0')
-      end
-
+    end
+    within(:css, "#review-#{review.id} .vote-total") do
+      expect(page).to have_content('-1')
+    end
+    within(:css, "#review-#{review.id}") do
       2.times { click_on 'downvote' }
       click_on 'upvote'
-      within(:css, '.vote-total') do
-        expect(page).to have_content('1')
-        expect(page).to_not have_content('0')
-      end
+    end
+    within(:css, "#review-#{review.id} .vote-total") do
+      expect(page).to have_content('1')
     end
   end
 
