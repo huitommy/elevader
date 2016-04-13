@@ -1,25 +1,27 @@
-<div class="row">
-  <h1> <%= @elevator.building_name %></h1>
+<div class="showtitle-container row">
+  <div class="showtitle-item">
+    <h1> <%= @elevator.building_name %></h1>
+  </div>
+    <% if current_user == @elevator.user || current_admin %>
+      <div class="showtitle-item">
+        <li> <%= link_to "Edit", edit_elevator_path(@elevator), class: "button tiny"%> </li>
+      </div>
+      <div class="showtitle-item">
+        <li> <%= link_to "Delete", @elevator, method: :delete, data: { confirm: "Are you sure you want to delete this elevator?" }, class: "button tiny alert" %> </li>
+      </div>
+    <% end %>
 </div>
-<div class="row">  <div class="small-1 large-6 columns inline-list">
+
+<div class="row">
+  <div class="small-1 large-6 columns inline-list">
     <img src="<%= @elevator.elevator.large_elevator %>">
-    <li> Address: <%= @elevator.address %>  </li>
-    <li> <%= @elevator.city %>, <%= @elevator.state %> <%= @elevator.zipcode %> </li>
+    <li> <%= @elevator.address %>, <%= @elevator.city %>, <%= @elevator.state %> <%= @elevator.zipcode %>  </li>
   </div>
   <div class="small-3 large-3 columns">
   </div>
   <div class="small-3 large-3 columns">
     <img src="<%= @elevator.user.avatar.small_avatar %>">
     <p>Created by: <%= @elevator.user.username %></p>
-  </div>
-</div>
-
-<div class="row">
-  <div class="inline-list">
-    <% if current_user == @elevator.user || current_admin %>
-      <li> <%= link_to "Edit", edit_elevator_path(@elevator), class: "button tiny"%> </li>
-      <li> <%= link_to "Delete", @elevator, method: :delete, data: { confirm: "Are you sure you want to delete this elevator?" }, class: "button tiny alert" %> </li>
-    <% end %>
   </div>
 </div>
 
@@ -41,7 +43,8 @@
       <div class="card">
         <div class="content">
           <span class ="title"> Rating: <%= review.rating %></span>
-          <p> Review: <%= review.body %> </p>
+          <p> <%= review.body %> </p>
+          <p> by: <%= review.user.username %> </p>
         </div>
         <div class="action">
         <% if current_user == review.user %>

@@ -3,6 +3,29 @@
 // Licensed under MIT Open Source
 @import url(//fonts.googleapis.com/css?family=Roboto:400,500,300,100,700,900);
 
+.showtitle-container {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+
+  -webkit-flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+.showtitle-item {
+  padding: 5px;
+  margin-top: 10px;
+
+}
+
+
 html,body { // for demo only
   background: #FAFAFA;
 }
