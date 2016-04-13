@@ -2,14 +2,14 @@ class ElevatorsController < PermissionsController
   before_filter :require_permission, only: [:edit, :destroy]
 
   def index
-    @elevators = Elevator.all.order(created_at: :desc)
+    @elevators = Elevator.order(:building_name).page params[:page]
   end
 
   def show
     @elevator = Elevator.find(params[:id])
     @review = Review.new
     @rating = Review::RATING
-    @reviews = @elevator.reviews
+    @reviews = @elevator.reviews.order(rating: :desc).page params[:page]
   end
 
   def new
@@ -51,7 +51,10 @@ class ElevatorsController < PermissionsController
   end
 
   def search
-    @elevators = Elevator.find_by_fuzzy_building_name(params['search'])
+    @search_results = Elevator.find_by_fuzzy_building_name(params['search'])
+    @ids = @search_results.map { |result| result.id }
+    @elevators = Elevator.where(id: @ids)
+    @elevators = @elevators.page params[:page]
     if @elevators.empty?
       flash[:notice] = "Sorry but we couldn't find that elevator for you"
     end
@@ -61,6 +64,6 @@ class ElevatorsController < PermissionsController
   private
 
   def elevator_params
-    params.require(:elevator).permit(:building_name, :address, :city, :zipcode, :state)
+    params.require(:elevator).permit(:building_name, :address, :city, :zipcode, :state, :elevator_cache, :elevator)
   end
 end

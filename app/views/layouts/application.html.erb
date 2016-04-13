@@ -12,8 +12,10 @@
   </head>
 
   <body>
-    <%= render "layouts/navbar" %>
-    <%= render "layouts/flash" %>
+    <header>
+      <%= render "layouts/navbar" %>
+      <%= render "layouts/flash" %>
+    </header>
 
     <div class="search-bar">
       <%= form_tag search_elevators_path, method: :get do %>

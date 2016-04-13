@@ -1,7 +1,10 @@
 <h1> Building Name: <%= @elevator.building_name %></h1>
+<img src="<%= @elevator.elevator.large_elevator %>">
+
 <h3> Address: <%= @elevator.address %>  </h3>
 <h3> <%= @elevator.city %>, <%= @elevator.state %> <%= @elevator.zipcode %> </h3>
 <h4> Created by: <%= @elevator.user.username %></h4>
+<img src="<%= @elevator.user.avatar.medium_avatar %>">
 
 <div class = "row">
   <%= link_to "Homepage", elevators_path %>
@@ -52,6 +55,27 @@
           <%= link_to "Delete Review", review, method: :delete %>
         <% end %>
       </div>
+
+      <div class="voting">
+        <div>
+          <%= form_tag review_votes_path(review), method: :post do  %>
+            <%= hidden_field_tag :vote, "1" %>
+            <%= submit_tag 'Up', class: 'vote', id: 'upvote' %>
+          <% end %>
+        </div>
+
+        <div class="vote-total">
+          <%= review.total_votes %>
+        </div>
+
+        <div class="downarrow">
+          <%= form_tag review_votes_path(review), method: :post do  %>
+            <%= hidden_field_tag :vote, "-1" %>
+            <%= submit_tag 'Down', class: 'vote', id: 'downvote' %>
+          <% end %>
+        </div>
+      </div>
     </div>
   <% end %>
+  <%= paginate @reviews %>
 </div>
