@@ -60,9 +60,7 @@ feature "User edits an existing elevator" do
       fill_in 'Password', with: 'password1'
       click_on 'Log in'
       click_link 'test'
-      within(:css, '.elevator_buttons') do
-        expect(page).not_to have_content("Edit")
-      end
+      expect(page).not_to have_content("Edit")
     end
   end
 
@@ -71,8 +69,6 @@ feature "User edits an existing elevator" do
     visit elevators_path
     click_link "test"
 
-    within(:css, '.elevator_buttons') do
-      expect(page).not_to have_content("Edit")
-    end
+    expect(page).not_to have_content("Edit")
   end
 end

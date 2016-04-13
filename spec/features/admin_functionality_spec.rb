@@ -32,30 +32,16 @@ feature 'Admin functionality:' do
 
   scenario 'admin can see list of elevators' do
     visit '/elevators'
-    expect(page).to have_css('.profile-card', count: 5)
-  end
-
-  scenario 'admin can erase elevators from list of elevators' do
-    visit elevators_path
-    elevator = Elevator.third
-    within(:css, "#elevator-#{elevator.id}") do
-      click_on 'Delete'
-    end
-    expect(page).to have_content('Elevator was deleted')
-    expect(page).to have_css('.profile-card', count: 4)
-
-    visit '/elevators'
-    expect(page).to have_css('.profile-card', count: 4)
+    expect(page).to have_css('.card', count: 5)
   end
 
   scenario 'admin can erase an elevator from the elevator show page' do
     elevator = Elevator.third
-    visit elevators_path
-    click_on elevator.building_name
+    visit elevator_path(elevator)
     click_on 'Delete'
 
     expect(page).to have_content('Elevator was deleted')
-    expect(page).to have_css('.profile-card', count: 4)
+    expect(page).to have_css('.card', count: 4)
   end
 
   scenario 'admin can see reviews in elevator show page' do

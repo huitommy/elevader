@@ -37,7 +37,7 @@
   <% end %>
 </div>
 
-<div class="row">
+<div class="row reviews">
   <% @reviews.each do |review| %>
     <div class="large-12 columns" id="review-<%= review.id %>">
       <div class="card">
@@ -46,37 +46,35 @@
           <p> <%= review.body %> </p>
           <p> by: <%= review.user.username %> </p>
         </div>
-        <div class="action">
-        <% if current_user == review.user %>
+        <div class="action row">
+          <div class="voting large-2 columns">
+            <div>
+              <%= form_tag review_votes_path(review), method: :post do  %>
+              <%= hidden_field_tag :vote, "1" %>
+              <%= submit_tag 'Up', class: 'vote', id: 'upvote' %>
+              <% end %>
+            </div>
+            <div class="vote-total">
+              <%= review.total_votes %>
+            </div>
+            <div class="downarrow">
+              <%= form_tag review_votes_path(review), method: :post do  %>
+              <%= hidden_field_tag :vote, "-1" %>
+              <%= submit_tag 'Down', class: 'vote', id: 'downvote' %>
+              <% end %>
+            </div>
+          </div>
+          <% if current_user == review.user %>
           <%= link_to "Edit Review", edit_review_path(review), class: "button tiny" %>
-        <% end %>
-        <% if current_user == review.user || current_admin %>
+          <% end %>
+          <% if current_user == review.user || current_admin %>
           <%= link_to "Delete Review", review, method: :delete, class: "button tiny alert" %>
-        <% end %>
-      </div>
-
-      <div class="voting">
-        <div>
-          <%= form_tag review_votes_path(review), method: :post do  %>
-            <%= hidden_field_tag :vote, "1" %>
-            <%= submit_tag 'Up', class: 'vote', id: 'upvote' %>
           <% end %>
-        </div>
-
-        <div class="vote-total">
-          <%= review.total_votes %>
-        </div>
-
-        <div class="downarrow">
-          <%= form_tag review_votes_path(review), method: :post do  %>
-            <%= hidden_field_tag :vote, "-1" %>
-            <%= submit_tag 'Down', class: 'vote', id: 'downvote' %>
-          <% end %>
-        </div>
       </div>
     </div>
   </div>
   <% end %>
+</div>
 
   <%= paginate @reviews %>
 </div>
