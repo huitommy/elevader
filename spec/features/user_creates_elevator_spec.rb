@@ -18,9 +18,11 @@ feature 'User creates new elevator' do
       fill_in 'City', with: 'teston'
       fill_in 'Zipcode', with: '02142'
       fill_in 'State', with: 'ta'
+      attach_file :elevator_elevator, "#{Rails.root}/spec/fixtures/images/sampleprofile.jpg"
       click_on 'Create Elevator'
 
       expect(page).to have_content('You have successfully added an elevader!')
+      expect(page).to have_css("img[src*='sampleprofile.jpg']")
       expect(page).to have_content('test')
     end
 
