@@ -12,7 +12,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
 
   def default_url
-    'default_avatar.png'
+    'http://www.mchail.org/images/mchail/default.png'
   end
 
   version :large_avatar do

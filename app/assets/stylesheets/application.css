@@ -15,3 +15,7 @@
  *= require foundation_and_overrides
 
  */
+
+.elevator_delete_button_index {
+  margin-left: 125px
+}

@@ -6,11 +6,11 @@
 <% @elevators.each do |elevator| %>
   <div class="medium-4 columns" id="elevator-<%= elevator.id %>">
     <div class="profile-card">
-      <img src="<%= elevator.elevator.large_elevator %>">
+      <%= link_to image_tag(elevator.elevator.large_elevator, border: 0, alt: '', title: "#{elevator.building_name}"), elevator_path(elevator) %>
       <div class="profile-info inline-list">
         <li><%= link_to "#{elevator.building_name}", elevator_path(elevator) %></li>
         <% if current_admin || current_user == elevator.user %>
-          <li><%= button_to "Delete", elevator, method: :delete, class: 'button tiny alert' %></li>
+          <li><%= button_to "Delete", elevator, method: :delete, class: 'button tiny alert elevator_delete_button_index' %></li>
       <% end %>
       </div>
     </div>

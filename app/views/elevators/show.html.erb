@@ -11,11 +11,6 @@
 
 <img src="<%= @elevator.user.avatar.medium_avatar %>">
 
-
-<div class = "large-10 columns">
-  <%= link_to "Homepage", elevators_path %>
-</div>
-
 <div class="elevator_buttons">
   <% if current_user == @elevator.user || current_admin %>
       <div class = "row">
