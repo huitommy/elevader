@@ -29,9 +29,9 @@ $(document).ready(function() {
     var flashError = function(errorMessage) {
       var header = $('header');
       var existingFlashes = header.children('div.flash');
-      var HTML = '<div class="flash error">' + errorMessage + '<div>';
+      var html = '<div class="flash error">' + errorMessage + '<div>';
       existingFlashes.remove();
-      header.append(HTML);
+      header.append(html);
     };
   });
 
