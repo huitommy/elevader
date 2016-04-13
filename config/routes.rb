@@ -9,10 +9,16 @@ Rails.application.routes.draw do
     resources :elevators, only: [:new, :create, :update, :edit] do
       resources :reviews, only: [:create]
     end
-    resources :reviews, only: [:edit, :update]
+    resources :reviews, only: [:edit, :update] do
+      resources :votes, only: [:create]
+    end
   end
 
-  resources :elevators, only: [:index, :show, :destroy]
+  resources :elevators, only: [:index, :show, :destroy] do
+    collection do
+      get 'search'
+    end
+  end
   resources :reviews, only: [:destroy]
 
   authenticated :admin do

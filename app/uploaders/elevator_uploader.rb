@@ -11,7 +11,6 @@ class ElevatorUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
-
   def default_url
     'https://nutfreenerd.files.wordpress.com/2013/04/elevader.jpg'
   end

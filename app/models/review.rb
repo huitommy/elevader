@@ -2,6 +2,7 @@ class Review < ActiveRecord::Base
   paginates_per 7
   belongs_to :elevator
   belongs_to :user
+  has_many :votes, dependent: :destroy
 
   RATING = [
     [1, "1"],
@@ -14,4 +15,9 @@ class Review < ActiveRecord::Base
   validates :user_id, presence: true
   validates :elevator_id, presence: true
   validates :rating, presence: true
+
+  def total_votes
+    votes = Vote.where(review_id: id)
+    votes.inject(0) { |a, vote| a + vote.vote }
+  end
 end

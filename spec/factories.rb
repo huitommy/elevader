@@ -31,4 +31,10 @@ FactoryGirl.define do
   factory :propic do
     photo Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/fixtures/images/sampleprofile.jpg')))
   end
+  
+  factory :vote do
+    review
+    user
+    vote [-1, 1].sample
+  end
 end
