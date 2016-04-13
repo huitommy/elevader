@@ -19,7 +19,7 @@ class Review < ActiveRecord::Base
   def count_votes
     votes = Vote.where(review_id: id)
     self.total_votes = votes.inject(0) { |a, vote| a + vote.vote }
-    self.save
-    self.total_votes
+    save
+    total_votes
   end
 end

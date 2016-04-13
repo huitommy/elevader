@@ -15,7 +15,7 @@ feature 'User visits elevator page:' do
   let!(:review4) { FactoryGirl.create(:review, elevator: elevator, total_votes: -9) }
   let!(:review5) { FactoryGirl.create(:review, elevator: elevator, total_votes: 1) }
   let!(:review6) { FactoryGirl.create(:review, elevator: elevator, total_votes: 0) }
-  
+
   scenario 'user sees reviews sorted by vote number and review date' do
     visit elevators_path
     click_on 'Cool Elevator'
