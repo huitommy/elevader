@@ -5,7 +5,7 @@ feature 'User can edit and delete account' do
 
   before :each do
     FactoryGirl.create(:user, username: 't00thless', email: 'noteeth@email.com', password: 'password')
-    visit '/users/sign_in'
+    visit new_user_session_path
     fill_in 'Email', with: 'noteeth@email.com'
     fill_in 'Password', with: 'password'
     click_on 'Log in'

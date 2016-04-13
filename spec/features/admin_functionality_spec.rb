@@ -6,19 +6,19 @@ feature 'Admin functionality:' do
     FactoryGirl.create(:admin, email: 'admin@admin.com')
     2.times { FactoryGirl.create(:admin) }
     5.times { FactoryGirl.create(:elevator) }
-    visit '/admins/sign_in'
+    visit new_admin_session_path
     fill_in 'Email', with: 'admin@admin.com'
     fill_in 'Password', with: 'password'
     click_on 'Log in'
   end
 
   scenario 'admin can see list of users' do
-    visit '/users'
+    visit users_path
     expect(page).to have_css('.user', count: 5)
   end
 
   scenario 'admin can erase users from list of users' do
-    visit '/users'
+    visit users_path
     user = User.third
     within(:css, "#user-#{user.id}") do
       click_on 'Delete'
@@ -26,17 +26,17 @@ feature 'Admin functionality:' do
     expect(page).to have_content('User was deleted')
     expect(page).to have_css('.user', count: 4)
 
-    visit '/users'
+    visit users_path
     expect(page).to have_css('.user', count: 4)
   end
 
   scenario 'admin can see list of elevators' do
-    visit '/elevators'
+    visit elevators_path
     expect(page).to have_css('.elevator', count: 5)
   end
 
   scenario 'admin can erase elevators from list of elevators' do
-    visit '/elevators'
+    visit elevators_path
     elevator = Elevator.third
     within(:css, "#elevator-#{elevator.id}") do
       click_on 'Delete'
@@ -44,13 +44,13 @@ feature 'Admin functionality:' do
     expect(page).to have_content('Elevator was deleted')
     expect(page).to have_css('.elevator', count: 4)
 
-    visit '/elevators'
+    visit elevators_path
     expect(page).to have_css('.elevator', count: 4)
   end
 
   scenario 'admin can erase an elevator from the elevator show page' do
     elevator = Elevator.third
-    visit '/elevators'
+    visit elevators_path
     click_on elevator.building_name
     click_on 'Delete'
 
