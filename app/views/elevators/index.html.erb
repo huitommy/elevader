@@ -5,13 +5,15 @@
 <div class="row">
 <% @elevators.each do |elevator| %>
   <div class="medium-4 columns" id="elevator-<%= elevator.id %>">
-    <div class="profile-card">
-      <%= link_to image_tag(elevator.elevator.large_elevator, border: 0, alt: '', title: "#{elevator.building_name}"), elevator_path(elevator) %>
-      <div class="profile-info inline-list">
-        <li><%= link_to "#{elevator.building_name}", elevator_path(elevator) %></li>
+    <div class="card">
+      <div class="image">
+        <%= link_to image_tag(elevator.elevator.medium_elevator), elevator_path(elevator) %>
+      </div>
+      <div class="content">
+        <span> <%= "#{elevator.building_name}" %></span>
         <% if current_admin || current_user == elevator.user %>
-          <li><%= button_to "Delete", elevator, method: :delete, class: 'button tiny alert elevator_delete_button_index' %></li>
-      <% end %>
+          <%= button_to "Delete", elevator, method: :delete, class: 'button tiny alert elevator_delete_button_index' %>
+        <% end %>
       </div>
     </div>
   </div>

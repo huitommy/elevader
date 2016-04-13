@@ -25,7 +25,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
   version :small_avatar do
     # returns a 35x35 image
-    process resize_to_fill: [35, 35]
+    process resize_to_fill: [15, 15]
   end
 
   def extension_white_list

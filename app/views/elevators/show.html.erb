@@ -1,47 +1,43 @@
-<h1> Building Name: <%= @elevator.building_name %></h1>
-<img src="<%= @elevator.elevator.large_elevator %>">
-
-<ul>
-  <div class = "inline-list">
+<div class="row">
+  <h1> <%= @elevator.building_name %></h1>
+</div>
+<div class="row">  <div class="small-1 large-6 columns inline-list">
+    <img src="<%= @elevator.elevator.large_elevator %>">
     <li> Address: <%= @elevator.address %>  </li>
     <li> <%= @elevator.city %>, <%= @elevator.state %> <%= @elevator.zipcode %> </li>
-    <li> Created by: <%= @elevator.user.username %></li>
   </div>
-</ul>
+  <div class="small-3 large-3 columns">
+  </div>
+  <div class="small-3 large-3 columns">
+    <img src="<%= @elevator.user.avatar.small_avatar %>">
+    <p>Created by: <%= @elevator.user.username %></p>
+  </div>
+</div>
 
-<img src="<%= @elevator.user.avatar.medium_avatar %>">
+<div class="row">
+  <div class="inline-list">
+    <% if current_user == @elevator.user || current_admin %>
+      <li> <%= link_to "Edit", edit_elevator_path(@elevator), class: "button tiny"%> </li>
+      <li> <%= link_to "Delete", @elevator, method: :delete, data: { confirm: "Are you sure you want to delete this elevator?" }, class: "button tiny alert" %> </li>
+    <% end %>
+  </div>
+</div>
 
-<div class="elevator_buttons">
-  <% if current_user == @elevator.user || current_admin %>
-      <div class = "row">
-        <%= link_to "Edit", edit_elevator_path(@elevator)%>
-      </div>
-
-      <div class = "row">
-        <%= link_to "Delete", @elevator, method: :delete, data: { confirm: "Are you sure you want to delete this elevator?" } %>
-      </div>
+<div class="row">
+  <% if current_user %>
+    <%= form_for [@elevator, @review] do |f| %>
+        <%= f.label :rating %>
+        <%= f.select :rating, options_for_select(@rating) %>
+        <%= f.label :body %>
+        <%= f.text_area :body %>
+        <%= f.submit "Create Review", class: "button tiny success" %>
+    <% end %>
   <% end %>
 </div>
 
-<% if current_user %>
-  <%= form_for [@elevator, @review] do |f| %>
-    <div class = "row">
-      <%= f.label :rating %>
-      <%= f.select :rating, options_for_select(@rating) %>
-    </div>
-    <div class = "small-10 columns">
-      <%= f.label :body %>
-      <%= f.text_area :body %>
-    </div>
-    <div class = "small-12 columns">
-      <%= f.submit "Create Review", class: "button tiny success" %>
-    </div>
-  <% end %>
-<% end %>
-
 <div class="row">
   <% @reviews.each do |review| %>
-    <div class="medium-6 columns" id="review-<%= review.id %>">
+    <div class="large-12 columns" id="review-<%= review.id %>">
       <div class="card">
         <div class="content">
           <span class ="title"> Rating: <%= review.rating %></span>

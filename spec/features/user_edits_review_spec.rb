@@ -29,7 +29,7 @@ feature 'User edits an existing review' do
     expect(page).to have_content('sample body')
     click_link 'Sign Out'
     click_link 'test'
-    within(:css, '.review_buttons') do
+    within(:css, '.card') do
       expect(page).not_to have_content("Edit")
     end
   end
