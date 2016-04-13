@@ -57,7 +57,7 @@ feature 'Voting buttons for reviews:', js: true do
       elevator: @elevator,
       user: @user
     )
-    visit '/'
+    visit elevators_path
     click_link 'Mission Control'
     within(:css, "#review-#{review.id}") do
       click_on 'upvote'

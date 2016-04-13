@@ -9,7 +9,7 @@ feature 'User can login and logout:' do
       email: 'noteeth@email.com',
       password: 'password'
     )
-    visit '/'
+    visit root_path
   end
 
   scenario 'not logged-in user sees sign-up button and sign-in button' do

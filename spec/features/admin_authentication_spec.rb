@@ -5,7 +5,7 @@ feature 'Admin authentication:' do
   before :each do
     FactoryGirl.create(:admin, email: 'admin@admin.com')
     FactoryGirl.create(:user, email: 'user@user.com')
-    visit '/admins/sign_in'
+    visit new_admin_session_path
   end
 
   scenario 'admin has a sign-in page' do

@@ -5,7 +5,7 @@ feature 'User creates new elevator' do
   context "user is signed in" do
     before(:each) do
       FactoryGirl.create(:user, username: 't00thless', email: 'noteeth@email.com', password: 'password')
-      visit '/users/sign_in'
+      visit new_user_session_path
       fill_in 'Email', with: 'noteeth@email.com'
       fill_in 'Password', with: 'password'
       click_on 'Log in'
@@ -43,7 +43,7 @@ feature 'User creates new elevator' do
   end
 
   scenario 'User is not logged in and tries to submit a new elevator form' do
-    visit '/'
+    visit elevators_path
     click_link 'Add Elevator'
 
     expect(page).to have_content('You need to sign in or sign up before continuing.')
