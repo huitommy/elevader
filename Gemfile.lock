@@ -229,6 +229,8 @@ GEM
     foundation-rails (5.4.3.1)
       railties (>= 3.1.0)
       sass (>= 3.2.0)
+    fuzzily (0.3.3)
+      activerecord (>= 2.3.17)
     hike (1.2.3)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
@@ -384,6 +386,7 @@ DEPENDENCIES
   factory_girl_rails (~> 4.0)
   fog
   foundation-rails (= 5.4.3.1)
+  fuzzily
   jbuilder (~> 2.0)
   jquery-rails
   kaminari

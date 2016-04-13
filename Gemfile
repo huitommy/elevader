@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 gem 'fog'
 gem 'mini_magick'
-gem 'carrierwave'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.6'
 # Use postgresql as the database for Active Record
@@ -45,6 +44,10 @@ gem 'pry-rails'
 gem 'devise'
 gem 'foundation-rails', '5.4.3.1'
 gem "rest-client"
+gem 'carrierwave'
+gem 'fuzzily'
+
+
 
 group :test do
   gem 'rspec-rails'

@@ -50,6 +50,17 @@ class ElevatorsController < PermissionsController
     end
   end
 
+  def search
+    @search_results = Elevator.find_by_fuzzy_building_name(params['search'])
+    @ids = @search_results.map { |result| result.id }
+    @elevators = Elevator.where(id: @ids)
+    @elevators = @elevators.page params[:page]
+    if @elevators.empty?
+      flash[:notice] = "Sorry but we couldn't find that elevator for you"
+    end
+    render :index
+  end
+
   private
 
   def elevator_params
