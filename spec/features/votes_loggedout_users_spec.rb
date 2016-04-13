@@ -10,7 +10,7 @@ feature 'Voting buttons for reviews:' do
         elevator: @elevator
       )
     end
-    visit '/'
+    visit root_path
     click_on 'Mission Control'
   end
 
@@ -27,7 +27,7 @@ feature 'Voting buttons for reviews:' do
     end
     expect(page).to have_content('You need to sign in or sign up before continuing.')
 
-    visit '/'
+    visit elevators_path
     click_on 'Mission Control'
     within(:css, "#review-#{review.id} .vote-total") do
       expect(page).to have_content('0')
@@ -42,7 +42,7 @@ feature 'Voting buttons for reviews:' do
     end
     expect(page).to have_content('You need to sign in or sign up before continuing.')
 
-    visit '/'
+    visit elevators_path
     click_on 'Mission Control'
     within(:css, "#review-#{review.id} .vote-total") do
       expect(page).to have_content('0')

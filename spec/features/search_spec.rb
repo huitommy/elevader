@@ -5,17 +5,22 @@ feature 'Search bar:' do
   before :each do
     FactoryGirl.create(:user, email: 'email@email.com', password: 'password')
     FactoryGirl.create(:admin, email: 'email@email.com', password: 'password')
-    FactoryGirl.create(:elevator, building_name: 'Nice building with nice elevator')
-    FactoryGirl.create(:elevator, building_name: 'Stinky elevator')
-    FactoryGirl.create(:elevator, building_name: 'Stinky yet NICE elevator')
-    FactoryGirl.create(:elevator, building_name: 'Idiotic building')
-    FactoryGirl.create(:elevator, building_name: 'The White House')
-    FactoryGirl.create(:elevator, building_name: 'The White Mountains')
-    FactoryGirl.create(:elevator, building_name: 'The White Whale')
+    building_names = [
+      'Nice building with nice elevator',
+      'Stinky elevator',
+      'Stinky yet NICE elevator',
+      'Idiotic building',
+      'The White House',
+      'The White Mountains',
+      'The White Whale'
+    ]
+    building_names.each do |name|
+      FactoryGirl.create(:elevator, building_name: name)
+    end
   end
 
   scenario 'Non-logged-in user searches for a specific elevator' do
-    visit '/'
+    visit root_path
     fill_in 'search', with: 'nice'
     click_on 'Search'
 
@@ -26,7 +31,7 @@ feature 'Search bar:' do
   end
 
   scenario 'Logged-in user searches for a specific elevator' do
-    visit '/'
+    visit root_path
     click_on 'Sign In'
     fill_in 'Email', with: 'email@email'
     fill_in 'Password', with: 'password'
@@ -53,7 +58,7 @@ feature 'Search bar:' do
   end
 
   scenario 'User enters search term for which there are no matches' do
-    visit '/'
+    visit root_path
     fill_in 'search', with: 'Madonna'
     click_on 'Search'
 
@@ -62,7 +67,7 @@ feature 'Search bar:' do
   end
 
   scenario 'user can go to elevator show pages from results' do
-    visit '/'
+    visit root_path
     fill_in 'search', with: 'nice'
     click_on 'Search'
 
