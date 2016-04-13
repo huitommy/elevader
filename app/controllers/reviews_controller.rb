@@ -1,3 +1,5 @@
+require 'rest-client'
+
 class ReviewsController < PermissionsController
   before_filter :require_permission, only: [:edit, :destroy]
 
@@ -6,9 +8,12 @@ class ReviewsController < PermissionsController
     @review = current_user.reviews.build(review_params)
     @rating = Review::RATING
     @reviews = @elevator.reviews
+    @user = @elevator.user
 
     @review.elevator = @elevator
     if @review.save
+
+      UserMailer.added_review(@user, @elevator).deliver
       flash[:notice] = 'Review Added!'
       redirect_to elevator_path(@elevator)
     else
