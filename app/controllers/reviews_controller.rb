@@ -8,8 +8,7 @@ class ReviewsController < PermissionsController
     @review = current_user.reviews.build(review_params)
     @rating = Review::RATING
     @reviews = @elevator.reviews
-    a = @elevator.user
-    @user = a
+    @user = @elevator.user
 
     @review.elevator = @elevator
     if @review.save
@@ -52,14 +51,5 @@ class ReviewsController < PermissionsController
 
   def review_params
     params.require(:review).permit(:rating, :body)
-  end
-
-  def added_review
-    RestClient.post "https://api:#{ENV['MAILGUN_KEY']}"\
-    "@api.mailgun.net/v3/#{ENV['MAILGUN_DOMAIN']}",
-    from: "Excited User #{ENV['MAILGUN_DOMAIN']}",
-    to: "bar@example.com, #{ENV['MAILGUN_USER']}",
-    subject: "Hello",
-    text: "Testing some Mailgun awesomness!"
   end
 end
