@@ -3,13 +3,36 @@ $(document).ready(function() {
   var voteButtons = $('.vote');
   voteButtons.click(function(event) {
     event.preventDefault();
-    var parent = $(event.target).closest('div[class="voting"]')
-    var voteTotal = parent.find('div.vote-total');
-    // Send vote to server
-    // Server changes votes and total count
-    // Upon receipt of success message, ajax changes total count
+
+    var review = $(event.target).closest('div[class="review"]');
+    var path = $(event.target).closest('form[method="post"]').attr('action');
+    var voteDir = $($(event.target).siblings('#vote')[0]).attr('value');
+    var voteTotal = review.find('div.vote-total');
+
+    $.ajax({
+      url: path,
+      method: 'POST',
+      datatype: 'json',
+      data: { vote: voteDir },
+      success: function(response) {
+        if (response.status === "200") {
+          voteTotal.text(response.votes);
+        } else {
+          flashError('You cannot vote on your own reviews');
+        };
+      },
+      error: function(response) {
+        flashError('You need to sign in or sign up before continuing.');
+      }
+    });
+
+    var flashError = function(errorMessage) {
+      var header = $('header');
+      var existingFlashes = header.children('div.flash');
+      HTML = "<div class='flash error'>" + errorMessage + "<div>";
+      existingFlashes.remove();
+      header.append(HTML);
+    };
   });
 
 });
-
-var $div = $('#divid').closest('div[class^="div-a"]');

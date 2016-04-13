@@ -3,8 +3,10 @@ class VotesController < ApplicationController
     @user = current_user
     @review = Review.find(params[:review_id])
     @elevator = @review.elevator
+
     if @review.user == @user
       flash[:error] = "You cannot vote on your own reviews"
+      json_response = { status: '401', error: flash[:error] }
     else
       @vote = Vote.new(user: @user, review: @review, vote: params[:vote])
       unless @vote.save
@@ -16,7 +18,15 @@ class VotesController < ApplicationController
           @vote.save
         end
       end
+      json_response = { status: '200', votes: @review.total_votes }
     end
-    redirect_to elevator_path(@elevator)
+
+    respond_to do |format|
+      format.json do
+        flash.discard(:error)
+        render json: json_response
+      end
+      format.html { redirect_to elevator_path(@elevator) }
+    end
   end
 end
