@@ -16,8 +16,10 @@ class Review < ActiveRecord::Base
   validates :elevator_id, presence: true
   validates :rating, presence: true
 
-  def total_votes
+  def count_votes
     votes = Vote.where(review_id: id)
-    votes.inject(0) { |a, vote| a + vote.vote }
+    self.total_votes = votes.inject(0) { |a, vote| a + vote.vote }
+    self.save
+    self.total_votes
   end
 end

@@ -9,7 +9,8 @@ class ElevatorsController < PermissionsController
     @elevator = Elevator.find(params[:id])
     @review = Review.new
     @rating = Review::RATING
-    @reviews = @elevator.reviews.order(rating: :desc).page params[:page]
+    @reviews = @elevator.reviews.order(total_votes: :desc, created_at: :desc)
+    @reviews = @reviews.page params[:page]
   end
 
   def new

@@ -18,6 +18,7 @@ class VotesController < ApplicationController
           @vote.save
         end
       end
+      @review.count_votes
       json_response = { status: '200', votes: @review.total_votes }
     end
 
