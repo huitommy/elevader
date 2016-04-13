@@ -33,9 +33,11 @@ feature "User edits an existing elevator" do
       fill_in 'City', with: 'teston'
       fill_in 'Zipcode', with: '02142'
       fill_in 'State', with: 'ta'
+      attach_file :elevator_elevator, "#{Rails.root}/spec/fixtures/images/sampleprofile.jpg"
 
       click_on "Update Elevator"
 
+      expect(page).to have_css("img[src*='sampleprofile.jpg']")
       expect(page).to have_content("test")
       expect(page).to have_content("test street")
       expect(page).to have_content("02142")

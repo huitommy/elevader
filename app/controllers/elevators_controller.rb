@@ -53,6 +53,6 @@ class ElevatorsController < PermissionsController
   private
 
   def elevator_params
-    params.require(:elevator).permit(:building_name, :address, :city, :zipcode, :state)
+    params.require(:elevator).permit(:building_name, :address, :city, :zipcode, :state, :elevator_cache, :elevator)
   end
 end

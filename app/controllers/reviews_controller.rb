@@ -50,6 +50,6 @@ class ReviewsController < PermissionsController
   private
 
   def review_params
-    params.require(:review).permit(:rating, :body)
+    params.require(:review).permit(:rating, :body, :vote)
   end
 end

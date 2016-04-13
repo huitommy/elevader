@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160406184946) do
+ActiveRecord::Schema.define(version: 20160412152555) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20160406184946) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id",       null: false
+    t.string   "elevator"
   end
 
   add_index "elevators", ["building_name"], name: "index_elevators_on_building_name", unique: true, using: :btree
@@ -54,6 +55,17 @@ ActiveRecord::Schema.define(version: 20160406184946) do
     t.integer "rating",      null: false
     t.text    "body"
   end
+
+  create_table "trigrams", force: true do |t|
+    t.string  "trigram",     limit: 3
+    t.integer "score",       limit: 2
+    t.integer "owner_id"
+    t.string  "owner_type"
+    t.string  "fuzzy_field"
+  end
+
+  add_index "trigrams", ["owner_id", "owner_type", "fuzzy_field", "trigram", "score"], name: "index_for_match", using: :btree
+  add_index "trigrams", ["owner_id", "owner_type"], name: "index_by_owner", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "username",                            null: false
@@ -69,10 +81,21 @@ ActiveRecord::Schema.define(version: 20160406184946) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "avatar"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
+
+  create_table "votes", force: true do |t|
+    t.integer  "review_id",  null: false
+    t.integer  "user_id",    null: false
+    t.integer  "vote",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "votes", ["review_id", "user_id"], name: "index_votes_on_review_id_and_user_id", unique: true, using: :btree
 
 end
