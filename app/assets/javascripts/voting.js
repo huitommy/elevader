@@ -15,11 +15,11 @@ $(document).ready(function() {
       datatype: 'json',
       data: { vote: voteDir },
       success: function(response) {
-        if (response.status === "200") {
+        if (response.status === '200') {
           voteTotal.text(response.votes);
         } else {
           flashError('You cannot vote on your own reviews');
-        };
+        }
       },
       error: function(response) {
         flashError('You need to sign in or sign up before continuing.');
@@ -29,7 +29,7 @@ $(document).ready(function() {
     var flashError = function(errorMessage) {
       var header = $('header');
       var existingFlashes = header.children('div.flash');
-      HTML = "<div class='flash error'>" + errorMessage + "<div>";
+      var HTML = '<div class="flash error">' + errorMessage + '<div>';
       existingFlashes.remove();
       header.append(HTML);
     };
