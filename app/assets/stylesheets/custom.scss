@@ -1,6 +1,11 @@
 @import 'foundation_and_overrides';
 @import url(//fonts.googleapis.com/css?family=Roboto:400,500,300,100,700,900);
 
+.container {
+  min-height: 100%;
+  position: relative;
+}
+
 div#search {
   border-style: hidden;
 }
