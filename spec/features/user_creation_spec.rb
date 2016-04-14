@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'User Creation:' do
 
   before :each do
-    visit '/'
+    visit root_path
     click_link 'Sign Up'
   end
 
@@ -12,9 +12,13 @@ feature 'User Creation:' do
     fill_in 'Email', with: 'test@test.test'
     fill_in 'Password', with: 'password'
     fill_in 'Password confirmation', with: 'password'
+    attach_file :user_avatar, "#{Rails.root}/spec/fixtures/images/sampleprofile.jpg"
     click_on 'Sign up'
 
     expect(page).to have_content('Welcome! You have signed up successfully.')
+
+    click_link 'Profile'
+    expect(page).to have_css("img[src*='sampleprofile.jpg']")
   end
 
   scenario 'user attempts to use an username that already exists' do

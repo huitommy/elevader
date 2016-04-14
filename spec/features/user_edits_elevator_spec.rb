@@ -7,7 +7,7 @@ feature "User edits an existing elevator" do
       tooth = FactoryGirl.create(:user, username: 't00thless', email: 'noteeth@email.com', password: 'password')
       FactoryGirl.create(:elevator, zipcode: "92312", building_name: "testname", state: "teststate", user: tooth)
 
-      visit '/users/sign_in'
+      visit new_user_session_path
       fill_in 'Email', with: 'noteeth@email.com'
       fill_in 'Password', with: 'password'
       click_on 'Log in'
@@ -33,9 +33,11 @@ feature "User edits an existing elevator" do
       fill_in 'City', with: 'teston'
       fill_in 'Zipcode', with: '02142'
       fill_in 'State', with: 'ta'
+      attach_file :elevator_elevator, "#{Rails.root}/spec/fixtures/images/sampleprofile.jpg"
 
       click_on "Update Elevator"
 
+      expect(page).to have_css("img[src*='sampleprofile.jpg']")
       expect(page).to have_content("test")
       expect(page).to have_content("test street")
       expect(page).to have_content("02142")
@@ -53,14 +55,12 @@ feature "User edits an existing elevator" do
       click_link 'Sign Out'
 
       FactoryGirl.create(:user, username: 't00thless1', email: '1noteeth@email.com', password: 'password1')
-      visit '/users/sign_in'
+      visit new_user_session_path
       fill_in 'Email', with: '1noteeth@email.com'
       fill_in 'Password', with: 'password1'
       click_on 'Log in'
       click_link 'test'
-      within(:css, '.elevator_buttons') do
-        expect(page).not_to have_content("Edit")
-      end
+      expect(page).not_to have_content("Edit")
     end
   end
 
@@ -69,8 +69,6 @@ feature "User edits an existing elevator" do
     visit elevators_path
     click_link "test"
 
-    within(:css, '.elevator_buttons') do
-      expect(page).not_to have_content("Edit")
-    end
+    expect(page).not_to have_content("Edit")
   end
 end

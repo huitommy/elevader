@@ -4,7 +4,7 @@ feature 'User edits an existing review' do
   before(:each) do
     a = FactoryGirl.create(:user, username: 't00thless', email: 'noteeth@email.com', password: 'password')
     FactoryGirl.create(:elevator, building_name: 'test', user: a)
-    visit '/users/sign_in'
+    visit new_user_session_path
     fill_in 'Email', with: 'noteeth@email.com'
     fill_in 'Password', with: 'password'
     click_on 'Log in'
@@ -29,7 +29,7 @@ feature 'User edits an existing review' do
     expect(page).to have_content('sample body')
     click_link 'Sign Out'
     click_link 'test'
-    within(:css, '.review_buttons') do
+    within(:css, '.card') do
       expect(page).not_to have_content("Edit")
     end
   end
@@ -38,7 +38,7 @@ feature 'User edits an existing review' do
     expect(page).to have_content('sample body')
     click_link 'Sign Out'
     FactoryGirl.create(:user, username: 't00thless1', email: '1noteeth@email.com', password: 'password1')
-    visit '/users/sign_in'
+    visit new_user_session_path
     fill_in 'Email', with: '1noteeth@email.com'
     fill_in 'Password', with: 'password1'
     click_on 'Log in'

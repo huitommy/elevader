@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
-
+gem 'fog'
+gem 'mini_magick'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.6'
 # Use postgresql as the database for Active Record
@@ -20,6 +21,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
+gem 'kaminari'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
@@ -40,17 +42,21 @@ gem 'dotenv-rails'
 # gem 'debugger', group: [:development, :test]
 gem 'pry-rails'
 gem 'devise'
+gem 'foundation-rails', '5.4.3.1'
+gem "rest-client"
 gem 'carrierwave'
 gem 'fuzzily'
-gem 'foundation-rails'
+
+
 
 group :test do
   gem 'rspec-rails'
   gem 'capybara-rails'
+  gem 'database_cleaner'
+  gem 'selenium-webdriver'
   gem 'coveralls', require: false
   gem 'launchy'
   gem 'factory_girl_rails', '~> 4.0'
   gem 'valid_attribute'
   gem 'shoulda-matchers', require: false
 end
-

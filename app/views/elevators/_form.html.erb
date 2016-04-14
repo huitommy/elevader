@@ -1,30 +1,37 @@
 <%= form_for(@elevator) do |f| %>
-  <div class= "field">
+  <div class= "large-10 columns">
     <%= f.label :building_name %>
     <%= f.text_field :building_name %>
   </div>
 
-  <div class= "field">
+  <div class= "large-10 columns">
     <%= f.label :address %>
     <%= f.text_field :address %>
   </div>
 
-  <div class= "field">
+  <div class= "large-10 columns">
     <%= f.label :city %>
     <%= f.text_field :city %>
   </div>
 
-  <div class= "field">
+  <div class= "large-10 columns">
     <%= f.label :zipcode %>
     <%= f.text_field :zipcode %>
   </div>
 
-  <div class= "field">
+  <div class= "large-10 columns">
     <%= f.label :state %>
     <%= f.text_field :state %>
   </div>
 
-  <div class= "actions">
-    <%= f.submit%>
+  <div class="large-10 columns">
+    <%= f.label :elevator do %>
+      <%= f.file_field :elevator %>
+      <%= f.hidden_field :elevator_cache %>
+    <% end %>
+  </div>
+
+  <div class="small-12 columns">
+    <%= f.submit :class => 'button'%>
   </div>
 <% end %>
