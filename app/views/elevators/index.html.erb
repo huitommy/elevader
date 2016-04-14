@@ -4,18 +4,21 @@
 
 <div class="row">
   <% @elevators.each do |elevator| %>
-    <div class="medium-4 columns" id="elevator-<%= elevator.id %>">
-      <div class="card">
-        <div class="image">
-          <%= link_to image_tag(elevator.elevator.medium_elevator, alt: "#{elevator.building_name}"), elevator_path(elevator) %>
-        </div>
-        <div class="content">
-          <span> <%= "#{elevator.building_name}" %>
+      <div class="medium-4 columns" id="elevator-<%= elevator.id %>">
+        <div class="card">
+          <div class="image">
+            <%= link_to image_tag(elevator.elevator.medium_elevator, alt: "#{elevator.building_name}"), elevator_path(elevator) %>
+          </div>
+          <div class="content">
+            <span> <h2><%= "#{elevator.building_name}" %> </h2></span>
+            <span>
+              <%= render 'elevators/stars', locals: { gold: elevator.average_rating, silver: 5 - elevator.average_rating } %>
+            </span>
+          </div>
         </div>
       </div>
-    </div>
-  <% end %>
-</div>
+    <% end %>
+  </div>
 
 <%= paginate @elevators %>
 

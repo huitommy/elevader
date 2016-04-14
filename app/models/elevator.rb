@@ -16,4 +16,11 @@ class Elevator < ActiveRecord::Base
 
   fuzzily_searchable :building_name
   Elevator.bulk_update_fuzzy_building_name
+
+  def average_rating
+    reviews = Review.where(elevator: self)
+    rtg_sum = reviews.inject(0) { |a, review| a + review.rating }
+    avg = reviews.empty? ? 0 : rtg_sum.to_f / reviews.length
+    avg.round
+  end
 end
