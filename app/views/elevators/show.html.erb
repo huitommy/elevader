@@ -52,22 +52,22 @@
           <p> by: <%= review.user.username %> </p>
         </div>
         <div class="action row">
-          <div class="voting circle small-1 large-2 columns">
-            <div class="increment up">
+          <div class="voting small-1 large-2">
+            <div class="upvote">
               <%= form_tag review_votes_path(review), method: :post do  %>
               <%= hidden_field_tag :vote, "1" %>
-              <%= submit_tag 'Up', class: 'vote', id: 'upvote' %>
+              <%= submit_tag 'Up', class: 'vote' %>
               <% end %>
             </div>
             <div class="vote-total" style="bottom: 60px;">
               <%= review.total_votes %>
             </div>
-            <i class="button tiny fi-arrow-down">
+            <div class="downvote">
               <%= form_tag review_votes_path(review), method: :post do  %>
               <%= hidden_field_tag :vote, "-1" %>
-              <%= submit_tag 'Down', class: 'vote', id: 'downvote' %>
+              <%= submit_tag 'Down', class: 'vote'%>
               <% end %>
-            </i>
+            </div>
           </div>
           <% if current_user == review.user %>
           <%= link_to "Edit Review", edit_review_path(review), class: "button tiny" %>
