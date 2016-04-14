@@ -1,0 +1,12 @@
+<% @elevators.each do |elevator| %>
+  <div class="medium-4 columns" id="elevator-<%= elevator.id %>">
+    <div class="card">
+      <div class="image">
+        <%= link_to image_tag(elevator.elevator.medium_elevator, alt: "#{elevator.building_name}"), elevator_path(elevator) %>
+      </div>
+      <div class="content">
+        <span> <%= "#{elevator.building_name}" %>
+      </div>
+    </div>
+  </div>
+<% end %>
