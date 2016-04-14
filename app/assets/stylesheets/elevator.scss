@@ -1,4 +1,4 @@
-@import 'foundation_and_overrides';
+@import "foundation_and_overrides";
 
 $lighter-color: $iron;
 $darker-color: $oil;
@@ -18,7 +18,7 @@ $elevator-depth: 25px;
   height: $footer-height;
   background-color: $lighter-color;
 
-  &:after {
+  &::after {
     content: '';
     position: absolute;
     z-index: 1;
@@ -71,7 +71,7 @@ $elevator-depth: 25px;
   left: 0;
   margin-top: -10px;
 
-  &:after, &:before {
+  &::after, &::before {
     content: '';
     position: absolute;
     top: 4px;
@@ -80,17 +80,13 @@ $elevator-depth: 25px;
     background-color: #acacac;
   }
 
-  &:after {
+  &::after {
     left: -24px;
-    -webkit-transform: skewX(-20deg) rotate(-20deg);
-    -ms-transform: skewX(-20deg) rotate(-20deg);
     transform: skewX(-20deg) rotate(-20deg);
   }
 
-  &:before {
+  &::before {
     right: -24px;
-    -webkit-transform: skewX(20deg) rotate(20deg);
-    -ms-transform: skewX(20deg) rotate(20deg);
     transform: skewX(20deg) rotate(20deg);
   }
 }
@@ -103,8 +99,8 @@ $elevator-depth: 25px;
   position: absolute;
   z-index: 8;
 
-  &:after,
-  &:before {
+  &::after,
+  &::before {
     content: '';
     position: absolute;
     width: 50%;
@@ -112,33 +108,31 @@ $elevator-depth: 25px;
     top: 0;
     box-sizing: border-box;
     background-color: #9b4c4c;
-    -webkit-transition: all 0.4s ease;
-    -o-transition: all 0.4s ease;
     transition: all 0.4s ease;
   }
 
-  &:after {
+  &::after {
     left: 0;
     border-right: 1px solid #644a4a;
   }
 
-  &:before {
+  &::before {
     right: -1px;
     border-left: 1px solid #644a4a;
   }
 }
 
 .door.active {
-  &:before {
+  &::before {
   right: -50%;
   }
 
-  &:after {
-    left: -50%
+  &::after {
+    left: -50%;
   }
 }
 
-.btn_cmon {
+.btn-cmon {
   width: 30px;
   height: 0.23 * $elevator-height;
   position: absolute;
@@ -149,8 +143,8 @@ $elevator-depth: 25px;
   background-color: #aaa;
   border-radius: 2px;
 
-  .btn_up,
-  .btn_down {
+  .btn-up,
+  .btn-down {
     position: absolute;
     width: 0;
     height: 0;
@@ -158,13 +152,11 @@ $elevator-depth: 25px;
     box-sizing: border-box;
     left: 50%;
     transform: translateX(-50%);
-    -webkit-transition: border-color 0.2s ease-in;
-    -o-transition: border-color 0.2s ease-in;
     transition: border-color 0.2s ease-in;
     cursor: pointer;
   }
 
-  .btn_up {
+  .btn-up {
     border-bottom: 7px solid #76766b;
     top: 7px;
 
@@ -173,21 +165,21 @@ $elevator-depth: 25px;
     }
   }
 
-  .btn_down {
+  .btn-down {
     border-top: 7px solid #76766b;
     bottom: 7px;
 
     &.active {
       border-top: 7px solid #e5ff00;
     }
-  } 
+  }
 }
 
 .floor {
   position: absolute;
   transform: translateX(-50%);
   left: 50%;
-  bottom: 1.05 * $elevator-height ;
+  bottom: 1.05 * $elevator-height;
   width: 0.1 * $elevator-height;
   height: 0.1 * $elevator-height;
   line-height: 0.1 * $elevator-height;
@@ -198,7 +190,7 @@ $elevator-depth: 25px;
   overflow: hidden;
 }
 
-.this_floor {
+.floor-name {
   position: absolute;
   z-index: 2;
   left: 50%;
