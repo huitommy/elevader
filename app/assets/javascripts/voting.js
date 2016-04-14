@@ -29,7 +29,7 @@ $(document).ready(function() {
     var flashError = function(errorMessage) {
       var header = $('header');
       var existingFlashes = header.children('div.flash');
-      var html = '<div class="flash error">' + errorMessage + '<div>';
+      var html = '<div class="flash alert">' + errorMessage + '<div>';
       existingFlashes.remove();
       header.append(html);
     };

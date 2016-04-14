@@ -1,0 +1,25 @@
+@import 'foundation_and_overrides';
+
+@import 'foundation_and_overrides';
+
+$flash-success: #3B9089;
+$flash-error: #ff1500;
+$flash-alert: #ff9933;
+
+.flash.notice{
+  padding: 1em;
+  color: white;
+  background-color: $flash-success ;
+}
+
+.flash.error{
+  padding: 1em;
+  color: white;
+  background-color: $flash-error ;
+}
+
+.flash.alert{
+  padding: 1em;
+  color: white;
+  background-color: $flash-alert ;
+}
