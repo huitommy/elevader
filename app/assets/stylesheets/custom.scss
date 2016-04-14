@@ -54,6 +54,7 @@ input#search.searchbox {
   margin-top: -105px;
   margin-left: -42px;
 }
+
 .container {
   min-height: 100%;
   position: relative;
@@ -137,4 +138,19 @@ input#search {
 
 .pagebar {
   margin-top: 10px;
+} 
+
+.elevator-card {
+  border-radius: $global-radius;
+
+  .content {
+    color: $iron;
+    background-color: $oil;
+    font-size: 25px;
+    clear: both;
+  }
+}
+
+.stars {
+  padding-top: 10px;
 }
