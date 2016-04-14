@@ -62,12 +62,12 @@
             <div class="vote-total" style="bottom: 60px;">
               <%= review.total_votes %>
             </div>
-            <div class="downvote">
+            <i class="button tiny fi-arrow-down">
               <%= form_tag review_votes_path(review), method: :post do  %>
               <%= hidden_field_tag :vote, "-1" %>
               <%= submit_tag 'Down', class: 'vote', id: 'downvote' %>
               <% end %>
-            </div>
+            </i>
           </div>
           <% if current_user == review.user %>
           <%= link_to "Edit Review", edit_review_path(review), class: "button tiny" %>
