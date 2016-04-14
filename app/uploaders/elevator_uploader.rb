@@ -12,7 +12,7 @@ class ElevatorUploader < CarrierWave::Uploader::Base
   end
 
   def default_url
-    'default_elevator.png'
+    'https://nutfreenerd.files.wordpress.com/2013/04/elevader.jpg'
   end
 
   version :large_elevator do

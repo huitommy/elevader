@@ -32,30 +32,16 @@ feature 'Admin functionality:' do
 
   scenario 'admin can see list of elevators' do
     visit elevators_path
-    expect(page).to have_css('.elevator', count: 5)
-  end
-
-  scenario 'admin can erase elevators from list of elevators' do
-    visit elevators_path
-    elevator = Elevator.third
-    within(:css, "#elevator-#{elevator.id}") do
-      click_on 'Delete'
-    end
-    expect(page).to have_content('Elevator was deleted')
-    expect(page).to have_css('.elevator', count: 4)
-
-    visit elevators_path
-    expect(page).to have_css('.elevator', count: 4)
+    expect(page).to have_css('.card', count: 5)
   end
 
   scenario 'admin can erase an elevator from the elevator show page' do
     elevator = Elevator.third
-    visit elevators_path
-    click_on elevator.building_name
+    visit elevator_path(elevator)
     click_on 'Delete'
 
     expect(page).to have_content('Elevator was deleted')
-    expect(page).to have_css('.elevator', count: 4)
+    expect(page).to have_css('.card', count: 4)
   end
 
   scenario 'admin can see reviews in elevator show page' do
@@ -63,7 +49,7 @@ feature 'Admin functionality:' do
     3.times { FactoryGirl.create(:review, elevator: elevator) }
     visit "/elevators/#{elevator.id}"
 
-    expect(page).to have_css('.review', count: 3)
+    expect(page).to have_css('.card', count: 3)
   end
 
   scenario 'admin can erase reviews from elevator show page' do
@@ -76,7 +62,7 @@ feature 'Admin functionality:' do
     end
 
     expect(page).to have_content('Review was deleted')
-    expect(page).to have_css('.review', count: 2)
+    expect(page).to have_css('.card', count: 2)
   end
 
   scenario 'admin can view list of admins' do

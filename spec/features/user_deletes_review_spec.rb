@@ -41,7 +41,7 @@ feature 'User deletes an existing review' do
     click_on 'Log in'
     click_link 'test'
 
-    within(:css, '.reviews') do
+    within(:css, '.card') do
       expect(page).not_to have_content('Delete')
     end
   end
