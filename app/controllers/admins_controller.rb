@@ -23,7 +23,7 @@ class AdminsController < ApplicationController
 
   def destroy
     @admin = Admin.find(params['id'])
-    @admin.delete
+    @admin.destroy
     flash[:notice] = "Admin was deleted"
     redirect_to admins_path
   end
