@@ -15,7 +15,7 @@ class AdminsController < ApplicationController
       flash[:notice] = "#{@admin.username} is now an admin"
     else
       unless Admin.find_by(email: @admin.email).nil?
-        flash[:notice] = "#{admin.username} is already admin"
+        flash[:alert] = "#{admin.username} is already admin"
       end
     end
     redirect_to admins_path
@@ -23,7 +23,7 @@ class AdminsController < ApplicationController
 
   def destroy
     @admin = Admin.find(params['id'])
-    @admin.delete
+    @admin.destroy
     flash[:notice] = "Admin was deleted"
     redirect_to admins_path
   end

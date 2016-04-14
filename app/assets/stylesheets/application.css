@@ -16,7 +16,7 @@
 
  */
 
-h2 {
+.elevaderfont {
   font-family: 'Play', cursive;
 }
 
@@ -32,5 +32,4 @@ h1 {
 
 .top-bar-section ul li > a{
   font-family: 'Play', cursive;
-  font-size: 17px;
 }

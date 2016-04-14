@@ -9,7 +9,8 @@ class ElevatorsController < PermissionsController
     @elevator = Elevator.find(params[:id])
     @review = Review.new
     @rating = Review::RATING
-    @reviews = @elevator.reviews.order(rating: :desc).page params[:page]
+    @reviews = @elevator.reviews.order(total_votes: :desc, created_at: :desc)
+    @reviews = @reviews.page params[:page]
     @user = @elevator.user
   end
 
@@ -24,7 +25,7 @@ class ElevatorsController < PermissionsController
       flash[:notice] = 'You have successfully added an elevader!'
       redirect_to elevator_path(@elevator)
     else
-      flash[:notice] = @elevator.errors.full_messages.join('. ')
+      flash[:error] = @elevator.errors.full_messages.join('. ')
       render action: 'new'
     end
   end
@@ -46,7 +47,7 @@ class ElevatorsController < PermissionsController
       flash[:notice] = 'Elevator was updated successfully'
       redirect_to elevator_path(@elevator)
     else
-      flash[:alert] = @elevator.errors.full_messages.join('. ')
+      flash[:error] = @elevator.errors.full_messages.join('. ')
       render :edit
     end
   end
@@ -57,7 +58,7 @@ class ElevatorsController < PermissionsController
     @elevators = Elevator.where(id: @ids)
     @elevators = @elevators.page params[:page]
     if @elevators.empty?
-      flash[:notice] = "Sorry but we couldn't find that elevator for you"
+      flash[:alert] = "Sorry but we couldn't find that elevator for you"
     end
     render :index
   end

@@ -24,7 +24,7 @@
         </div>
       </ul>
 
-      <ul class="left searcharea">
+      <ul class="left">
         <%= form_tag search_elevators_path, method: :get do %>
           <li class="searchelement"><%= text_field_tag :search, params[:search], class: "searchbox" %></li>
           <li class="searchelement"><%= submit_tag "Search", class: "button searchbutton" %></li>

@@ -1,6 +1,6 @@
 <div class="showtitle-container row">
   <div class="showtitle-item">
-    <h1> <%= @elevator.building_name %></h1>
+    <h1><span class="elevaderfont"> <%= @elevator.building_name %></span></h1>
   </div>
     <% if current_user == @elevator.user || current_admin %>
       <div class="showtitle-item">
@@ -65,7 +65,7 @@
             <div class="downvote">
               <%= form_tag review_votes_path(review), method: :post do  %>
               <%= hidden_field_tag :vote, "-1" %>
-              <%= submit_tag 'Down', class: 'fi-down-arrow', id: 'downvote' %>
+              <%= submit_tag 'Down', class: 'vote', id: 'downvote' %>
               <% end %>
             </div>
           </div>

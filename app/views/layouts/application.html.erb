@@ -15,7 +15,7 @@
     <%= csrf_meta_tags %>
   </head>
 
-  <body>
+  <body id='body'>
     <header>
       <%= render "layouts/navbar" %>
       <%= render "layouts/flash" %>
@@ -24,6 +24,9 @@
     <div class="row">
       <%= yield %>
     </div>
+
+    <%= render "layouts/elevator" %>
+
     <%= javascript_include_tag "application" %>
   </body>
 </html>

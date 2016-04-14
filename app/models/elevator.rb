@@ -3,7 +3,7 @@ class Elevator < ActiveRecord::Base
 
   paginates_per 9
   belongs_to :user
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
 
   validates :building_name, presence: true, uniqueness: true
   validates :address, presence: true
