@@ -2,7 +2,7 @@
 
   <ul class="title-area">
     <li class="name">
-      <h1><a href="#">ELEVADER</a></h1>
+      <h1><%= link_to "ELEVADER", elevators_path %></h1>
     </li>
   </ul>
 
@@ -22,4 +22,18 @@
     </ul>
   </section>
 
+  <%= form_tag search_elevators_path, method: :get do %>
+    <div class="small-5 columns">
+      <div class="search row collapse">
+        <div class="small-9 columns">
+          <%= text_field_tag :search, params[:search] %>
+        </div>
+        <div class="small-3 columns">
+        <%= submit_tag "Search", class: "button postfix radius" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
 </nav>
+

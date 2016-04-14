@@ -3,17 +3,17 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html:{multipart: true}) do |f| %>
   <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :username %><br />
+  <div class="large-10 columns">
+    <%= f.label :username %>
     <%= f.text_field :username, autofocus: true %>
   </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
+  <div class="large-10 columns">
+    <%= f.label :email %>
     <%= f.email_field :email%>
   </div>
 
-  <div class="field">
+  <div class="large-10 columns">
     <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
@@ -21,21 +21,21 @@
     <%= f.password_field :password, autocomplete: "off" %>
   </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
+  <div class="large-10 columns">
+    <%= f.label :password_confirmation %>
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
-  <div class="field">
+  <div class="large-10 columns">
+    <span>Profile picture</span>
     <%= f.label :avatar do %>
       <%= f.file_field :avatar %>
       <%= f.hidden_field :avatar_cache %>
     <% end %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
+  <div class="large-12 columns">
+    <%= f.submit "Sign up", :class => 'button' %>
+    <p><%= link_to "Back", :root %></p>
   </div>
 <% end %>
-
-<%= render "devise/shared/links" %>

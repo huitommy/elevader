@@ -11,6 +11,7 @@ class ElevatorsController < PermissionsController
     @rating = Review::RATING
     @reviews = @elevator.reviews.order(total_votes: :desc, created_at: :desc)
     @reviews = @reviews.page params[:page]
+    @user = @elevator.user
   end
 
   def new
