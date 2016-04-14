@@ -12,7 +12,18 @@ $door-width: 0.8 * $elevator-width;
 $button-height: 0.2 $footer-height;
 $elevator-depth: 25px;
 
-.elevator-footer {
+.container {
+  padding-bottom: $footer-height;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: $footer-height;
+}
+
+.elevator-wrapper {
   position: relative;
   width: 100%;
   height: $footer-height;

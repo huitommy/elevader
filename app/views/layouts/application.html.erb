@@ -16,17 +16,18 @@
   </head>
 
   <body id='body'>
-    <header>
-      <%= render "layouts/navbar" %>
-      <%= render "layouts/flash" %>
-    </header>
+    <div class='container'>
+      <header>
+        <%= render "layouts/navbar" %>
+        <%= render "layouts/flash" %>
+      </header>
 
-    <div class="row">
-      <%= yield %>
+      <div class="row">
+        <%= yield %>
+      </div>
+
+      <%= render "layouts/footer" %>
     </div>
-
-    <%= render "layouts/elevator" %>
-
     <%= javascript_include_tag "application" %>
   </body>
 </html>
