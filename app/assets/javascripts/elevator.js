@@ -2,6 +2,7 @@ $(function() {
   var doorBlock = $('.door'),
       btnUp = $('.btn_up'),
       btnDown = $('.btn_down'),
+      btn = $('.btn'),
       insideBlock = $('.inside'),
       insideBlockH = $('.inside').height(),
       floorBlock = $('.floor'),
@@ -19,7 +20,7 @@ $(function() {
 
   insideBlock.css('top',-(floorCur*insideBlockH));
   
-  btnUp.on('click', function(){
+  btn.on('click', function(){
     if (flagCanPush) {
       flagCanPush = false;
       moveElevator();

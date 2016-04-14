@@ -162,17 +162,13 @@ $elevator-depth: 25px;
     -o-transition: border-color 0.2s ease-in;
     transition: border-color 0.2s ease-in;
     cursor: pointer;
-
-    .active {
-      cursor: default;
-    }
   }
 
   .btn_up {
     border-bottom: 7px solid #76766b;
     top: 7px;
 
-    .active {
+    &.active {
       border-bottom: 7px solid #e5ff00;
     }
   }
@@ -181,10 +177,10 @@ $elevator-depth: 25px;
     border-top: 7px solid #76766b;
     bottom: 7px;
 
-    .active {
+    &.active {
       border-top: 7px solid #e5ff00;
     }
-  }
+  } 
 }
 
 .floor {
@@ -207,9 +203,9 @@ $elevator-depth: 25px;
   z-index: 2;
   left: 50%;
   bottom: $bottom-accent-height;
-  line-height: 0.3 * $elevator-height;
+  line-height: 0.20 * $elevator-height;
   text-align: center;
   color: $darker-color;
-  font-size: 100px;
-  margin-left: -($elevator-width);
+  font-size: 60px;
+  transform: translateX(-150%);
 }
