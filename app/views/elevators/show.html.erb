@@ -13,13 +13,16 @@
 </div>
 
 <div class="row">
-  <div class="medium-4 large-6 columns inline-list">
+  <div class="medium-4 large-6 columns">
     <img src="<%= @elevator.elevator.large_elevator %>">
-    <li> <%= @elevator.address %>, <%= @elevator.city %>, <%= @elevator.state %> <%= @elevator.zipcode %>  </li>
+  </div>
+  <div class="medium-2 large-3 columns inline-list" id="address">
+    <li> <%= @elevator.address %>, <%= @elevator.city %></li>
+    <li> <%= @elevator.state %> <%= @elevator.zipcode %> </li>
   </div>
   <div class="small-3 large-3 columns">
   </div>
-  <div class="small-3 medium-4 large-3 columns">
+  <div class="small-1 medium-1 large-2 columns">
     <img src="<%= @user.avatar.small_avatar %>">
     <p>Created by: <%= @user.username %></p>
   </div>
@@ -28,8 +31,10 @@
 <div class="row">
   <% if current_user %>
     <%= form_for [@elevator, @review] do |f| %>
+      <div class="medium-4 large-6">
         <%= f.label :rating %>
         <%= f.select :rating, options_for_select(@rating) %>
+      </div>
         <%= f.label :body %>
         <%= f.text_area :body %>
         <%= f.submit "Create Review", class: "button tiny success" %>
