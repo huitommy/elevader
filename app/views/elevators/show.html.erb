@@ -53,7 +53,7 @@
         </div>
         <div class="action row">
           <div class="voting small-1 large-2">
-            <div class="upvote">
+            <div class="upvote column">
               <%= form_tag review_votes_path(review), method: :post do  %>
               <%= hidden_field_tag :vote, "1" %>
               <%= submit_tag 'Up', class: 'vote', id: "upvote" %>
@@ -62,7 +62,7 @@
             <div class="vote-total" style="bottom: 60px;">
               <%= review.total_votes %>
             </div>
-            <div class="downvote">
+            <div class="downvote column">
               <%= form_tag review_votes_path(review), method: :post do  %>
               <%= hidden_field_tag :vote, "-1" %>
               <%= submit_tag 'Down', class: 'vote', id: "downvote"%>
