@@ -138,17 +138,17 @@ input#search {
 
 .pagebar {
   margin-top: 10px;
-}
-
-.elevator-card .content {
-  color: $iron;
-  background-color: $oil;
-  font-size: 25px;
-  clear: both;
-}
+} 
 
 .elevator-card {
   border-radius: $global-radius;
+
+  .content {
+    color: $iron;
+    background-color: $oil;
+    font-size: 25px;
+    clear: both;
+  }
 }
 
 .stars {

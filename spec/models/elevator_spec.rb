@@ -6,7 +6,7 @@ RSpec.describe Elevator do
 
     it 'returns rounded average of all ratings for the elevator' do
       expect(elevator.average_rating).to eq(0)
-      
+
       [1, 1, 5].each { |rtg| FactoryGirl.create(:review, elevator: elevator, rating: rtg) }
 
       expect(elevator.average_rating).to eq(2)
