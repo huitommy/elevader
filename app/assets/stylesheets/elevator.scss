@@ -1,0 +1,215 @@
+@import 'foundation_and_overrides';
+
+$lighter-color: $iron;
+$darker-color: $oil;
+$footer-height: 250px;
+$bottom-accent-height: 0.51 * $footer-height;
+$elevator-height: 0.8 * $footer-height;
+$elevator-width: 0.85 * $elevator-height;
+$trim-width: 0.1 * $elevator-height;
+$door-height: 0.9 * $elevator-height;
+$door-width: 0.8 * $elevator-width;
+$button-height: 0.2 $footer-height;
+$elevator-depth: 25px;
+
+.elevator-footer {
+  position: relative;
+  width: 100%;
+  height: $footer-height;
+  background-color: $lighter-color;
+
+  &:after {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: $bottom-accent-height;
+    left: 0;
+    bottom: 0;
+    background-color: $darker-color;
+  }
+
+  .elevator {
+    position: absolute;
+    z-index: 3;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: $elevator-height;
+    width: $elevator-width;
+    border-top: $trim-width solid #dbda7d;
+    border-left: $trim-width solid #cac96c;
+    border-right: $trim-width solid #cac96c;
+    box-sizing: border-box;
+    overflow: hidden;
+    background-color: #444;
+  }
+}
+
+.inside {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0.8 * $elevator-width;
+  height: 0.9 * $elevator-height;
+  border-bottom: $elevator-depth solid #7c7c5a;
+  border-left: $elevator-depth solid #898967;
+  border-right: $elevator-depth solid #898967;
+  border-top: $elevator-depth solid #93936e;
+  background-color: #83835f;
+  box-sizing: border-box;
+  z-index: 2;
+}
+
+.handrails {
+  position: absolute;
+  z-index: 5;
+  height: 0.8 * $trim-width;
+  width: 0.8 * $elevator-width - 2 * $elevator-depth;
+  background-color: #a19494;
+  top: 50%;
+  left: 0;
+  margin-top: -10px;
+
+  &:after, &:before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    height: 0.8 * $trim-width;
+    width: 23px;
+    background-color: #acacac;
+  }
+
+  &:after {
+    left: -24px;
+    -webkit-transform: skewX(-20deg) rotate(-20deg);
+    -ms-transform: skewX(-20deg) rotate(-20deg);
+    transform: skewX(-20deg) rotate(-20deg);
+  }
+
+  &:before {
+    right: -24px;
+    -webkit-transform: skewX(20deg) rotate(20deg);
+    -ms-transform: skewX(20deg) rotate(20deg);
+    transform: skewX(20deg) rotate(20deg);
+  }
+}
+
+.door {
+  height: $door-height;
+  width: $door-width;
+  top: 10;
+  left: 20;
+  position: absolute;
+  z-index: 8;
+
+  &:after,
+  &:before {
+    content: '';
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    top: 0;
+    box-sizing: border-box;
+    background-color: #9b4c4c;
+    -webkit-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+  }
+
+  &:after {
+    left: 0;
+    border-right: 1px solid #644a4a;
+  }
+
+  &:before {
+    right: -1px;
+    border-left: 1px solid #644a4a;
+  }
+}
+
+.door.active {
+  &:before {
+  right: -50%;
+  }
+
+  &:after {
+    left: -50%
+  }
+}
+
+.btn_cmon {
+  width: 30px;
+  height: 0.23 * $elevator-height;
+  position: absolute;
+  z-index: 9;
+  bottom: 0.47 * $bottom-accent-height;
+  left: 50%;
+  margin-left: $elevator-width / 2 + 10px;
+  background-color: #aaa;
+  border-radius: 2px;
+
+  .btn_up,
+  .btn_down {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 7px solid transparent;
+    box-sizing: border-box;
+    left: 50%;
+    transform: translateX(-50%);
+    -webkit-transition: border-color 0.2s ease-in;
+    -o-transition: border-color 0.2s ease-in;
+    transition: border-color 0.2s ease-in;
+    cursor: pointer;
+
+    .active {
+      cursor: default;
+    }
+  }
+
+  .btn_up {
+    border-bottom: 7px solid #76766b;
+    top: 7px;
+
+    .active {
+      border-bottom: 7px solid #e5ff00;
+    }
+  }
+
+  .btn_down {
+    border-top: 7px solid #76766b;
+    bottom: 7px;
+
+    .active {
+      border-top: 7px solid #e5ff00;
+    }
+  }
+}
+
+.floor {
+  position: absolute;
+  transform: translateX(-50%);
+  left: 50%;
+  bottom: 1.05 * $elevator-height ;
+  width: 0.1 * $elevator-height;
+  height: 0.1 * $elevator-height;
+  line-height: 0.1 * $elevator-height;
+  text-align: center;
+  background-color: $darker-color;
+  color: #e5ff00;
+  font-size: 100%;
+  overflow: hidden;
+}
+
+.this_floor {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  bottom: $bottom-accent-height;
+  line-height: 0.3 * $elevator-height;
+  text-align: center;
+  color: $darker-color;
+  font-size: 100px;
+  margin-left: -($elevator-width);
+}
