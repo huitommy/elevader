@@ -2,15 +2,14 @@ class ElevatorsController < PermissionsController
   before_filter :require_permission, only: [:edit, :destroy]
 
   def index
-    @elevators = Elevator.order(:building_name).page params[:page]
+    @elevators = Elevator.all.order(created_at: :desc)
   end
 
   def show
     @elevator = Elevator.find(params[:id])
     @review = Review.new
     @rating = Review::RATING
-    @reviews = @elevator.reviews.order(rating: :desc).page params[:page]
-    @user = @elevator.user
+    @reviews = @elevator.reviews
   end
 
   def new
@@ -24,7 +23,7 @@ class ElevatorsController < PermissionsController
       flash[:notice] = 'You have successfully added an elevader!'
       redirect_to elevator_path(@elevator)
     else
-      flash[:error] = @elevator.errors.full_messages.join('. ')
+      flash[:notice] = @elevator.errors.full_messages.join('. ')
       render action: 'new'
     end
   end
@@ -46,18 +45,15 @@ class ElevatorsController < PermissionsController
       flash[:notice] = 'Elevator was updated successfully'
       redirect_to elevator_path(@elevator)
     else
-      flash[:error] = @elevator.errors.full_messages.join('. ')
+      flash[:alert] = @elevator.errors.full_messages.join('. ')
       render :edit
     end
   end
 
   def search
-    @search_results = Elevator.find_by_fuzzy_building_name(params['search'])
-    @ids = @search_results.map { |result| result.id }
-    @elevators = Elevator.where(id: @ids)
-    @elevators = @elevators.page params[:page]
+    @elevators = Elevator.find_by_fuzzy_building_name(params['search'])
     if @elevators.empty?
-      flash[:alert] = "Sorry but we couldn't find that elevator for you"
+      flash[:notice] = "Sorry but we couldn't find that elevator for you"
     end
     render :index
   end
@@ -65,6 +61,6 @@ class ElevatorsController < PermissionsController
   private
 
   def elevator_params
-    params.require(:elevator).permit(:building_name, :address, :city, :zipcode, :state, :elevator_cache, :elevator)
+    params.require(:elevator).permit(:building_name, :address, :city, :zipcode, :state)
   end
 end

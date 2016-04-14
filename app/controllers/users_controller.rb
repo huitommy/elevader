@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def index
-    @users = User.order(:username).page params[:page]
+    @users = User.all
   end
 
   def destroy

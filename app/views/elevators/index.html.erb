@@ -1,24 +1,12 @@
 <h1>Hello!</h1>
 
-<link href="http://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel="stylesheet">
+<% @elevators.each do |elevator| %>
+  <div class="elevator" id="elevator-<%= elevator.id %>">
+    <%= link_to "#{elevator.building_name}", elevator_path(elevator) %>
+    <% if current_admin || current_user == elevator.user %>
+      <%= button_to "Delete", elevator, method: :delete %>
+    <% end %>
+  </div>
+<% end %>
 
-<div class="row">
-  <% @elevators.each do |elevator| %>
-    <div class="medium-4 columns" id="elevator-<%= elevator.id %>">
-      <div class="card">
-        <div class="image">
-          <%= link_to image_tag(elevator.elevator.medium_elevator, alt: "#{elevator.building_name}"), elevator_path(elevator) %>
-        </div>
-        <div class="content">
-          <span> <%= "#{elevator.building_name}" %>
-        </div>
-      </div>
-    </div>
-  <% end %>
-</div>
-
-<%= paginate @elevators %>
-
-<div class="row">
-  <%= link_to "Add Elevator", new_elevator_path, class: "button" %>
-</div>
+<%= link_to "Add Elevator", new_elevator_path %>

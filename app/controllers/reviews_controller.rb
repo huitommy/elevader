@@ -1,5 +1,3 @@
-require 'rest-client'
-
 class ReviewsController < PermissionsController
   before_filter :require_permission, only: [:edit, :destroy]
 
@@ -8,16 +6,13 @@ class ReviewsController < PermissionsController
     @review = current_user.reviews.build(review_params)
     @rating = Review::RATING
     @reviews = @elevator.reviews
-    @user = @elevator.user
 
     @review.elevator = @elevator
     if @review.save
-
-      UserMailer.added_review(@user, @elevator).deliver
       flash[:notice] = 'Review Added!'
       redirect_to elevator_path(@elevator)
     else
-      flash[:error] = @review.errors.full_messages.join(', ')
+      flash[:notice] = @review.errors.full_messages.join(', ')
       render 'elevators/show'
     end
   end
@@ -34,7 +29,7 @@ class ReviewsController < PermissionsController
       flash[:notice] = 'Review was updated successfully'
       redirect_to elevator_path(@review.elevator)
     else
-      flash[:error] = @review.errors.full_messages.join('. ')
+      flash[:alert] = @review.errors.full_messages.join('. ')
       render :edit
     end
   end
@@ -50,6 +45,6 @@ class ReviewsController < PermissionsController
   private
 
   def review_params
-    params.require(:review).permit(:rating, :body, :vote)
+    params.require(:review).permit(:rating, :body)
   end
 end

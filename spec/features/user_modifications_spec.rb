@@ -1,11 +1,10 @@
 require 'rails_helper'
-require 'capybara'
 
 feature 'User can edit and delete account' do
 
   before :each do
     FactoryGirl.create(:user, username: 't00thless', email: 'noteeth@email.com', password: 'password')
-    visit new_user_session_path
+    visit '/users/sign_in'
     fill_in 'Email', with: 'noteeth@email.com'
     fill_in 'Password', with: 'password'
     click_on 'Log in'
@@ -51,18 +50,6 @@ feature 'User can edit and delete account' do
     click_on 'Log in'
 
     expect(page).to have_content('Signed in successfully.')
-  end
-
-  scenario 'user can edit image from edit profile page' do
-    click_on 'Profile'
-
-    fill_in 'Current password', with: 'password'
-
-    attach_file :user_avatar, "#{Rails.root}/spec/fixtures/images/sampleprofile.jpg"
-    click_on 'Update'
-    click_on 'Profile'
-
-    expect(page).to have_css("img[src*='sampleprofile.jpg']")
   end
 
   scenario 'user can delete profile in edit profile page' do

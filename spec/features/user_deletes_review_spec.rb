@@ -5,7 +5,7 @@ feature 'User deletes an existing review' do
     a = FactoryGirl.create(:user, username: 't00thless', email: 'noteeth@email.com', password: 'password')
     FactoryGirl.create(:elevator, building_name: 'test', user: a)
 
-    visit new_user_session_path
+    visit '/users/sign_in'
     fill_in 'Email', with: 'noteeth@email.com'
     fill_in 'Password', with: 'password'
     click_on 'Log in'
@@ -35,13 +35,13 @@ feature 'User deletes an existing review' do
     click_link 'Sign Out'
 
     FactoryGirl.create(:user, username: 't00thless1', email: '1noteeth@email.com', password: 'password1')
-    visit new_user_session_path
+    visit '/users/sign_in'
     fill_in 'Email', with: '1noteeth@email.com'
     fill_in 'Password', with: 'password1'
     click_on 'Log in'
     click_link 'test'
 
-    within(:css, '.card') do
+    within(:css, '.reviews') do
       expect(page).not_to have_content('Delete')
     end
   end

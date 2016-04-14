@@ -6,20 +6,24 @@
 
     <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
 
-    <%= stylesheet_link_tag "application" %>
+    <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
     <%= csrf_meta_tags %>
   </head>
 
   <body>
-    <header>
-      <%= render "layouts/navbar" %>
-      <%= render "layouts/flash" %>
-    </header>
+    <%= render "layouts/navbar" %>
+    <%= render "layouts/flash" %>
 
-    <div class="row">
-      <%= yield %>
+    <div class="search-bar">
+      <%= form_tag search_elevators_path, method: :get do %>
+        <%= text_field_tag :search, params[:search] %>
+        <%= submit_tag "Search" %>
+      <% end %>
     </div>
+
+    <%= yield %>
+
     <%= javascript_include_tag "application" %>
   </body>
 </html>

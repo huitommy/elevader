@@ -1,10 +1,9 @@
-
 require 'rails_helper'
 
 feature 'User inputs review' do
   scenario 'User visits page with existing elevator and adds review data while signed in' do
     FactoryGirl.create(:user, username: 't00thless', email: 'noteeth@email.com', password: 'password')
-    visit new_user_session_path
+    visit '/users/sign_in'
     fill_in 'Email', with: 'noteeth@email.com'
     fill_in 'Password', with: 'password'
     click_on 'Log in'
