@@ -21,6 +21,7 @@ FactoryGirl.define do
     body "Test bodyyyy"
     user
     elevator
+    total_votes 0
   end
 
   factory :admin do
