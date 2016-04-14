@@ -31,7 +31,7 @@ feature 'Admin functionality:' do
   end
 
   scenario 'admin can see list of elevators' do
-    visit '/elevators'
+    visit elevators_path
     expect(page).to have_css('.card', count: 5)
   end
 
