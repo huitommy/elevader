@@ -17,17 +17,9 @@
       <%= render "layouts/flash" %>
     </header>
 
-    <div class="search-bar">
-      <%= form_tag search_elevators_path, method: :get do %>
-        <%= text_field_tag :search, params[:search] %>
-        <%= submit_tag "Search" %>
-      <% end %>
-    </div>
-
     <div class="row">
       <%= yield %>
     </div>
-
     <%= javascript_include_tag "application" %>
   </body>
 </html>

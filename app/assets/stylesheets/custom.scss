@@ -1,0 +1,10 @@
+@import 'foundation_and_overrides';
+
+div#search {
+  border-style: hidden;
+}
+
+input#search {
+  border-bottom-left-radius: $global-radius;
+  border-top-left-radius: $global-radius;
+}

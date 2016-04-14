@@ -42,9 +42,12 @@ gem 'dotenv-rails'
 # gem 'debugger', group: [:development, :test]
 gem 'pry-rails'
 gem 'devise'
+gem 'foundation-rails', '5.4.3.1'
+gem "rest-client"
 gem 'carrierwave'
 gem 'fuzzily'
-gem 'foundation-rails', '5.4.3.1'
+
+
 
 group :test do
   gem 'rspec-rails'
