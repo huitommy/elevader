@@ -1,6 +1,6 @@
 <div class="contain-to-grid large-12, medium-6, small-2">
   <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: small">
-    <ul class="title-area small-4">
+    <ul class="title-area small-3">
       <li class="name">
         <h1><%= link_to "ELEVADER", elevators_path %></h1>
           <img src="/assets/elevader.png" />
@@ -8,24 +8,29 @@
     </ul>
 
     <div class="search top-bar-section small-4">
-      <ul class="right">
+      <ul class="left small-3">
+        <%= form_tag search_elevators_path, method: :get do %>
+          <li class="searchelement"><%= text_field_tag :search, params[:search], class: "searchbox" %></li>
+          <li class="searchelement"><%= submit_tag "Search", class: "button searchbutton", id: "searchbutton" %></li>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="top-bar-section small-5" id="nav-buttons">
+      <ul class="right button-group">
         <% if current_admin %>
             <li><%= link_to "Admins", admins_path %></li>
             <li><%= link_to "Users", users_path %></li>
         <% end %>
         <% if current_user || current_admin %>
-          <li><%= link_to "Profile", edit_user_registration_path %></li>
+          <li class="avatar-container small" id="nav-avatar">
+            <img src="<%= current_user.avatar.small_avatar %>">
+          </li>
+          <li><%= link_to "Profile", edit_user_registration_path, id: 'nav-button' %></li>
           <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
         <% else %>
           <li><%= link_to "Sign In", new_user_session_path %></li>
           <li><%= link_to "Sign Up", new_user_registration_path %></li>
-        <% end %>
-      </ul>
-
-      <ul class="left small-4">
-        <%= form_tag search_elevators_path, method: :get do %>
-          <li class="searchelement"><%= text_field_tag :search, params[:search], class: "searchbox" %></li>
-          <li class="searchelement"><%= submit_tag "Search", class: "button searchbutton", id: "searchbutton" %></li>
         <% end %>
       </ul>
     </div>

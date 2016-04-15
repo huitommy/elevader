@@ -1,10 +1,10 @@
 <div class="showtitle-container row">
-  <div class="showtitle-item">
-    <div class="elevaderfont">
-      <div class="building-name"><h1><%= @elevator.building_name %></h1></div>
-      <div clas="building-rating">
-        <%= render 'elevators/stars', locals: { gold: @elevator.average_rating, silver: 5 - @elevator.average_rating } %>
-      </div>
+  <div class="showtitle-item small-12">
+    <div class="building-name small-10 columns">
+      <h1><%= @elevator.building_name %></h1>
+    </div>
+    <div class="building-rating small-2 columns">
+      <%= render 'elevators/stars', locals: { gold: @elevator.average_rating, silver: 5 - @elevator.average_rating } %>
     </div>
   </div>
     <% if current_user == @elevator.user || current_admin %>
@@ -23,7 +23,9 @@
   </div>
   <div class="small-3 columns author">
     <p>Created by: <%= @user.username %></p>
-    <img src="<%= @user.avatar.small_avatar %>">
+    <div class="avatar-container large">
+      <img src="<%= @user.avatar.small_avatar %>">
+    </div>
   </div>
   <div class="row" id="address">
     <h3>Address:</h3>
@@ -41,52 +43,55 @@
       </div>
         <%= f.label :body %>
         <%= f.text_area :body %>
-        <%= f.submit "Create Review", class: "button tiny success" %>
+        <%= f.submit "Create Review", class: "button tiny secondary button-span round" %>
     <% end %>
   <% end %>
 </div>
 
 <div class="row reviews">
   <% @reviews.each do |review| %>
-    <div class="small-4 columns end" id="review-<%= review.id %>">
-      <div class="vcard">
-        <div class="content">
-          <div class="small-block-grid-2">
-            <img src="<%= review.user.avatar %>">
+    <div class="review row" id="review-<%= review.id %>">
+      <div class="user-info small-2 columns">
+        <div class="small-block-grid-6 avatar-container small">
+          <img src="<%= review.user.avatar %>">
+        </div>
+        <div class="small-block-grid-4" id="username">
+          <p> <%= review.user.username %> </p>
+        </div>
+      </div>
+      <div class="rating small-6 columns">
+        <div class="stars">
+          <%= render 'elevators/stars', locals: { gold: review.rating, silver: 5 - review.rating } %>
+        </div>
+        <div class="review-body"><p> <%= review.body %> </p></div>
+      </div>
+      <div class="small-2 columns">
+        <div class="voting">
+          <div class="upvote small-4 columns">
+            <%= form_tag review_votes_path(review), method: :post do  %>
+            <%= hidden_field_tag :vote, "1" %>
+            <%= submit_tag 'Up', class: 'vote', id: "upvote", type: :image, :src => image_path("up.png") %>
+            <% end %>
           </div>
-          <div class="rating column">
-            <p> by: <%= review.user.username %> </p>
-            <span class ="title"> Rating: <%= review.rating %></span>
-            <p> <%= review.body %> </p>
+          <div class="vote-total small-4 columns">
+            <%= review.total_votes %>
+          </div>
+          <div class="downvote small-4 columns">
+            <%= form_tag review_votes_path(review), method: :post do  %>
+            <%= hidden_field_tag :vote, "-1" %>
+            <%= submit_tag 'Down', class: 'vote', id: "downvote", type: :image, :src => image_path("down.png")%>
+            <% end %>
           </div>
         </div>
-        <div class="action row">
-          <div class="voting">
-            <div class="upvote small-4 columns">
-              <%= form_tag review_votes_path(review), method: :post do  %>
-              <%= hidden_field_tag :vote, "1" %>
-              <%= submit_tag 'Up', class: 'vote', id: "upvote", type: :image, :src => image_path("up.png") %>
-              <% end %>
-            </div>
-            <div class="vote-total small-4 columns">
-              <%= review.total_votes %>
-            </div>
-            <div class="downvote small-4 columns">
-              <%= form_tag review_votes_path(review), method: :post do  %>
-              <%= hidden_field_tag :vote, "-1" %>
-              <%= submit_tag 'Down', class: 'vote', id: "downvote", type: :image, :src => image_path("down.png")%>
-              <% end %>
-            </div>
-          </div>
+        <ul class="review-edits button-group even-2 round">
           <% if current_user == review.user %>
-          <%= link_to "Edit Review", edit_review_path(review), class: "button tiny" %>
+            <li><%= link_to "Edit Review", edit_review_path(review), class: "button tiny" %></li>
           <% end %>
           <% if current_user == review.user || current_admin %>
-          <%= link_to "Delete Review", review, method: :delete, class: "button tiny alert"%>
+            <li><%= link_to "Delete Review", review, method: :delete, class: "button tiny alert" %></li>
           <% end %>
-
-      </div>
-    </div>
+        </div>
+      </ul>
   </div>
   <% end %>
 </div>
