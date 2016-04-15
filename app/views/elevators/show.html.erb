@@ -56,39 +56,33 @@
           <p> <%= review.body %> </p>
           <p> by: <%= review.user.username %> </p>
         </div>
-        <div class="action row inline-list">
-          <li>
-            <div class="voting small-1 large-2 columns">
-              <div class="upvote">
-                <%= form_tag review_votes_path(review), method: :post do  %>
-                <%= hidden_field_tag :vote, "1" %>
-                <%= submit_tag 'Up', class: 'vote', id: "upvote" %>
-                <% end %>
-              </div>
-              <div class="vote-total" style="bottom: 60px;">
-                <%= review.total_votes %>
-              </div>
-              <div class="downvote">
-                <%= form_tag review_votes_path(review), method: :post do  %>
-                <%= hidden_field_tag :vote, "-1" %>
-                <%= submit_tag 'Down', class: 'vote', id: "downvote"%>
-                <% end %>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="row">
-              <% if current_user == review.user %>
-              <%= link_to "Edit Review", edit_review_path(review), class: "button tiny" %>
-              <% end %>
-              <% if current_user == review.user || current_admin %>
-              <%= link_to "Delete Review", review, method: :delete, class: "button tiny alert" %>
+        <div class="action row">
+          <div class="voting small-1 large-2">
+            <div class="upvote">
+              <%= form_tag review_votes_path(review), method: :post do  %>
+              <%= hidden_field_tag :vote, "1" %>
+              <%= submit_tag 'Up', class: 'vote', id: "upvote", type: :image, :src => image_path("up.png") %>
               <% end %>
             </div>
-          </li>
-        </div>
+            <div class="vote-total" style="bottom: 60px;">
+              <%= review.total_votes %>
+            </div>
+            <div class="downvote">
+              <%= form_tag review_votes_path(review), method: :post do  %>
+              <%= hidden_field_tag :vote, "-1" %>
+              <%= submit_tag 'Down', class: 'vote', id: "downvote", type: :image, :src => image_path("down.png")%>
+              <% end %>
+            </div>
+          </div>
+          <% if current_user == review.user %>
+          <%= link_to "Edit Review", edit_review_path(review), class: "button tiny" %>
+          <% end %>
+          <% if current_user == review.user || current_admin %>
+          <%= link_to "Delete Review", review, method: :delete, class: "button tiny alert"%>
+          <% end %>
       </div>
     </div>
+  </div>
   <% end %>
 </div>
 
