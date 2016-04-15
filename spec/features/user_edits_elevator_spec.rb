@@ -11,6 +11,7 @@ feature "User edits an existing elevator" do
       fill_in 'Email', with: 'noteeth@email.com'
       fill_in 'Password', with: 'password'
       click_on 'Log in'
+      click_on "splash_screen"
     end
 
     scenario "User visits page with existing elevator and clicks edit link, fields should be populated with existing data" do
@@ -59,6 +60,7 @@ feature "User edits an existing elevator" do
       fill_in 'Email', with: '1noteeth@email.com'
       fill_in 'Password', with: 'password1'
       click_on 'Log in'
+        click_on 'splash_screen'
       click_link 'test'
       expect(page).not_to have_content("Edit")
     end

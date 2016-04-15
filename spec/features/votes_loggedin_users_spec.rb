@@ -13,11 +13,12 @@ feature 'Voting buttons for reviews:', js: true do
     end
 
     @user = User.first
-    visit root_path
+    visit elevators_path
     click_on 'Sign In'
     fill_in 'Email', with: @user.email
     fill_in 'Password', with: 'password'
     click_on 'Log in'
+    click_on 'splash_screen'
     find("#elevator-#{@elevator.id}").click
   end
 

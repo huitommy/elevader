@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'User Creation:' do
 
   before :each do
-    visit root_path
+    visit elevators_path
     click_link 'Sign Up'
   end
 

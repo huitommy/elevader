@@ -28,6 +28,7 @@ feature 'User edits an existing review' do
   scenario 'User is unable to edit existing review if they are not logged in' do
     expect(page).to have_content('sample body')
     click_link 'Sign Out'
+    click_on "splash_screen"
     click_link 'test'
     within(:css, '.card') do
       expect(page).not_to have_content("Edit")
@@ -42,6 +43,7 @@ feature 'User edits an existing review' do
     fill_in 'Email', with: '1noteeth@email.com'
     fill_in 'Password', with: 'password1'
     click_on 'Log in'
+    click_on 'splash_screen'
     click_link 'test'
     elevator = Elevator.first
     review = elevator.reviews.first
