@@ -32,11 +32,19 @@ $flash-alert: #ff9933;
   font-family: 'Play', cursive;
 }
 
-#address{
+#address {
   font-size: 23px;
   font-family: 'Play', cursive;
 }
 
 h1 {
   font-family: 'Play', cursive;
+}
+
+.rating {
+  font-size: 25px;
+}
+
+.review.columns {
+  padding-left: 50px;
 }

@@ -4,7 +4,7 @@ feature 'Voting buttons for reviews:' do
 
   before :each do
     @elevator = FactoryGirl.create(:elevator, building_name: 'Mission Control')
-    7.times do
+    6.times do
       FactoryGirl.create(
         :review,
         elevator: @elevator
@@ -15,9 +15,9 @@ feature 'Voting buttons for reviews:' do
   end
 
   scenario 'Logged-out user can see voting buttons and vote total' do
-    expect(page).to have_css('#upvote', count: 7)
-    expect(page).to have_css('#downvote', count: 7)
-    expect(page).to have_css('.vote-total', count: 7)
+    expect(page).to have_css('#upvote', count: 6)
+    expect(page).to have_css('#downvote', count: 6)
+    expect(page).to have_css('.vote-total', count: 6)
   end
 
   scenario 'Logged-out user is prompted to sign-in if she attempts to upvote' do
