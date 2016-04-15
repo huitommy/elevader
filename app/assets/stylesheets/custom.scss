@@ -123,6 +123,8 @@ input#search {
   }
   .image {
     position: relative;
+    width: 300px;
+    height: 200px;
     .title {
       position: absolute;
       bottom: 0;
@@ -138,7 +140,7 @@ input#search {
 
 .pagebar {
   margin-top: 10px;
-} 
+}
 
 .elevator-card {
   border-radius: $global-radius;
