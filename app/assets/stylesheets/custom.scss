@@ -1,7 +1,7 @@
 @import 'foundation_and_overrides';
 @import url(//fonts.googleapis.com/css?family=Roboto:400,500,300,100,700,900);
 
-#splashscreen{
+#splashscreen {
   position: relative;
   border: 5px solid black;
   width: 100%;
@@ -9,13 +9,13 @@
   margin: auto;
 }
 
-#splashtitle{
+#splashtitle {
   position: absolute;
   top: 200px;
   left: 0;
   width: 100%;
 
-  #titletext{
+  #titletext {
     color: white;
     font: bold 24px/45px;
     font-family: 'Play';
@@ -25,7 +25,7 @@
   }
 }
 
-#splashscreen img.wide{
+#splashscreen img.wide {
   max-width: auto;
   max-height: auto;
   height: auto;
