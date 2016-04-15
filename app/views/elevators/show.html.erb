@@ -1,6 +1,11 @@
 <div class="showtitle-container row">
   <div class="showtitle-item">
-    <h1><span class="elevaderfont"> <%= @elevator.building_name %></span></h1>
+    <div class="elevaderfont">
+      <div class="building-name"><h1><%= @elevator.building_name %></h1></div>
+      <div clas="building-rating">
+        <%= render 'elevators/stars', locals: { gold: @elevator.average_rating, silver: 5 - @elevator.average_rating } %>
+      </div>
+    </div>
   </div>
     <% if current_user == @elevator.user || current_admin %>
       <div class="showtitle-item">
@@ -23,7 +28,7 @@
   <div class="small-3 large-3 columns">
   </div>
   <div class="small-1 medium-1 large-2 columns">
-    <img src="<%= @user.avatar.small_avatar %>">
+    <img src="<%= @user.avatar.large_avatar %>">
     <p>Created by: <%= @user.username %></p>
   </div>
 </div>

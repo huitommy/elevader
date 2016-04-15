@@ -17,15 +17,15 @@ class AvatarUploader < CarrierWave::Uploader::Base
 
   version :large_avatar do
     # returns a 150x150 image
-    process resize_to_fill: [150, 150]
+    process resize_to_fill: [350, 350]
   end
   version :medium_avatar do
     # returns a 50x50 image
-    process resize_to_fill: [50, 50]
+    process resize_to_fill: [250, 250]
   end
   version :small_avatar do
     # returns a 35x35 image
-    process resize_to_fill: [15, 15]
+    process resize_to_fill: [150, 150]
   end
 
   def extension_white_list

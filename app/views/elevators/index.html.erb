@@ -1,19 +1,22 @@
-<h2><span class="elevaderfont">Here are your elevaders for today, motherfucker</span></h2>
+<div class="text-center"><h2 class="elevaderfont">Here are your elevaders for today, my dear friend</h2></div>
 
 <div class="row">
   <% @elevators.each do |elevator| %>
-    <div class="medium-4 columns" id="elevator-<%= elevator.id %>">
-      <div class="card">
-        <div class="image">
-          <%= link_to image_tag(elevator.elevator.medium_elevator, alt: "#{elevator.building_name}"), elevator_path(elevator) %>
-        </div>
-        <div class="content">
-          <span> <%= "#{elevator.building_name}" %>
+      <div class="medium-4 columns elevator-card" id="elevator-<%= elevator.id %>">
+        <div class="card elevator-card">
+          <div class="image">
+            <%= link_to image_tag(elevator.elevator.medium_elevator, alt: "#{elevator.building_name}"), elevator_path(elevator) %>
+          </div>
+          <div class="content text-center">
+            <div> <%= "#{elevator.building_name}" %></div>
+            <div class="stars">
+              <%= render 'elevators/stars', locals: { gold: elevator.average_rating, silver: 5 - elevator.average_rating } %>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  <% end %>
-</div>
+    <% end %>
+  </div>
 
 <%= paginate @elevators %>
 
