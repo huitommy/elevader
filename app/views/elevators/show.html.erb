@@ -18,17 +18,17 @@
 </div>
 
 <div class="card large-12 columns">
-  <div class="small-8 columns">
+  <div class="small-8 columns inline-list">
     <img src="<%= @elevator.elevator.large_elevator %>">
+    <div class="large-6 columns">
+      <h3 class="elevaderfont">Address:</h3>
+      <li> <%= @elevator.address %> </li>
+      <li><%= @elevator.city %>, <%= @elevator.state %> <%= @elevator.zipcode %> </li>
+    </div>
   </div>
   <div class="small-3 columns author">
     <p>Created by: <%= @user.username %></p>
     <img src="<%= @user.avatar.small_avatar %>">
-  </div>
-  <div class="row" id="address">
-    <h3>Address:</h3>
-    <li> <%= @elevator.address %> </li>
-    <li><%= @elevator.city %>, <%= @elevator.state %> <%= @elevator.zipcode %> </li>
   </div>
 </div>
 
