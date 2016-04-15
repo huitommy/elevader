@@ -61,6 +61,7 @@
       </div>
       <div class="rating small-6 columns">
         <div class="stars">
+          <p class="hidden-rating">Rating: <%= review.rating %></p>
           <%= render 'elevators/stars', locals: { gold: review.rating, silver: 5 - review.rating } %>
         </div>
         <div class="review-body"><p> <%= review.body %> </p></div>
@@ -73,7 +74,7 @@
             <%= submit_tag 'Up', class: 'vote', id: "upvote", type: :image, :src => image_path("up.png") %>
             <% end %>
           </div>
-          <div class="vote-total small-4 columns">
+          <div class="vote-total small-4 columns" id="vote-total-<%= review.id %>">
             <%= review.total_votes %>
           </div>
           <div class="downvote small-4 columns">
