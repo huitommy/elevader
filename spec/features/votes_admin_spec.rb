@@ -5,7 +5,7 @@ feature 'Voting buttons:' do
   before :each do
     FactoryGirl.create(:admin, email: 'admin@admin.com')
     @elevator = FactoryGirl.create(:elevator, building_name: 'Mission Control')
-    7.times do
+    6.times do
       FactoryGirl.create(
         :review,
         elevator: @elevator
@@ -20,9 +20,9 @@ feature 'Voting buttons:' do
   end
 
   scenario 'Admin can see voting buttons and vote total' do
-    expect(page).to have_css('#upvote', count: 7)
-    expect(page).to have_css('#downvote', count: 7)
-    expect(page).to have_css('.vote-total', count: 7)
+    expect(page).to have_css('#upvote', count: 6)
+    expect(page).to have_css('#downvote', count: 6)
+    expect(page).to have_css('.vote-total', count: 6)
   end
 
   scenario 'Admin cannot upvote' do
