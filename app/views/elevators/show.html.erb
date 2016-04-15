@@ -61,7 +61,7 @@
             <div class="upvote">
               <%= form_tag review_votes_path(review), method: :post do  %>
               <%= hidden_field_tag :vote, "1" %>
-              <%= submit_tag 'Up', class: 'vote', id: "upvote" %>
+              <%= submit_tag 'Up', class: 'vote', id: "upvote", type: :image, :src => image_path("up.png") %>
               <% end %>
             </div>
             <div class="vote-total" style="bottom: 60px;">
@@ -70,7 +70,7 @@
             <div class="downvote">
               <%= form_tag review_votes_path(review), method: :post do  %>
               <%= hidden_field_tag :vote, "-1" %>
-              <%= submit_tag 'Down', class: 'vote', id: "downvote"%>
+              <%= submit_tag 'Down', class: 'vote', id: "downvote", type: :image, :src => image_path("down.png")%>
               <% end %>
             </div>
           </div>
@@ -78,7 +78,7 @@
           <%= link_to "Edit Review", edit_review_path(review), class: "button tiny" %>
           <% end %>
           <% if current_user == review.user || current_admin %>
-          <%= link_to "Delete Review", review, method: :delete, class: "button tiny alert" %>
+          <%= link_to "Delete Review", review, method: :delete, class: "button tiny alert"%>
           <% end %>
       </div>
     </div>
