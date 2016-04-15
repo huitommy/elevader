@@ -16,6 +16,7 @@ feature 'Voting buttons:' do
     fill_in 'Email', with: 'admin@admin.com'
     fill_in 'Password', with: 'password'
     click_on 'Log in'
+    click_on 'splash_screen'
     click_on 'Mission Control'
   end
 

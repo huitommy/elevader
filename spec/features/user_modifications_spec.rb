@@ -9,6 +9,7 @@ feature 'User can edit and delete account' do
     fill_in 'Email', with: 'noteeth@email.com'
     fill_in 'Password', with: 'password'
     click_on 'Log in'
+    click_on 'splash_screen'
   end
 
   scenario 'user can access page to edit profile' do

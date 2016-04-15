@@ -5,7 +5,7 @@ feature 'User can login and logout:' do
   before :each do
     15.times { FactoryGirl.create(:elevator) }
     15.times { FactoryGirl.create(:review) }
-    visit root_path
+    visit elevators_path
   end
 
   scenario 'User sees multiple pages of elevators' do

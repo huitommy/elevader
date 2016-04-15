@@ -17,6 +17,7 @@ feature 'Voting buttons for reviews:' do
       fill_in 'Email', with: user.email
       fill_in 'Password', with: 'password'
       click_on 'Log in'
+      click_on 'splash_screen'
       click_on 'Mission Control'
       within(:css, "#review-#{review.id}") do
         click_on direction
@@ -29,7 +30,7 @@ feature 'Voting buttons for reviews:' do
     user_votes(user3, 'upvote', review)
     user_votes(user4, 'upvote', review)
 
-    visit root_path
+    visit elevators_path
     click_on 'Mission Control'
     within(:css, "#review-#{review.id} .vote-total") do
       expect(page).to have_content('2')

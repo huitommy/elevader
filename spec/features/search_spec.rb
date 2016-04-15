@@ -20,7 +20,7 @@ feature 'Search bar:' do
   end
 
   scenario 'Non-logged-in user searches for a specific elevator' do
-    visit root_path
+    visit elevators_path
     fill_in 'search', with: 'nice'
     click_on 'Search'
 
@@ -31,7 +31,7 @@ feature 'Search bar:' do
   end
 
   scenario 'Logged-in user searches for a specific elevator' do
-    visit root_path
+    visit elevators_path
     click_on 'Sign In'
     fill_in 'Email', with: 'email@email'
     fill_in 'Password', with: 'password'
@@ -58,7 +58,7 @@ feature 'Search bar:' do
   end
 
   scenario 'User enters search term for which there are no matches' do
-    visit root_path
+    visit elevators_path
     fill_in 'search', with: 'Madonna'
     click_on 'Search'
 
@@ -67,7 +67,7 @@ feature 'Search bar:' do
   end
 
   scenario 'user can go to elevator show pages from results' do
-    visit root_path
+    visit elevators_path
     fill_in 'search', with: 'nice'
     click_on 'Search'
 
