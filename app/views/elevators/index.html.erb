@@ -3,7 +3,7 @@
 <div class="row">
   <% @elevators.each do |elevator| %>
       <%= link_to elevator_path(elevator) do %>
-        <div class="medium-4 columns elevator-card" id="elevator-<%= elevator.id %>">
+        <div class="medium-4 columns elevator-card end" id="elevator-<%= elevator.id %>">
           <div class="card elevator-card">
             <div class="image">
               <%= image_tag(elevator.elevator.medium_elevator, alt: "#{elevator.building_name}") %>
