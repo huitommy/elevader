@@ -9,7 +9,7 @@ feature 'User creates new elevator' do
       fill_in 'Email', with: 'noteeth@email.com'
       fill_in 'Password', with: 'password'
       click_on 'Log in'
-      binding.pry
+      click_on 'splash_screen'
     end
 
     scenario 'User visits page with new elevator form and fills it out correctly' do

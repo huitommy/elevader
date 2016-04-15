@@ -39,6 +39,7 @@ feature 'User deletes an existing review' do
     fill_in 'Email', with: '1noteeth@email.com'
     fill_in 'Password', with: 'password1'
     click_on 'Log in'
+    click_on 'splash_screen'
     click_link 'test'
 
     within(:css, '.card') do

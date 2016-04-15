@@ -18,7 +18,8 @@ feature 'Voting buttons for reviews:', js: true do
     fill_in 'Email', with: @user.email
     fill_in 'Password', with: 'password'
     click_on 'Log in'
-    click_on 'Mission Control'
+    click_on 'splash_screen'
+    find("#elevator-#{@elevator.id}").click
   end
 
   scenario 'Logged-in user can see voting buttons and vote total' do
@@ -58,8 +59,7 @@ feature 'Voting buttons for reviews:', js: true do
       elevator: @elevator,
       user: @user
     )
-    visit elevators_path
-    click_on 'Mission Control'
+    visit elevator_path(@elevator)
     within(:css, "#review-#{review.id}") do
       click_on 'upvote'
     end
