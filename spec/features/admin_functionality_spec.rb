@@ -49,7 +49,7 @@ feature 'Admin functionality:' do
     3.times { FactoryGirl.create(:review, elevator: elevator) }
     visit "/elevators/#{elevator.id}"
 
-    expect(page).to have_css('.vcard', count: 3)
+    expect(page).to have_css('.review', count: 3)
   end
 
   scenario 'admin can erase reviews from elevator show page' do
@@ -62,7 +62,7 @@ feature 'Admin functionality:' do
     end
 
     expect(page).to have_content('Review was deleted')
-    expect(page).to have_css('.vcard', count: 2)
+    expect(page).to have_css('.review', count: 2)
   end
 
   scenario 'admin can view list of admins' do

@@ -4,10 +4,10 @@ $(document).ready(function() {
   voteButtons.click(function(event) {
     event.preventDefault();
 
-    var review = $(event.target).closest('div[class="vcard"]');
+    var review = $(event.target).closest('div[class="review row"]');
     var path = $(event.target).closest('form[method="post"]').attr('action');
     var voteDir = $($(event.target).siblings('#vote')[0]).attr('value');
-    var voteTotal = review.find('div.vote-total ');
+    var voteTotal = review.find('div.vote-total');
 
     $.ajax({
       url: path,

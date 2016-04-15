@@ -1,4 +1,4 @@
-<div class="text-center"><h2 class="elevaderfont">Here are your elevaders for today, my dear friend</h2></div>
+<div class="elevaderfont text-center"><h2></h2></div>
 
 <div class="row">
   <% @elevators.each do |elevator| %>
@@ -23,5 +23,5 @@
 <%= paginate @elevators %>
 
 <div class="row">
-  <%= link_to "Add Elevator", new_elevator_path, class: "button" %>
+  <%= link_to "Add Elevator", new_elevator_path, class: "button button-span round" %>
 </div>

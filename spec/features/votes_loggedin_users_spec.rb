@@ -34,7 +34,7 @@ feature 'Voting buttons for reviews:', js: true do
       click_on 'upvote'
     end
 
-    within(:css, "#review-#{review.id} .vote-total") do
+    within(:css, "#vote-total-#{review.id}") do
       expect(page).to have_content('1')
       expect(page).to_not have_content('0')
     end
@@ -46,7 +46,7 @@ feature 'Voting buttons for reviews:', js: true do
       click_on 'downvote'
     end
 
-    within(:css, "#review-#{review.id} .vote-total") do
+    within(:css, "#vote-total-#{review.id}") do
       expect(page).to have_content('-1')
       expect(page).to_not have_content('0')
     end
@@ -65,7 +65,7 @@ feature 'Voting buttons for reviews:', js: true do
     end
 
     expect(page).to have_content('You cannot vote on your own reviews')
-    within(:css, "#review-#{review.id} .vote-total") do
+    within(:css, "#vote-total-#{review.id}") do
       expect(page).to have_content('0')
       expect(page).to_not have_content('1')
     end
@@ -75,7 +75,7 @@ feature 'Voting buttons for reviews:', js: true do
     end
 
     expect(page).to have_content('You cannot vote on your own reviews')
-    within(:css, "#review-#{review.id} .vote-total") do
+    within(:css, "#vote-total-#{review.id}") do
       expect(page).to have_content('0')
       expect(page).to_not have_content('-1')
     end
@@ -86,7 +86,7 @@ feature 'Voting buttons for reviews:', js: true do
     within(:css, "#review-#{review.id}") do
       2.times { click_on 'upvote' }
     end
-    within(:css, "#review-#{review.id} .vote-total") do
+    within(:css, "#vote-total-#{review.id}") do
       expect(page).to have_content('0')
       expect(page).to_not have_content('1')
       expect(page).to_not have_content('2')
@@ -95,7 +95,7 @@ feature 'Voting buttons for reviews:', js: true do
     within(:css, "#review-#{review.id}") do
       2.times { click_on 'downvote' }
     end
-    within(:css, "#review-#{review.id} .vote-total") do
+    within(:css, "#vote-total-#{review.id}") do
       expect(page).to have_content('0')
       expect(page).to_not have_content('-1')
       expect(page).to_not have_content('-2')
@@ -108,14 +108,14 @@ feature 'Voting buttons for reviews:', js: true do
       click_on 'upvote'
       click_on 'downvote'
     end
-    within(:css, "#review-#{review.id} .vote-total") do
+    within(:css, "#vote-total-#{review.id}") do
       expect(page).to have_content('-1')
     end
     within(:css, "#review-#{review.id}") do
       2.times { click_on 'downvote' }
       click_on 'upvote'
     end
-    within(:css, "#review-#{review.id} .vote-total") do
+    within(:css, "#vote-total-#{review.id}") do
       expect(page).to have_content('1')
     end
   end
