@@ -25,6 +25,7 @@ feature 'User deletes an existing review' do
   scenario 'User is unable to delete existing review if they are not logged in' do
     expect(page).to have_content('sample body')
     click_link 'Sign Out'
+    click_on "splash_screen"
     click_link 'test'
 
     expect(page).not_to have_content('Delete')
