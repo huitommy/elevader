@@ -1,6 +1,7 @@
 @import 'foundation_and_overrides';
 @import url(//fonts.googleapis.com/css?family=Roboto:400,500,300,100,700,900);
 
+//// Splash
 #splashscreen {
   display: block;
   position: fixed;
@@ -35,6 +36,7 @@
   max-height: auto;
   height: auto;
 }
+////
 
 //// top bar stuff
 .top-bar-section ul li > a {
@@ -260,3 +262,8 @@ input#searchbutton {
   margin-top: 13px;
 }
 
+.vote-total {
+  position: relative;
+  left: 15px;
+  top: 10px;
+}
