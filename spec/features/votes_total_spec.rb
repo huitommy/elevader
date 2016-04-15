@@ -17,6 +17,7 @@ feature 'Voting buttons for reviews:' do
       fill_in 'Email', with: user.email
       fill_in 'Password', with: 'password'
       click_on 'Log in'
+      click_on 'splash_screen'
       click_on 'Mission Control'
       within(:css, "#review-#{review.id}") do
         click_on direction
