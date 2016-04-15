@@ -1,6 +1,7 @@
 @import 'foundation_and_overrides';
 @import url(//fonts.googleapis.com/css?family=Roboto:400,500,300,100,700,900);
 
+//// top bar stuff
 .top-bar-section ul li > a {
   font-family: "Play",cursive !important;
   font-size: large !important;
@@ -67,7 +68,10 @@ input#search {
   border-bottom-left-radius: $global-radius;
   border-top-left-radius: $global-radius;
 }
+////////
 
+
+///// show page
 .showtitle-container {
   padding: 0;
   margin: 0;
