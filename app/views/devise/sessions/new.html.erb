@@ -16,10 +16,8 @@
   </div>
 <% end %>
 
-<div class = "small-10 columns">
-  <%= render "devise/shared/links" %>
-</div>
-
-<div class="small-10 columns">
-  <%= link_to "Back", :root %>
+<div class="row">
+  <div class = "large-10 columns">
+    <span><%= render "devise/shared/links" %> <%= link_to "Back", elevators_path%></span>
+  </div>
 </div>

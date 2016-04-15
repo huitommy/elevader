@@ -10,7 +10,7 @@ feature 'Voting buttons for reviews:' do
         elevator: @elevator
       )
     end
-    visit root_path
+    visit elevators_path
     click_on 'Mission Control'
   end
 

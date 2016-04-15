@@ -29,7 +29,7 @@ feature 'Voting buttons for reviews:' do
     user_votes(user3, 'upvote', review)
     user_votes(user4, 'upvote', review)
 
-    visit root_path
+    visit elevators_path
     click_on 'Mission Control'
     within(:css, "#review-#{review.id} .vote-total") do
       expect(page).to have_content('2')

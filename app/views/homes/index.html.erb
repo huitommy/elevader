@@ -1,3 +1,33 @@
-<div id="splashscreen">
-   <%= link_to image_tag("https://i.ytimg.com/vi/QZNk-NJMjE8/maxresdefault.jpg", alt: "splash_screen"), elevators_path, class: "enter_link splashscreenimg" %>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href='https://fonts.googleapis.com/css?family=Play' rel='stylesheet' type='text/css'>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/stylesheets/foundation-icons/foundation-icons.css" />
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
+
+    <%= stylesheet_link_tag "application" %>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body id='body'>
+    <div class='container'>
+      <header>
+        <%= render "layouts/navbar" %>
+        <%= render "layouts/flash" %>
+      </header>
+
+      <div id="splashscreen">
+        <%= link_to image_tag("http://images.adsttc.com/media/images/53e0/f90e/c07a/8044/5500/0136/large_jpg/kone.jpg?1407252738", alt: "splash_screen"), elevators_path, class: "enter_link splashscreenimg" %>
+      </div>
+
+      <%= render "layouts/footer" %>
+    </div>
+    <%= javascript_include_tag "application" %>
+  </body>
+</html>

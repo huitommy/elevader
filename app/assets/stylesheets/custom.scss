@@ -1,36 +1,18 @@
 @import 'foundation_and_overrides';
 @import url(//fonts.googleapis.com/css?family=Roboto:400,500,300,100,700,900);
 
-#splashscreen{
-  width: 200%;
-  height: 100%;
-  margin: auto;
-}
-
-#splashscreen img.wide{
-  max-width: 100%;
-  max-height: 100%;
-  height: auto;
-}
-
-#splashscreen img.tall{
-  max-height: 100%;
-  max-width: 100%;
-  width: auto;
-}
-
 //// top bar stuff
 .top-bar-section ul li > a {
-  font-family: "Play",cursive !important;
+  font-family: "Play" !important;
   font-size: large !important;
 }
 
 .name h1 {
-  font-family: 'Play', cursive !important;
+  font-family: 'Play' !important;
 }
 
 .elevaderfont{
-  font-family: 'Play', cursive !important;
+  font-family: 'Play' !important;
 }
 
 .searcharea {
